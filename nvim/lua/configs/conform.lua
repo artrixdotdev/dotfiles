@@ -1,12 +1,13 @@
 local options = {
   formatters_by_ft = {
     lua = { "stylua" },
-    css = { "prettier" },
-    html = { "prettier" },
-    javascript = { "prettierd", "prettier", stop_after_first = true },
-    javascriptreact = { "prettierd", "prettier", stop_after_first = true },
-    typescript = { "prettierd", "prettier", stop_after_first = true },
-    typescriptreact = { "prettierd", "prettier", stop_after_first = true },
+    css = { "biome", "prettier" },
+    html = { "biome", "prettier" },
+    javascript = { "biome", "prettierd", "prettier", stop_after_first = true },
+    json = { "biome", "prettierd", "prettier", stop_after_first = true },
+    javascriptreact = { "biome", "prettierd", "prettier", stop_after_first = true },
+    typescript = { "biome", "prettierd", "prettier", stop_after_first = true },
+    typescriptreact = { "biome", "prettierd", "prettier", stop_after_first = true },
   },
 
   format_on_save = {
