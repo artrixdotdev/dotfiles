@@ -21,7 +21,8 @@ const rest = args.slice(1);
 if (settings && settings.apps && Object.keys(settings.apps).includes(app)) {
   const executable = settings.apps[app];
 
-  await $`${executable} ${rest.join(" ")}`;
+  const proc = Bun.spawn([executable, ...rest]);
+  proc.unref(); // Save memory
 } else {
   console.error(`Unknown app: ${app}`);
 }
