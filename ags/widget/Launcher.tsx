@@ -19,12 +19,12 @@ export default function Applauncher() {
             cssClasses={["appbutton"]}
             tooltipText={app.name}
             name={app.name}
-            //onActivate={(self) => {
-            //   app.launch();
-            //   App.toggle_window("AppLauncher");
-            //   self.set_state_flags(Gtk.StateFlags.NORMAL, true);
-            //   entry.grab_focus();
-            //}}
+            onButtonPressed={(self) => {
+               app.launch();
+               App.toggle_window("AppLauncher");
+               self.set_state_flags(Gtk.StateFlags.NORMAL, true);
+               entry.grab_focus();
+            }}
          >
             <image iconName={app.get_icon_name() || ""} />
          </box>
@@ -32,22 +32,22 @@ export default function Applauncher() {
    }
 
    const appButtons = appList.map((app) => <AppButton app={app} />);
-   var first_visible_child: Gtk.Widget | undefined;
+   let first_visible_child: Gtk.Widget | undefined;
 
    function filterList(text: string) {
-      appButtons.forEach((appButton) => {
-         let appName = appButton.name.toLowerCase();
-         let isVisible = appName.includes(text.toLowerCase());
+      for (const appButton of appButtons) {
+         const appName = appButton.name.toLowerCase();
+         const isVisible = appName.includes(text.toLowerCase());
          appButton.set_visible(isVisible);
          appButton.set_state_flags(Gtk.StateFlags.NORMAL, true);
-      });
+      }
    }
 
    const entry = (
       <entry
          placeholderText={"ctrl+tab to select"}
          onChanged={(self) => {
-            let app_name = self.get_text();
+            const app_name = self.get_text();
             filterList(app_name);
             if (!app_name) return;
             // Select the first visible child
@@ -56,10 +56,10 @@ export default function Applauncher() {
             );
             first_visible_child?.set_state_flags(Gtk.StateFlags.SELECTED, true);
          }}
-         //onActivate={(self) => {
-         //   first_visible_child?.activate();
-         //   self.text = "";
-         //}}
+         onButtonPressed={(self) => {
+            first_visible_child?.activate();
+            self.text = "";
+         }}
       />
    );
 
@@ -89,11 +89,7 @@ export default function Applauncher() {
             vertical={true}
          >
             {entry}
-            <box hscrollbarPolicy={Gtk.PolicyType.NEVER}>
-               <box homogeneous selectionMode={Gtk.SelectionMode.SINGLE}>
-                  {appButtons}
-               </box>
-            </box>
+            <box>{appButtons}</box>
          </box>
       </window>
    );
