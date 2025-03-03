@@ -6,3 +6,14 @@ require "nvchad.options"
 -- o.cursorlineopt ='both' -- to enable cursorline!
 --
 vim.opt.wrap = false
+
+vim.filetype.add {
+  extension = { rasi = "rasi" },
+  pattern = {
+    [".*/waybar/config"] = "jsonc",
+    [".*/mako/config"] = "dosini",
+    [".*/kitty/*.conf"] = "bash",
+    [".*/hypr/.*%.conf"] = "hyprlang",
+    [".*/bun.lock"] = "json5",
+  },
+}
