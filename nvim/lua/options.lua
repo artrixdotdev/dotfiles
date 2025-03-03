@@ -15,5 +15,6 @@ vim.filetype.add {
     [".*/kitty/*.conf"] = "bash",
     [".*/hypr/.*%.conf"] = "hyprlang",
     [".*/bun.lock"] = "json5",
+    [".*/ghostty/config"] = "toml",
   },
 }
