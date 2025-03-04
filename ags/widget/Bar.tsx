@@ -1,4 +1,4 @@
-import { App, Astal, Gtk, Gdk } from "astal/gtk4";
+import { App, Astal, Gtk, type Gdk } from "astal/gtk4";
 import { bind, Variable } from "astal";
 import Hyprland from "gi://AstalHyprland";
 import Tray from "gi://AstalTray";
@@ -20,9 +20,27 @@ function SysTray() {
                   ])}
                   menuModel={bind(item, "menuModel")}
                >
-                  <icon gicon={bind(item, "gicon")} />
+                  <image iconName={bind(item, "iconName")} />
                </menubutton>
             )),
+         )}
+      </box>
+   );
+}
+
+function DynamicMenu() {
+   const hyprland = Hyprland.get_default();
+   const focused = bind(hyprland, "focusedClient");
+
+   return (
+      <box className="Focused" visible={focused.as(Boolean)}>
+         {focused.as(
+            (client) =>
+               client && (
+                  <label
+                     label={bind(client, "title").as((s) => s.split(" — ")[0])}
+                  />
+               ),
          )}
       </box>
    );
@@ -64,6 +82,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
          <centerbox cssName="centerbox">
             <SysTray />
             <Workspaces />
+            <DynamicMenu />
             <menubutton hexpand halign={Gtk.Align.CENTER}>
                <label label={time()} />
                <popover>
