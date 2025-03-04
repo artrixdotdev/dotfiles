@@ -1,5 +1,7 @@
 #!/usr/bin/env bun
 
+import { $ } from "bun";
+
 const args = Bun.argv.slice(2);
 const HOME = Bun.env.HOME;
 
@@ -16,10 +18,12 @@ const app = args[0];
 const rest = args.slice(1);
 
 if (settings?.apps && Object.keys(settings.apps).includes(app)) {
-   const executable = settings.apps[app];
-   const proc = Bun.spawn([executable, ...rest]);
+   const [executable, ...extra] = settings.apps[app].split(" ");
+   const args = [executable, ...extra, ...rest];
+   await $`notify-send "Running ${app}" ${args.join(" ")}`;
+   const proc = Bun.spawn(args);
 
    proc.unref(); // Save memory
 } else {
-   console.error(`Unknown app: ${app}`);
+   await $`notify-send "Unknown app: ${app}"`;
 }
