@@ -58,7 +58,7 @@ function Workspaces() {
                .map((ws) => {
                   return (
                      <button name={ws.name} onClicked={() => ws.focus()}>
-                        ⦿ {ws.name}
+                        {ws.name}
                      </button>
                   );
                }),
@@ -80,10 +80,10 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
          application={App}
       >
          <centerbox cssName="centerbox">
-            <SysTray />
             <Workspaces />
             <DynamicMenu />
-            <menubutton hexpand halign={Gtk.Align.CENTER}>
+            <SysTray />
+            <menubutton hexpand>
                <label label={time()} />
                <popover>
                   <Gtk.Calendar />
