@@ -1,7 +1,32 @@
 import { App, Astal, Gtk, Gdk } from "astal/gtk4";
 import { bind, Variable } from "astal";
 import Hyprland from "gi://AstalHyprland";
+import Tray from "gi://AstalTray";
 const time = Variable("").poll(1000, "date");
+
+function SysTray() {
+   const tray = Tray.get_default();
+
+   return (
+      <box>
+         {bind(tray, "items").as((items) =>
+            items.map((item) => (
+               <menubutton
+                  tooltipMarkup={bind(item, "tooltipMarkup")}
+                  usePopover={false}
+                  actionGroup={bind(item, "actionGroup").as((ag) => [
+                     "dbusmenu",
+                     ag,
+                  ])}
+                  menuModel={bind(item, "menuModel")}
+               >
+                  <icon gicon={bind(item, "gicon")} />
+               </menubutton>
+            )),
+         )}
+      </box>
+   );
+}
 
 function Workspaces() {
    const hyprland = Hyprland.get_default();
@@ -15,7 +40,7 @@ function Workspaces() {
                .map((ws) => {
                   return (
                      <button name={ws.name} onClicked={() => ws.focus()}>
-                        ⦿
+                        ⦿ {ws.name}
                      </button>
                   );
                }),
@@ -37,8 +62,8 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
          application={App}
       >
          <centerbox cssName="centerbox">
+            <SysTray />
             <Workspaces />
-
             <menubutton hexpand halign={Gtk.Align.CENTER}>
                <label label={time()} />
                <popover>
