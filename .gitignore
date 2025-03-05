@@ -4,6 +4,7 @@
 
 logs
 _.log
+btop.log*
 npm-debug.log_
 yarn-debug.log*
 yarn-error.log*
