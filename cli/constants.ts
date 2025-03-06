@@ -1,3 +1,5 @@
+import type { Settings } from "./types";
+
 /**
  * Required packages type definition
  */
@@ -51,7 +53,7 @@ export const OPTIONAL_PACKAGES: PackageSpec[] = [
 /**
  * Default settings
  */
-export const DEFAULT_SETTINGS = {
+export const DEFAULT_SETTINGS: Settings = {
    apps: {
       terminal: "ghostty",
       terminalExecute: "ghostty --font-size=14 -e",

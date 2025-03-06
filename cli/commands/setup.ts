@@ -8,7 +8,7 @@ import {
    DOTFILES_REPO_URL,
    REQUIRED_PACKAGES,
 } from "../constants";
-import { writeSettingsFile } from "../utils/config";
+import { quickSettings, writeSettingsFile } from "../utils/config";
 import {
    cloneDotfilesRepo,
    installAurHelper,
@@ -84,9 +84,9 @@ export function setupCommand(program: Command): void {
             info("Checking for required packages...");
             await installRequiredPackages(REQUIRED_PACKAGES, aurHelper);
 
-            // Create settings file
+            // Settings file prompt
             info("Creating settings file...");
-            await writeSettingsFile(DEFAULT_SETTINGS);
+            await quickSettings();
 
             // Check for potentially conflicting dotfiles
             const conflictingFiles = await getConflictingDotfiles(

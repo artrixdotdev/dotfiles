@@ -1,8 +1,10 @@
 import { existsSync, mkdirSync } from "node:fs";
 import { homedir } from "node:os";
 import { dirname, join } from "node:path";
-import type { PackageSpec } from "../constants";
+import inquirer from "inquirer";
+import { DEFAULT_SETTINGS, type PackageSpec } from "../constants";
 import { error, info, success, warn } from "./logger";
+import { camelCaseToWords } from "./strings";
 import {
    checkPackageInstalled,
    execWithSpinner,
@@ -185,4 +187,33 @@ export async function runDotfilesSync(installDir: string): Promise<void> {
       "Dotfiles synced successfully",
       "Failed to sync dotfiles",
    );
+}
+
+export type Settings = Partial<
+   Record<
+      "apps" | "colors" | "fonts" | "wallpapers",
+      Record<string, string | null>
+   >
+>;
+
+export async function quickSettings(): Promise<Settings> {
+   const settings: Settings = DEFAULT_SETTINGS;
+   if (!settings.apps) {
+      return;
+   }
+   const apps = Object.entries(settings.apps ?? {});
+   for (const [name, value] of apps) {
+      const { value: newValue } = await inquirer.prompt([
+         {
+            name,
+            message: camelCaseToWords(name),
+            default: value ?? undefined,
+            type: "input",
+         },
+      ]);
+
+      settings.apps[name] = newValue;
+   }
+
+   return settings;
 }

@@ -11,5 +11,7 @@ export interface Settings {
       chat: string;
       entertainment: string;
       music: string;
+      [key: string]: string; // Allow for additional app settings
    };
+   [key: string]: string | null; // Allow for additional setting categories
 }
