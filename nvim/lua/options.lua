@@ -8,13 +8,13 @@ require "nvchad.options"
 vim.opt.wrap = false
 
 vim.filetype.add {
-  extension = { rasi = "rasi" },
-  pattern = {
-    [".*/waybar/config"] = "jsonc",
-    [".*/mako/config"] = "dosini",
-    [".*/kitty/*.conf"] = "bash",
-    [".*/hypr/.*%.conf"] = "hyprlang",
-    [".*/bun.lock"] = "json5",
-    [".*/ghostty/config"] = "toml",
-  },
+   extension = { rasi = "rasi" },
+   pattern = {
+      [".*/waybar/config"] = "jsonc",
+      [".*/mako/config"] = "dosini",
+      [".*/kitty/*.conf"] = "bash",
+      [".*/hypr/.*%.conf"] = "hyprlang",
+      [".*/bun.lock"] = "json5",
+      [".*/ghostty/config"] = "toml",
+   },
 }
