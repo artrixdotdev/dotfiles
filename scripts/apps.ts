@@ -18,6 +18,10 @@ const app = args[0];
 const rest = args.slice(1);
 
 if (settings?.apps && Object.keys(settings.apps).includes(app)) {
+   if (settings.apps[app] === null) {
+      await $`notify-send "No app set for ${app}"`;
+      process.exit(1);
+   }
    const [executable, ...extra] = settings.apps[app].split(" ");
    const args = [executable, ...extra, ...rest];
    await $`notify-send "Running ${app}" ${args.join(" ")}`;
