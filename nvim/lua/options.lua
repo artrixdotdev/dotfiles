@@ -6,7 +6,7 @@ require "nvchad.options"
 -- o.cursorlineopt ='both' -- to enable cursorline!
 --
 vim.opt.wrap = false
-
+vim.wo.relativenumber = true
 vim.filetype.add {
    extension = { rasi = "rasi" },
    pattern = {
