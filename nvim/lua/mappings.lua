@@ -179,6 +179,63 @@ local visual_mappings = {
    },
 }
 
+local debugger_mappings = {
+   {
+      modes = "n",
+      lhs = "<Leader>dl",
+      rhs = "<cmd>lua require'dap'.step_into()<CR>",
+      opts = { desc = "Debugger step into" },
+   },
+   {
+      modes = "n",
+      lhs = "<Leader>dj",
+      rhs = "<cmd>lua require'dap'.step_over()<CR>",
+      opts = { desc = "Debugger step over" },
+   },
+   {
+      modes = "n",
+      lhs = "<Leader>dk",
+      rhs = "<cmd>lua require'dap'.step_out()<CR>",
+      opts = { desc = "Debugger step out" },
+   },
+   {
+      modes = "n",
+      lhs = "<Leader>dc",
+      rhs = "<cmd>lua require'dap'.continue()<CR>",
+      opts = { desc = "Debugger continue" },
+   },
+   {
+      modes = "n",
+      lhs = "<Leader>db",
+      rhs = "<cmd>lua require'dap'.toggle_breakpoint()<CR>",
+      opts = { desc = "Debugger toggle breakpoint" },
+   },
+   {
+      modes = "n",
+      lhs = "<Leader>dd",
+      rhs = "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
+      opts = { desc = "Debugger set conditional breakpoint" },
+   },
+   {
+      modes = "n",
+      lhs = "<Leader>de",
+      rhs = "<cmd>lua require'dap'.terminate()<CR>",
+      opts = { desc = "Debugger reset" },
+   },
+   {
+      modes = "n",
+      lhs = "<Leader>dr",
+      rhs = "<cmd>lua require'dap'.run_last()<CR>",
+      opts = { desc = "Debugger run last" },
+   },
+   {
+      modes = "n",
+      lhs = "<Leader>dt",
+      rhs = "<cmd>lua vim.cmd('RustLsp testables')<CR>",
+      opts = { desc = "Debugger testables" },
+   },
+}
+
 -- Apply all mappings
 local function apply_mappings(mappings)
    for _, mapping in ipairs(mappings) do
@@ -193,6 +250,7 @@ apply_mappings(movement_mappings)
 apply_mappings(menu_mappings)
 apply_mappings(lang_mappings)
 apply_mappings(visual_mappings)
+apply_mappings(debugger_mappings)
 
 -- Optional: Save mapping (commented out as per original config)
 map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>", { desc = "Save file" })
