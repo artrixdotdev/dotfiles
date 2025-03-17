@@ -6,8 +6,7 @@ window.Bar {
    color: $fg-color;
    font-weight: bold;
 
-   >centerbox {
-
+   > centerbox {
       // background: $bg-color;
       // border-radius: 10px;
       // margin: 8px;
@@ -30,16 +29,14 @@ window.Bar {
    min-width: 5rem;
    min-height: 5rem;
 
-   >box {
+   > box {
       background: $bg-color;
       border-radius: 8px;
       padding-left: 1.5rem;
       padding-right: 1.5rem;
-
    }
 
    .Focused {
       background: $bg-color;
    }
-
 }
