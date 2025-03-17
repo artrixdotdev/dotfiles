@@ -1,7 +1,7 @@
-import { App, Astal, Gtk, type Gdk } from "astal/gtk4";
-import { bind, Variable } from "astal";
 import Hyprland from "gi://AstalHyprland";
 import Tray from "gi://AstalTray";
+import { Variable, bind } from "astal";
+import { App, Astal, type Gdk, Gtk } from "astal/gtk4";
 const time = Variable("").poll(1000, "date");
 
 function SysTray() {
@@ -58,7 +58,7 @@ function Workspaces() {
                .map((ws) => {
                   return (
                      <button name={ws.name} onClicked={() => ws.focus()}>
-                        {ws.name}
+                        <centerbox>{ws.name}</centerbox>
                      </button>
                   );
                }),
@@ -67,14 +67,14 @@ function Workspaces() {
    );
 }
 
-export default function Bar(gdkmonitor: Gdk.Monitor) {
+export default function Bar(monitor: Hyprland.Monitor) {
    const { TOP, LEFT, RIGHT } = Astal.WindowAnchor;
 
    return (
       <window
          visible
          cssClasses={["Bar"]}
-         gdkmonitor={gdkmonitor}
+         monitor={monitor.id}
          exclusivity={Astal.Exclusivity.EXCLUSIVE}
          anchor={TOP | LEFT | RIGHT}
          application={App}
@@ -82,7 +82,6 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
          <centerbox cssName="centerbox">
             <Workspaces />
             <DynamicMenu />
-            <SysTray />
             <menubutton hexpand>
                <label label={time()} />
                <popover>

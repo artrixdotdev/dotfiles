@@ -1,7 +1,7 @@
-import { bind, Variable } from "astal";
-import { App, Astal, Gdk, Gtk, hook } from "astal/gtk4";
 import Apps from "gi://AstalApps";
 import Hyprland from "gi://AstalHyprland";
+import { Variable, bind } from "astal";
+import { App, Astal, Gdk, Gtk, hook } from "astal/gtk4";
 
 export default function Applauncher() {
    const hyprland = Hyprland.get_default();
@@ -26,7 +26,7 @@ export default function Applauncher() {
                entry.grab_focus();
             }}
          >
-            <image iconName={app.get_icon_name() || ""} />
+            <image pixelSize={64} iconName={app.get_icon_name() || ""} />
          </box>
       );
    }
@@ -56,6 +56,7 @@ export default function Applauncher() {
             );
             first_visible_child?.set_state_flags(Gtk.StateFlags.SELECTED, true);
          }}
+         onKeyModifier={() => print("thing")}
          onButtonPressed={(self) => {
             first_visible_child?.activate();
             self.text = "";
@@ -65,16 +66,12 @@ export default function Applauncher() {
 
    return (
       <window
-         anchor={
-            Astal.WindowAnchor.TOP |
-            Astal.WindowAnchor.RIGHT |
-            Astal.WindowAnchor.LEFT |
-            Astal.WindowAnchor.BOTTOM
-         }
          exclusivity={Astal.Exclusivity.EXCLUSIVE}
          keymode={Astal.Keymode.EXCLUSIVE}
          name={"AppLauncher"}
          application={App}
+         defaultWidth={600}
+         defaultHeight={400}
          monitor={bind(hyprland, "focused_monitor").as((monitor) => monitor.id)}
          onKeyPressed={(self, keyval) =>
             keyval === Gdk.KEY_Escape && self.hide()
@@ -89,7 +86,7 @@ export default function Applauncher() {
             vertical={true}
          >
             {entry}
-            <box>{appButtons}</box>
+            <box vertical={true}>{appButtons}</box>
          </box>
       </window>
    );

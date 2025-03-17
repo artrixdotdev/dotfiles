@@ -7,13 +7,39 @@ window.Bar {
    font-weight: bold;
 
    >centerbox {
+
       // background: $bg-color;
-      border-radius: 10px;
-      margin: 8px;
+      // border-radius: 10px;
+      // margin: 8px;
+      //
+      // &:hover {
+      //    background: $bg-color;
+      // }
    }
 
    button {
-      border-radius: 8px;
-      margin: 2px;
+      // padding: 8px;
+      // text-align: center;
    }
+}
+
+.Dock {
+   // background: $bg-color;
+   border-radius: 10px;
+   margin-bottom: 20px;
+   min-width: 5rem;
+   min-height: 5rem;
+
+   >box {
+      background: $bg-color;
+      border-radius: 8px;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+
+   }
+
+   .Focused {
+      background: $bg-color;
+   }
+
 }
