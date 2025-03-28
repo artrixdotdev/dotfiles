@@ -32,6 +32,13 @@
       "binary": {
         "path": "/usr/bin/omnisharp"
       }
+    },
+    "rust-analyzer": {
+      "initialization_options": {
+        "checkOnSave": {
+          "command": "clippy"
+        }
+      }
     }
   },
   "assistant": {
@@ -86,8 +93,9 @@
   "theme": {
     "mode": "system",
     "light": "One Light",
-    "dark": "Material Theme"
+    "dark": "Quill"
   },
+
   "languages": {
     "Rust": {
       "formatter": "language_server"
