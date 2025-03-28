@@ -25,7 +25,9 @@ if (settings?.apps && Object.keys(settings.apps).includes(app)) {
    const [executable, ...extra] = settings.apps[app].split(" ");
    const args = [executable, ...extra, ...rest];
    await $`notify-send "Running ${app}" ${args.join(" ")}`;
-   const proc = Bun.spawn(args);
+   const proc = Bun.spawn(args, {
+      stdout: "ignore",
+   });
 
    proc.unref(); // Save memory
 } else {
