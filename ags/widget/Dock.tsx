@@ -2,6 +2,7 @@ import { App, Astal, Gtk, type Gdk } from "astal/gtk4";
 import Hyprland from "gi://AstalHyprland";
 import Apps from "gi://AstalApps";
 import { bind, derive } from "astal";
+import { getAppName } from "../lib/util";
 
 // E.G com.mitchellh.ghostty
 const isRDN = (s: string) => /\b[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+){2,}\b/.test(s);
@@ -10,7 +11,11 @@ function AppButton({
    app,
    client,
    focused = false,
-}: { app: Apps.Application; client: Hyprland.Client; focused?: boolean }) {
+}: {
+   app: Apps.Application;
+   client: Hyprland.Client;
+   focused?: boolean;
+}) {
    return (
       <box onButtonPressed={() => client.focus()} name={app.name}>
          <image
@@ -52,9 +57,7 @@ export default function Dock(monitor: Hyprland.Monitor) {
                {bind(ws, "clients").as((clients) => (
                   <box>
                      {clients.map((c) => {
-                        const title = isRDN(c.initialClass)
-                           ? c.initialClass.split(".").pop()
-                           : c.initialTitle || c.initialClass;
+                        const title = getAppName(c);
                         const app = apps.fuzzy_query(title)[0];
                         print(monitor.id, title);
 
