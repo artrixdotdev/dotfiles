@@ -2,7 +2,6 @@ import chalk from "chalk";
 import type { Command } from "commander";
 import inquirer from "inquirer";
 import {
-   DEFAULT_SETTINGS,
    DOTFILES_BACKUP_DIR,
    DOTFILES_INSTALL_DIR,
    DOTFILES_REPO_URL,
@@ -15,11 +14,10 @@ import {
    installRequiredPackages,
    runDotfilesSync,
 } from "../utils/installer";
-import { error, info, log, success, warn } from "../utils/logger";
+import { error, info, success, warn } from "../utils/logger";
 import {
    backupDotfiles,
    checkDistribution,
-   checkPackageInstalled,
    getAurHelperOptions,
    getConflictingDotfiles,
 } from "../utils/system";
@@ -136,7 +134,7 @@ export function setupCommand(program: Command): void {
                "To get started, log out and log back in to apply all changes.",
             );
          } catch (err) {
-            error(`Setup failed: ${err.message}`);
+            error(`Setup failed: ${(err as Error).message}`);
             process.exit(1);
          }
       });
