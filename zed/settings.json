@@ -7,6 +7,14 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "edit_predictions": {
+    "mode": "subtle",
+    "copilot": {
+      "proxy": null,
+      "proxy_no_verify": null
+    },
+    "enabled_in_text_threads": false
+  },
   "auto_update": false,
   "restore_on_startup": "last_session",
 
@@ -35,13 +43,11 @@
     },
     "rust-analyzer": {
       "initialization_options": {
-        "checkOnSave": {
-          "command": "clippy"
-        }
+        "checkOnSave": true
       }
     }
   },
-  "assistant": {
+  "agent": {
     "default_model": {
       "provider": "zed.dev",
       "model": "claude-3-7-sonnet-latest"
@@ -76,8 +82,7 @@
   },
   "buffer_font_size": 22,
   "ui_font_family": "Readex Pro",
-
-  "buffer_font_family": "JetBrains Mono",
+  "buffer_font_family": "JetBrainsMono Nerd Font Mono",
   "terminal": {
     "dock": "bottom",
     "font_family": "JetBrainsMono Nerd Font Mono",
@@ -93,7 +98,7 @@
   "theme": {
     "mode": "system",
     "light": "One Light",
-    "dark": "Quill"
+    "dark": "Palenight Theme"
   },
 
   "languages": {

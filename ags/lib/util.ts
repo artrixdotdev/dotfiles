@@ -9,8 +9,9 @@ export function getAppName(windowInfo: {
 }): string {
    const { initialClass, initialTitle, class: windowClass, title } = windowInfo;
 
-   // Special case mapping - extend this for any specific apps that need custom handling
+   // Special case mapping - extend this for specific apps
    const specialCases: Record<string, string> = {
+      vesktop: "vesktop",
       "com.mitchellh.ghostty": "Ghostty",
       "dev.zed.Zed-Preview": "Zed",
       zen: "Zen Browser",
@@ -19,6 +20,20 @@ export function getAppName(windowInfo: {
    // Check special cases first
    if (specialCases[initialClass]) {
       return specialCases[initialClass];
+   }
+
+   // Handle common browser patterns
+   if (
+      windowClass.includes("-edge") ||
+      windowClass.includes("-chrome") ||
+      windowClass.includes("-firefox") ||
+      windowClass.includes("-brave")
+   ) {
+      // Transform microsoft-edge
+      return windowClass
+         .split("-")
+         .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+         .join(" ");
    }
 
    // Process RDN-style class names (com.example.AppName)
@@ -35,17 +50,24 @@ export function getAppName(windowInfo: {
       return lastPart.charAt(0).toUpperCase() + lastPart.slice(1);
    }
 
-   // For browser windows, extract app name from title if available
-   const browserAppMatch = / — ([^—]+)$/.exec(title);
+   // Extract browser name from window title using multiple patterns
+   // Pattern 1: content — Browser Name
+   const emDashMatch = / — ([^—]+)$/.exec(title);
+   if (emDashMatch && emDashMatch[1]) {
+      return emDashMatch[1].trim();
+   }
+
+   // Pattern 2: content - Profile x - Browser Name (Microsoft Edge style)
+   const edgeStyleMatch = /- (?:Profile \d+ - )?(.*?)$/i.exec(title);
    if (
-      browserAppMatch &&
-      browserAppMatch[1] &&
-      (initialClass === "firefox" ||
-         initialClass === "chrome" ||
-         initialClass === "brave" ||
-         initialClass === "zen")
+      edgeStyleMatch &&
+      edgeStyleMatch[1] &&
+      (edgeStyleMatch[1].includes("Edge") ||
+         edgeStyleMatch[1].includes("Chrome") ||
+         edgeStyleMatch[1].includes("Firefox") ||
+         edgeStyleMatch[1].includes("Browser"))
    ) {
-      return browserAppMatch[1].trim();
+      return edgeStyleMatch[1].trim();
    }
 
    // Use initialTitle if it's meaningful and not a terminal path/prompt
@@ -57,10 +79,31 @@ export function getAppName(windowInfo: {
       !initialTitle.includes("/") &&
       !initialTitle.match(/^[A-Za-z0-9_-]+:$/)
    ) {
+      // For browser initialTitles that follow "page - browser" pattern
+      const browserInitialMatch = /- ([^-]+)$/.exec(initialTitle);
+      if (
+         browserInitialMatch &&
+         browserInitialMatch[1] &&
+         (browserInitialMatch[1].includes("Edge") ||
+            browserInitialMatch[1].includes("Chrome") ||
+            browserInitialMatch[1].includes("Firefox"))
+      ) {
+         return browserInitialMatch[1].trim();
+      }
+
       return initialTitle;
    }
 
-   // Clean up class name for fallback (for electron apps often have electron in class)
+   // Handle hyphenated class names that weren't caught by earlier rules
+   if (windowClass.includes("-")) {
+      // For hyphenated app names, convert to Title Case
+      return windowClass
+         .split("-")
+         .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+         .join(" ");
+   }
+
+   // Clean up class name for fallback (for electron apps)
    if (windowClass.toLowerCase().includes("electron")) {
       // Try to extract a meaningful name from title
       const appName = title.split(" ")[0];
@@ -69,7 +112,7 @@ export function getAppName(windowInfo: {
       }
    }
 
-   // For regular terminal emulators that aren't covered by special cases
+   // For terminal emulators
    if (
       windowClass.toLowerCase().includes("term") ||
       windowClass.toLowerCase().includes("konsole") ||
