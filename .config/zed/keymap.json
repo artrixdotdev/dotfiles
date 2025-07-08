@@ -1,0 +1,34 @@
+[
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl+w": "workspace::CloseWindow",
+      "ctrl+n": null
+    }
+  },
+  {
+    "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
+    "bindings": {
+      "space": null,
+      ";": "command_palette::Toggle",
+      "space f f": "file_finder::Toggle",
+      "space t b": "vim::ToggleVisualBlock",
+      "space f w": "workspace::NewSearch",
+      "space g g": "git_panel::ToggleFocus",
+      "space e": "project_panel::ToggleFocus",
+      "ctrl+n": "project_panel::ToggleFocus",
+      "space h": "terminal_panel::ToggleFocus",
+      "space t h": "theme_selector::Toggle",
+      "space /": "vim::ToggleComments",
+      "space shift-d": "diagnostics::Deploy",
+      "space d d": "diagnostics::Deploy",
+      "space d w": "diagnostics::ToggleWarnings",
+      "space d o": "editor::GoToDiagnostic",
+      "space d n": "editor::GoToPreviousDiagnostic",
+      "space s": "outline::Toggle",
+      "space shift-s": "project_symbols::Toggle",
+      "space c c": "editor::Fold",
+      "space c o": "editor::UnfoldRecursive"
+    }
+  }
+]
