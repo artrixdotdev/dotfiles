@@ -253,7 +253,8 @@ layout {
 // See the binds section below for more spawn examples.
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
-// spawn-at-startup "waybar"
+spawn-at-startup "quickshell"
+spawn-at-startup "vesktop"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
@@ -325,6 +326,16 @@ window-rule {
     geometry-corner-radius 16
     clip-to-geometry true
 }
+
+workspace "Chats" {
+   open-on-output "DP-4"
+}
+
+window-rule {
+   match at-startup=true app-id="vesktop"
+   open-on-workspace "Chats"
+}
+
 
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
