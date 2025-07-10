@@ -7,12 +7,7 @@
    "sizing": {
       "base": 8
    },
-   "autostart": [
-      "vesktop",
-      "quickshell",
-      "/usr/bin/polkit-gnome-authentication-agent-1",
-      "bunx arrpc"
-   ],
+   "autostart": ["vesktop", "/usr/bin/polkit-gnome-authentication-agent-1"],
    "outputs": [
       {
          "name": "DP-4",

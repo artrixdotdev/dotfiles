@@ -1,0 +1,6 @@
+[Unit]
+Description=arRPC Service for Vesktop
+
+[Service]
+Type=simple
+ExecStart=arrpc
