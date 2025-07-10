@@ -1,4 +1,9 @@
 {
+   "apps": {
+      "terminal": "ghostty",
+      "browser": "zen-browser",
+      "fileExplorer": "nautilus"
+   },
    "sizing": {
       "base": 8
    },
