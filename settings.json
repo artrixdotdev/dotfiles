@@ -10,7 +10,8 @@
    "autostart": [
       "vesktop",
       "quickshell",
-      "/usr/bin/polkit-gnome-authentication-agent-1"
+      "/usr/bin/polkit-gnome-authentication-agent-1",
+      "bunx arrpc"
    ],
    "outputs": [
       {
