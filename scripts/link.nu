@@ -57,10 +57,9 @@ ls $config_dir | each { |item|
 ls $servcies_dir | each { |item|
     let item_name = ($item.name | path basename)
     let source_path = $"($servcies_dir)/($item_name)"
-    let target_path = $"($env.HOME)/.config/systemd/user/($item_name)"
 
-    create_symlink $source_path $target_path
-    systemctl --user add-wants niri.service $item_name # Adds it as a dependency to the niri service
+    # create_symlink $source_path $target_path
+    systemctl --user add-wants niri.service $source_path # Adds it as a dependency to the niri service
 }
 
 
