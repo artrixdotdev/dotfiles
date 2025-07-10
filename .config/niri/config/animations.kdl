@@ -1,0 +1,13 @@
+// Animation settings.
+// The wiki explains how to configure individual animations:
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Animations
+animations {
+    // Uncomment to turn off all animations.
+    // off
+    horizontal-view-movement {
+        // duration-ms 200
+        spring damping-ratio=1.6 stiffness=800 epsilon=0.0001
+    }
+    // Slow down all animations by this factor. Values below 1 speed them up instead.
+    // slowdown 3.0
+}

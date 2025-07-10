@@ -1,0 +1,17 @@
+{
+   "sizing": {
+      "base": 8
+   },
+   "autostart": ["vesktop", "quickshell"],
+   "outputs": [
+      {
+         "name": "DP-4",
+         "transform": "90",
+         "workspaces": ["Chats"],
+         "position": {
+            "x": 1280,
+            "y": -180
+         }
+      }
+   ]
+}

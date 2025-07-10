@@ -1,0 +1,8 @@
+{{#each settings.outputs}}
+// {{this.name}} Workspaces
+{{#each this.workspaces}}
+workspace "{{this}}" {
+   open-on-output "{{../this.name}}"
+}
+   {{/each}}
+{{/each}}
