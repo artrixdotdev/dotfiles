@@ -1,8 +1,9 @@
 .config/*
 
-!.config/nvim/
-!.config/zed/
+!.config/nvim
+!.config/zed
 !.config/ghostty
 !.config/niri
 !.config/xdg-desktop-portal
+!.config/nushell
 !.config/quickshell
