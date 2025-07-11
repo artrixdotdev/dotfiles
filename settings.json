@@ -7,7 +7,11 @@
    "sizing": {
       "base": 8
    },
-   "autostart": ["vesktop", "/usr/bin/polkit-gnome-authentication-agent-1"],
+   "autostart": [
+      "vesktop",
+      "/usr/bin/polkit-gnome-authentication-agent-1",
+      "artrix-dots daemon"
+   ],
    "outputs": [
       {
          "name": "DP-4",
