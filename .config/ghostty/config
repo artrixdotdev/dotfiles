@@ -13,7 +13,7 @@ window-padding-x = 8,0
 window-padding-color = "extend"
 
 
-theme = Aura
+theme = carbonfox
 
 keybind = performable:ctrl+c=copy_to_clipboard
 keybind = performable:ctrl+v=paste_from_clipboard
