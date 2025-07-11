@@ -37,10 +37,12 @@ window-rule {
 // (This example rule is commented out with a "/-" in front.)
 window-rule {
    geometry-corner-radius {{mul settings.sizing.base 2}}
-    clip-to-geometry true
+   clip-to-geometry true
 }
 
 window-rule {
    match at-startup=true app-id="vesktop"
+
+   open-maximized true
    open-on-workspace "Chats"
 }
