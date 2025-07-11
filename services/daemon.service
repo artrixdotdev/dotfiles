@@ -1,0 +1,15 @@
+
+[Unit]
+Description=Artrix Daemon
+PartOf=graphical-session.target
+After=graphical-session.target
+Requisite=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=artrix-dots daemon
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=default.target
