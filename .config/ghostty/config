@@ -1,7 +1,6 @@
 config-file = theme
 
-font-family = "JetBrainsMonoNF-Regular"
-font-family-bold = "JetBrainsMonoNF-Bold"
+
 
 
 font-size = 16

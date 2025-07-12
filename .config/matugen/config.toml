@@ -21,3 +21,6 @@ pre_hook = "mkdir ~/.cache/theme"
 input_path = './templates/colors.template.css'
 output_path = '~/.cache/theme/colors.css'
 
+[config.custom_keywords]
+font_mono = "JetBrainsMono Nerd Font Mono"
+font_sans = "Segoe UI"
