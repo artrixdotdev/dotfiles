@@ -7,3 +7,4 @@
 !.config/nushell
 !.config/quickshell
 !.config/matugen
+!.config/starship.toml

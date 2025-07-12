@@ -34,6 +34,10 @@ pre_hook = "mkdir ~/.cache/theme"
 input_path = './templates/colors.template.css'
 output_path = '~/.cache/theme/colors.css'
 
+[templates.starship]
+input_path = './templates/starship.template.toml'
+output_path = '~/.config/starship.toml'
+
 [config.custom_keywords]
 font_mono = "JetBrainsMono Nerd Font Mono"
 font_sans = "Segoe UI"
