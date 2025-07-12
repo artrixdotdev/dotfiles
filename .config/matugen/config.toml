@@ -7,3 +7,11 @@ set = true
 [templates.ghostty]
 input_path = './templates/ghostty.template'
 output_path = '~/dotfiles/.config/ghostty/theme'
+
+[templates.gtk3]
+input_path = './templates/gtk.template.css'
+output_path = '~/.config/gtk-3.0/colors.css'
+
+[templates.gtk4]
+input_path = './templates/gtk.template.css'
+output_path = '~/.config/gtk-4.0/colors.css'
