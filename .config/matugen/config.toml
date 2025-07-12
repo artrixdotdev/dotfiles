@@ -16,6 +16,10 @@ output_path = '~/.config/gtk-3.0/colors.css'
 input_path = './templates/gtk.template.css'
 output_path = '~/.config/gtk-4.0/colors.css'
 
+[templates.discord-midnight]
+input_path = './templates/discord-midnight.template.css'
+output_path = '~/.config/vesktop/themes/midnight.theme.css'
+
 [templates.colors]
 pre_hook = "mkdir ~/.cache/theme"
 input_path = './templates/colors.template.css'
