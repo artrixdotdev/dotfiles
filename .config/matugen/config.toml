@@ -15,3 +15,9 @@ output_path = '~/.config/gtk-3.0/colors.css'
 [templates.gtk4]
 input_path = './templates/gtk.template.css'
 output_path = '~/.config/gtk-4.0/colors.css'
+
+[templates.colors]
+pre_hook = "mkdir ~/.cache/theme"
+input_path = './templates/colors.template.css'
+output_path = '~/.cache/theme/colors.css'
+
