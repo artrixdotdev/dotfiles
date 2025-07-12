@@ -3,7 +3,6 @@ config-file = theme
 font-family = "JetBrainsMonoNF-Regular"
 font-family-bold = "JetBrainsMonoNF-Bold"
 
-background-opacity = 0.4
 
 font-size = 16
 font-thicken = true
