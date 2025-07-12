@@ -148,7 +148,7 @@ body {
 
    /* base colors - using matugen color scheme */
    --red-1: {{colors.error.default.hex}};
-   --red-2: {{colors.error_container.default.hex}};
+   --red-2: {{colors.error.default.hex}};
    --red-3: {{colors.on_error_container.default.hex}};
    --red-4: {{colors.on_error.default.hex}};
    --red-5: color-mix(in srgb, {{colors.error.default.hex}} 80%, black);
