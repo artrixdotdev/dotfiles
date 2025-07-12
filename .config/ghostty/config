@@ -1,9 +1,10 @@
+config-file = theme
+
 font-family = "JetBrainsMonoNF-Regular"
 font-family-bold = "JetBrainsMonoNF-Bold"
 
 background-opacity = 0.4
 
-background = "black"
 font-size = 16
 font-thicken = true
 
@@ -13,7 +14,6 @@ window-padding-x = 8,0
 window-padding-color = "extend"
 
 
-theme = carbonfox
 
 keybind = performable:ctrl+c=copy_to_clipboard
 keybind = performable:ctrl+v=paste_from_clipboard
