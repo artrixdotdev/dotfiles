@@ -66,9 +66,9 @@ body {
 
    /* transparency/blur options */
    /* NOTE: TO USE TRANSPARENCY/BLUR, YOU MUST HAVE TRANSPARENT BG COLORS. FOR EXAMPLE: --bg-4: hsla(220, 15%, 10%, 0.7); */
-   --transparency-tweaks: off; /* off: no changes, on: remove some elements for better transparency */
+   --transparency-tweaks: on; /* off: no changes, on: remove some elements for better transparency */
    --remove-bg-layer: off; /* off: no changes, on: remove the base --bg-3 layer for use with window transparency (WILL OVERRIDE BACKGROUND IMAGE) */
-   --panel-blur: off; /* off: no changes, on: blur the background of panels */
+   --panel-blur: on; /* off: no changes, on: blur the background of panels */
    --blur-amount: 12px; /* amount of blur */
    --bg-floating: var(
       --bg-3
@@ -134,9 +134,9 @@ body {
    ); /* background of messages that reply to you when hovered */
 
    /* status indicator colors */
-   --online: {{colors.tertiary.default.hex}}; /* change to #40a258 for default */
+   --online: {{colors.primary.default.hex}}; /* change to #40a258 for default */
    --dnd: {{colors.error.default.hex}}; /* change to #d83a41 for default */
-   --idle: {{colors.tertiary_container.default.hex}}; /* change to #cc954c for default */
+   --idle: {{colors.tertiary.default.hex}}; /* change to #cc954c for default */
    --streaming: {{colors.secondary.default.hex}}; /* change to ##9147ff for default streaming color */
    --offline: var(--text-4); /* change to #82838b for default offline color */
 
