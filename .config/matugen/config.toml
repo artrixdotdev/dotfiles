@@ -1,0 +1,9 @@
+[config.wallpaper]
+command = "swww"
+arguments = ["img", "--transition-type", "center"]
+set = true
+
+
+[templates.ghostty]
+input_path = './templates/ghostty.template'
+output_path = '~/dotfiles/.config/ghostty/theme'
