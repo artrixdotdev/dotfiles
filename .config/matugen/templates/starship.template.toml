@@ -86,72 +86,77 @@ $time"""
 symbol = ' '
 
 [palettes.colors]
-color1 = '{{colors.primary_fixed_dim.default.hex}}'
-color2 = '{{colors.outline.default.hex}}'
-color3 = '{{colors.on_surface_variant.default.hex}}'
-color4 = '{{colors.surface_container.default.hex}}'
-color5 = '{{colors.on_primary.default.hex}}'
-color6 = '{{colors.surface_dim.default.hex}}'
-color7 = '{{colors.surface.default.hex}}'
-color8 = '{{colors.primary.default.hex}}'
-color9 = '{{colors.error.default.hex}}'
+primary_fixed = '{{colors.primary_fixed.default.hex}}'
+on_primary_fixed = '{{colors.on_primary_fixed.default.hex}}'
+primary_fixed_dim = '{{colors.primary_fixed_dim.default.hex}}'
+secondary_fixed = '{{colors.secondary_fixed.default.hex}}'
+on_secondary_fixed = '{{colors.on_secondary_fixed.default.hex}}'
+secondary_fixed_dim = '{{colors.secondary_fixed_dim.default.hex}}'
+tertiary_fixed = '{{colors.tertiary_fixed.default.hex}}'
+on_tertiary_fixed = '{{colors.on_tertiary_fixed.default.hex}}'
+tertiary_fixed_dim = '{{colors.tertiary_fixed_dim.default.hex}}'
+error = '{{colors.error.default.hex}}'
+on_error = '{{colors.on_error.default.hex}}'
+on_surface = '{{colors.on_surface.default.hex}}'
+outline = '{{colors.outline.default.hex}}'
+surface_container_highest = '{{colors.surface_container_highest.default.hex}}'
+primary = '{{colors.primary.default.hex}}'
+secondary = '{{colors.secondary.default.hex}}'
+tertiary = '{{colors.tertiary.default.hex}}'
 
-
-# Replace the "❯" symbol in the prompt with "➜"
 [character]
-success_symbol = "[  ](bold fg:color8)" # Using color8 for blue
-error_symbol = "[  ](bold fg:color9)" # Using color9 for red (tertiary)
+success_symbol = "[  ](bold fg:primary)"
+error_symbol = "[  ](bold fg:on_error)"
 
-# Disable the package module, hiding it from the prompt completely
 [package]
 disabled = false
 
 [git_branch]
-style = "bg:color1" # Using color1 for cyan background
+style = "bg:primary_fixed fg:on_primary_fixed"
 symbol = "󰘬"
 
 ignore_branches = ["main", "master"]
 truncation_length = 12
 truncation_symbol = ""
-format = "[](bold fg:color1)(bold fg:color1)[$symbol $branch(:$remote_branch)](fg:black bg:color1)[ ](bold fg:color1)"
+format = "[](bold fg:primary_fixed)[$symbol $branch(:$remote_branch)]($style)[](bold fg:primary_fixed)"
 
 [git_commit]
 commit_hash_length = 4
-tag_symbol = " "
+tag_symbol = " "
+style = "fg:primary_fixed_dim"
 
 [git_state]
 format = '[\($state( $progress_current of $progress_total)\)]($style) '
-cherry_pick = "[🍒 PICKING](bold fg:color9)" # Using color9 for red
-
+cherry_pick = "[🍒 PICKING](bold fg:on_error)"
 
 [git_metrics]
 format = '([▴$added]($added_style))([▿$deleted]($deleted_style))'
-added_style = 'italic dimmed fg:color8' # Using color8 for green (primary)
-deleted_style = 'italic dimmed fg:color9' # Using color9 for red (tertiary)
+added_style = 'italic dimmed fg:tertiary_fixed'
+deleted_style = 'italic dimmed fg:error'
 ignore_submodules = true
 disabled = false
 
 [git_status]
-style = "bold italic fg:color1" # Using color1 for bright-blue
+style = "bold italic fg:primary_fixed"
 format = "([⎪$ahead_behind$staged$modified$untracked$renamed$deleted$conflicted$stashed⎥]($style))"
-conflicted = "[◪◦](italic fg:color9)" # Using color9 for bright-magenta (tertiary)
-ahead = "[▴│[${count}](bold fg:color2)│](italic fg:color8)" # Using color8 for green (primary), color2 for white
-behind = "[▿│[${count}](bold fg:color2)│](italic fg:color9)" # Using color9 for red (tertiary), color2 for white
-diverged = "[◇ ▴┤[${ahead_count}](regular fg:color2)│▿┤[${behind_count}](regular fg:color2)│](italic fg:color9)" # Using color9 for bright-magenta (tertiary), color2 for white
-untracked = "[◌◦](italic fg:color1)" # Using color1 for bright-yellow (assuming you want a different bright color here, otherwise define a yellow in palette)
-stashed = "[◃◈](italic fg:color2)" # Using color2 for white
-modified = "[●◦](italic fg:color1)" # Using color1 for yellow (assuming you want a different yellow, define one in palette)
-staged = "[▪┤[$count](bold fg:color2)│](italic fg:color1)" # Using color1 for bright-cyan, color2 for white
-renamed = "[◎◦](italic fg:color1)" # Using color1 for bright-blue
-deleted = "[✕](italic fg:color9)" # Using color9 for red
+conflicted = "[◪◦](italic fg:error)"
+ahead = "[▴│[${count}](bold fg:on_surface)│](italic fg:tertiary_fixed)"
+behind = "[▿│[${count}](bold fg:on_surface)│](italic fg:error)"
+diverged = "[◇ ▴┤[${ahead_count}](regular fg:on_surface)│▿┤[${behind_count}](regular fg:on_surface)│](italic fg:error)"
+untracked = "[◌◦](italic fg:secondary_fixed)"
+stashed = "[◃◈](italic fg:outline)"
+modified = "[●◦](italic fg:tertiary_fixed)"
+staged = "[▪┤[$count](bold fg:on_surface)│](italic fg:primary_fixed)"
+renamed = "[◎◦](italic fg:secondary_fixed_dim)"
+deleted = "[✕](italic fg:error)"
 
 [directory]
-home_symbol = ""
-read_only = ""
-style = "bg:color8 fg:color2" # Using color8 for green background, color2 for black foreground
+home_symbol = ""
+read_only = ""
+style = "bg:tertiary_fixed_dim fg:on_tertiary_fixed"
 truncation_length = 6
-format = '[](bold fg:color8)[$path]($style)[ ](bold fg:color8)'
+format = '[](bold fg:tertiary_fixed_dim)[$path]($style)[](bold fg:tertiary_fixed_dim)'
 
 [cmd_duration]
 min_time = 0
-format = '[](bold fg:color1)[ $duration](bold bg:color1 fg:color2)[](bold fg:color1)' # Using color1 for yellow, color2 for black
+format = '[](bold fg:tertiary_fixed)[󰔶 $duration](bold bg:tertiary_fixed fg:on_tertiary_fixed)[](bold fg:tertiary_fixed)'
