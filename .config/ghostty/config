@@ -1,7 +1,7 @@
 config-file = theme
 
 
-
+custom-shader = shaders/cursor-smear.glsl
 
 font-size = 16
 font-thicken = true
