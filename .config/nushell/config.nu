@@ -43,19 +43,19 @@ $env.config = {
     }
 
     explore: {
-        status_bar_background: { fg: "#1D1F21", bg: "#C4C9C6" },
-        command_bar_text: { fg: "#C4C9C6" },
-        highlight: { fg: "black", bg: ".theme.binary" },
+        status_bar_background: { fg: $env.raw_theme.on_surface, bg: $env.raw_theme.surface_container },
+        command_bar_text: { fg: $env.raw_theme.on_surface },
+        highlight: { fg: $env.raw_theme.on_primary, bg: $env.raw_theme.primary },
         status: {
-            error: { fg: "white", bg: "red" },
-            warn: {}
-            info: {}
+            error: { fg: $env.raw_theme.on_error, bg: $env.raw_theme.error },
+            warn: { fg: $env.raw_theme.on_surface, bg: $env.raw_theme.tertiary_container }
+            info: { fg: $env.raw_theme.on_surface, bg: $env.raw_theme.secondary_container }
         },
-        selected_cell: { bg: light_blue },
+        selected_cell: { bg: $env.raw_theme.primary_container },
     }
 
     history: {
-        max_size: 100_000 # Session has to be reloaded for this to take effect
+        max_size: 100_000_000 # Session has to be reloaded for this to take effect
         sync_on_enter: true # Enable to share history between multiple sessions, else you have to close the session to write history to file
         file_format: "plaintext" # "sqlite" or "plaintext"
         isolation: false # only available with sqlite file_format. true enables history isolation, false disables it. true will allow the history to be isolated to the current session using up/down arrows. false will allow the history to be shared across all sessions.
@@ -72,6 +72,7 @@ $env.config = {
             completer: null # check 'carapace_completer' above as an example
         }
         use_ls_colors: true # set this to true to enable file/path/directory completions using LS_COLORS
+
     }
 
 
@@ -163,11 +164,11 @@ $env.config = {
                 col_padding: 2
             }
             style: {
-                text: $env.theme.bool
-                selected_text: { attr: r }
-                description_text: $env.theme.binary
-                match_text: { attr: u }
-                selected_match_text: { attr: ur }
+                text: $env.raw_theme.on_surface
+                selected_text: { fg: $env.raw_theme.on_primary_container, bg: $env.raw_theme.primary_container, attr: r }
+                description_text: $env.raw_theme.on_surface_variant
+                match_text: { fg: $env.raw_theme.primary, attr: u }
+                selected_match_text: { fg: $env.raw_theme.primary_fixed, attr: ur }
             }
         }
         {
@@ -196,11 +197,11 @@ $env.config = {
                 correct_cursor_pos: false
             }
             style: {
-                text: $env.theme.bool
-                selected_text: { attr: r }
-                description_text: $env.theme.binary
-                match_text: { attr: u }
-                selected_match_text: { attr: ur }
+                text: $env.raw_theme.on_surface
+                selected_text: { fg: $env.raw_theme.on_primary_container, bg: $env.raw_theme.primary_container, attr: r }
+                description_text: $env.raw_theme.on_surface_variant
+                match_text: { fg: $env.raw_theme.primary, attr: u }
+                selected_match_text: { fg: $env.raw_theme.primary_fixed, attr: ur }
             }
         }
         {
@@ -212,9 +213,9 @@ $env.config = {
                 page_size: 10
             }
             style: {
-                text: $env.theme.bool
-                selected_text: { fg: $env.theme.bool }
-                description_text: $env.theme.binary
+                text: $env.raw_theme.on_surface
+                selected_text: { fg: $env.raw_theme.on_secondary_container, bg: $env.raw_theme.secondary_container }
+                description_text: $env.raw_theme.on_surface_variant
             }
         }
         {
@@ -230,9 +231,9 @@ $env.config = {
                 description_rows: 10
             }
             style: {
-                text: $env.theme.bool
-                selected_text: $env.theme.bool
-                description_text: $env.theme.binary
+                text: $env.raw_theme.on_surface
+                selected_text: { fg: $env.raw_theme.on_tertiary_container, bg: $env.raw_theme.tertiary_container }
+                description_text: $env.raw_theme.on_surface_variant
             }
         }
     ]

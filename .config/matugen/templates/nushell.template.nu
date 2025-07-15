@@ -59,3 +59,9 @@ $env.theme = {
     shape_variable: "{{colors.secondary_fixed_dim.default.hex}}"
     string: "{{colors.primary_fixed_dim.default.hex}}"
 }
+
+$env.raw_theme = {
+   <* for name, value in colors *>
+   {{name}}: "{{value.default.hex}}"
+   <* endfor *>
+}
