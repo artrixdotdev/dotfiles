@@ -34,6 +34,10 @@ pre_hook = "mkdir ~/.cache/theme"
 input_path = './templates/colors.template.css'
 output_path = '~/.cache/theme/colors.css'
 
+[templates.nushell]
+input_path = './templates/nushell.template.nu'
+output_path = '~/.cache/theme/theme.nu'
+
 [templates.starship]
 input_path = './templates/starship.template.toml'
 output_path = '~/.config/starship/starship.toml'
