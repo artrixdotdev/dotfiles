@@ -3,9 +3,11 @@
 add_newline = true
 
 format = """
-$cmd_duration  $directory$right_format
+$cmd_duration  $directory
 $character
 """
+
+palette = "colors"
 
 right_format = """
 $singularity\
@@ -85,45 +87,33 @@ symbol = ' '
 
 [palettes.colors]
 color1 = '{{colors.primary_fixed_dim.default.hex}}'
-color2 = '{{colors.on_primary.default.hex}}'
+color2 = '{{colors.outline.default.hex}}'
 color3 = '{{colors.on_surface_variant.default.hex}}'
 color4 = '{{colors.surface_container.default.hex}}'
 color5 = '{{colors.on_primary.default.hex}}'
 color6 = '{{colors.surface_dim.default.hex}}'
 color7 = '{{colors.surface.default.hex}}'
 color8 = '{{colors.primary.default.hex}}'
-color9 = '{{colors.tertiary.default.hex}}'
-
-# Don't print a new line at the start of the prompt
-# Pipes ╰─ ╭─
-# Powerline symbols                                    
-# Wedges 🭧🭒 🭣🭧🭓
-# Random noise 🬖🬥🬔🬗
-# Cool stuff 󰜥   
-
-# format = """
-# $cmd_duration$username$hostname $directory $git_branch
-# $character
-# """
+color9 = '{{colors.error.default.hex}}'
 
 
 # Replace the "❯" symbol in the prompt with "➜"
-[character]                            # The name of the module we are configuring is "character"
-success_symbol = "[  ](bold fg:blue)"
-error_symbol = "[  ](bold fg:red)"
+[character]
+success_symbol = "[  ](bold fg:color8)" # Using color8 for blue
+error_symbol = "[  ](bold fg:color9)" # Using color9 for red (tertiary)
 
 # Disable the package module, hiding it from the prompt completely
 [package]
 disabled = false
 
 [git_branch]
-style = "bg: cyan"
+style = "bg:color1" # Using color1 for cyan background
 symbol = "󰘬"
 
 ignore_branches = ["main", "master"]
 truncation_length = 12
 truncation_symbol = ""
-format = "[](bold fg:cyan)(bold fg:cyan)[$symbol $branch(:$remote_branch)](fg:black bg:cyan)[ ](bold fg:cyan)"
+format = "[](bold fg:color1)(bold fg:color1)[$symbol $branch(:$remote_branch)](fg:black bg:color1)[ ](bold fg:color1)"
 
 [git_commit]
 commit_hash_length = 4
@@ -131,48 +121,37 @@ tag_symbol = " "
 
 [git_state]
 format = '[\($state( $progress_current of $progress_total)\)]($style) '
-cherry_pick = "[🍒 PICKING](bold red)"
-
+cherry_pick = "[🍒 PICKING](bold fg:color9)" # Using color9 for red
 
 
 [git_metrics]
 format = '([▴$added]($added_style))([▿$deleted]($deleted_style))'
-added_style = 'italic dimmed green'
-deleted_style = 'italic dimmed red'
+added_style = 'italic dimmed fg:color8' # Using color8 for green (primary)
+deleted_style = 'italic dimmed fg:color9' # Using color9 for red (tertiary)
 ignore_submodules = true
 disabled = false
 
 [git_status]
-style = "bold italic bright-blue"
+style = "bold italic fg:color1" # Using color1 for bright-blue
 format = "([⎪$ahead_behind$staged$modified$untracked$renamed$deleted$conflicted$stashed⎥]($style))"
-conflicted = "[◪◦](italic bright-magenta)"
-ahead = "[▴│[${count}](bold white)│](italic green)"
-behind = "[▿│[${count}](bold white)│](italic red)"
-diverged = "[◇ ▴┤[${ahead_count}](regular white)│▿┤[${behind_count}](regular white)│](italic bright-magenta)"
-untracked = "[◌◦](italic bright-yellow)"
-stashed = "[◃◈](italic white)"
-modified = "[●◦](italic yellow)"
-staged = "[▪┤[$count](bold white)│](italic bright-cyan)"
-renamed = "[◎◦](italic bright-blue)"
-deleted = "[✕](italic red)"
+conflicted = "[◪◦](italic fg:color9)" # Using color9 for bright-magenta (tertiary)
+ahead = "[▴│[${count}](bold fg:color2)│](italic fg:color8)" # Using color8 for green (primary), color2 for white
+behind = "[▿│[${count}](bold fg:color2)│](italic fg:color9)" # Using color9 for red (tertiary), color2 for white
+diverged = "[◇ ▴┤[${ahead_count}](regular fg:color2)│▿┤[${behind_count}](regular fg:color2)│](italic fg:color9)" # Using color9 for bright-magenta (tertiary), color2 for white
+untracked = "[◌◦](italic fg:color1)" # Using color1 for bright-yellow (assuming you want a different bright color here, otherwise define a yellow in palette)
+stashed = "[◃◈](italic fg:color2)" # Using color2 for white
+modified = "[●◦](italic fg:color1)" # Using color1 for yellow (assuming you want a different yellow, define one in palette)
+staged = "[▪┤[$count](bold fg:color2)│](italic fg:color1)" # Using color1 for bright-cyan, color2 for white
+renamed = "[◎◦](italic fg:color1)" # Using color1 for bright-blue
+deleted = "[✕](italic fg:color9)" # Using color9 for red
 
 [directory]
 home_symbol = ""
 read_only = ""
-style = "bg:green fg:black"
+style = "bg:color8 fg:color2" # Using color8 for green background, color2 for black foreground
 truncation_length = 6
-format = '[](bold fg:green)[$path]($style)[ ](bold fg:green)'
-
-
-# [directory.substitutions]
-# "Desktop" = ""
-# "Documents" = ""
-# "Downloads" = ""
-# "Music" = "󰎈"
-# "Pictures" = ""
-# "Videos" = ""
-# "GitHub" = "󰊤"
+format = '[](bold fg:color8)[$path]($style)[ ](bold fg:color8)'
 
 [cmd_duration]
 min_time = 0
-format = '[](bold fg:yellow)[ $duration](bold bg:yellow fg:black)[](bold fg:yellow)'
+format = '[](bold fg:color1)[ $duration](bold bg:color1 fg:color2)[](bold fg:color1)' # Using color1 for yellow, color2 for black
