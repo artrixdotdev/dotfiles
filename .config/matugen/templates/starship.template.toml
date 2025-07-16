@@ -106,7 +106,7 @@ tertiary = '{{colors.tertiary.default.hex}}'
 
 [character]
 success_symbol = "[  ](bold fg:primary)"
-error_symbol = "[  ](bold fg:on_error)"
+error_symbol = "[  ](bold fg:error)"
 
 [package]
 disabled = false
@@ -127,7 +127,7 @@ style = "fg:primary_fixed_dim"
 
 [git_state]
 format = '[\($state( $progress_current of $progress_total)\)]($style) '
-cherry_pick = "[🍒 PICKING](bold fg:on_error)"
+cherry_pick = "[🍒 PICKING](bold fg:error)"
 
 [git_metrics]
 format = '([▴$added]($added_style))([▿$deleted]($deleted_style))'
@@ -151,8 +151,8 @@ renamed = "[◎◦](italic fg:secondary_fixed_dim)"
 deleted = "[✕](italic fg:error)"
 
 [directory]
-home_symbol = ""
-read_only = ""
+home_symbol = ""
+read_only = ""
 style = "bg:tertiary_fixed_dim fg:on_tertiary_fixed"
 truncation_length = 6
 format = '[](bold fg:tertiary_fixed_dim)[$path]($style)[](bold fg:tertiary_fixed_dim)'
