@@ -36,6 +36,11 @@ pre_hook = "mkdir ~/.cache/theme"
 input_path = './templates/colors.template.css'
 output_path = '~/.cache/theme/colors.css'
 
+[templates.toml]
+pre_hook = "mkdir ~/.cache/theme"
+input_path = './templates/colors.template.toml'
+output_path = '~/.cache/theme/colors.toml'
+
 [templates.nushell]
 input_path = './templates/nushell.template.nu'
 output_path = '~/.cache/theme/theme.nu'
