@@ -41,6 +41,10 @@ pre_hook = "mkdir ~/.cache/theme"
 input_path = './templates/colors.template.toml'
 output_path = '~/.cache/theme/colors.toml'
 
+[templates.nvim]
+input_path = './templates/nvim.template.lua'
+output_path = '~/.local/share/nvim/lazy/base46/lua/base46/themes/matugen.lua'
+
 [templates.nushell]
 input_path = './templates/nushell.template.nu'
 output_path = '~/.cache/theme/theme.nu'
@@ -52,3 +56,31 @@ output_path = '~/.config/starship/starship.toml'
 [config.custom_keywords]
 font_mono = "JetBrainsMono Nerd Font Mono"
 font_sans = "Segoe UI"
+
+[config.custom_colors.red]
+color = "#FF0000"
+blend = true
+
+[config.custom_colors.green]
+color = "#00FF00"
+blend = true
+
+[config.custom_colors.yellow]
+color = "#FFFF00"
+blend = true
+
+[config.custom_colors.blue]
+color = "#0000FF"
+blend = true
+
+[config.custom_colors.magenta]
+color = "#FF00FF"
+blend = true
+
+[config.custom_colors.cyan]
+color = "#00FFFF"
+blend = true
+
+[config.custom_colors.white]
+color = "#FFFFFF"
+blend = true

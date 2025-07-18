@@ -6,7 +6,7 @@
 local M = {}
 
 M.base46 = {
-   theme = "catppuccin",
+   theme = "matugen",
    changed_themes = {
       catppuccin = {
          base_30 = {
