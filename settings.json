@@ -1,6 +1,6 @@
 {
    "apps": {
-      "terminal": "ghostty",
+      "terminal": ["ghostty", "+new-window"],
       "browser": "zen-browser",
       "fileExplorer": "nautilus"
    },
