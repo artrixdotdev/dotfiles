@@ -7,6 +7,8 @@ set = true
 [templates.ghostty]
 input_path = './templates/ghostty.template'
 output_path = '~/dotfiles/.config/ghostty/theme'
+# Reload ghostty service
+post_hook = "systemctl reload --user app-com.mitchellh.ghostty.service"
 
 [templates.gtk3]
 input_path = './templates/gtk.template.css'
