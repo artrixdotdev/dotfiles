@@ -53,6 +53,10 @@ output_path = '~/.cache/theme/theme.nu'
 input_path = './templates/starship.template.toml'
 output_path = '~/.config/starship/starship.toml'
 
+[templates.zed]
+input_path = './templates/zed.template.json'
+output_path = '~/.config/zed/themes/matugen.json'
+
 [config.custom_keywords]
 font_mono = "JetBrainsMono Nerd Font Mono"
 font_sans = "Segoe UI"
