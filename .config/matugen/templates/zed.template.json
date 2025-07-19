@@ -190,7 +190,8 @@
                   "font_style": "italic"
                },
                "constant": {
-                  "color": "{{colors.green.default.hex}}"
+                  "font_weight": 700,
+                  "color": "{{colors.source_color.default.hex}}"
                },
                "constructor": {
                   "color": "{{colors.blue.default.hex}}"
@@ -265,7 +266,7 @@
                   "color": "{{colors.tertiary.default.hex}}"
                },
                "string": {
-                  "color": "{{colors.green.default.hex}}"
+                  "color": "{{colors.tertiary.default.hex}}"
                },
                "string.escape": {
                   "color": "{{colors.cyan.default.hex}}"
