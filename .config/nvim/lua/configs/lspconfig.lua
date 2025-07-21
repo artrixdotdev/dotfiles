@@ -23,6 +23,12 @@ end
 --   capabilities = nvlsp.capabilities,
 -- }
 --
+require("lspconfig").qmlls.setup {
+   cmd = { "qmlls", "-E" },
+   on_attach = nvlsp.on_attach,
+   on_init = nvlsp.on_init,
+   capabilities = nvlsp.capabilities,
+}
 
 require("lspconfig").mdx_analyzer.setup {
    on_attach = nvlsp.on_attach,
