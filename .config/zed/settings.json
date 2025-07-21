@@ -51,7 +51,7 @@
       "default_model": {
          "provider": "copilot_chat",
          "model": "gpt-4.1"
-      },
+      }
    },
 
    "vim": {
@@ -103,6 +103,14 @@
    "languages": {
       "Rust": {
          "formatter": "language_server"
+      },
+      "QML": {
+         "formatter": {
+            "external": {
+               "command": "qmlformat",
+               "arguments": ["{buffer_path}"]
+            }
+         }
       }
    },
 

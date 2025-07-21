@@ -1,48 +1,67 @@
+import "Clients/Niri.qml" as Niri
+import QtQuick
 import Quickshell
 import Quickshell.Io
-import QtQuick
+import "Shared/Settings.qml" as Settings
 
 Variants {
-  model: Quickshell.screens;
+    model: Quickshell.screens
 
-  delegate: Component {
-    PanelWindow {
-      // the screen from the screens list will be injected into this
-      // property
-      property var modelData
+    delegate: Component {
+        PanelWindow {
+            // we can then set the window's screen to the injected property
 
-      // we can then set the window's screen to the injected property
-      screen: modelData
+            // the screen from the screens list will be injected into this
+            // property
+            property var client: Niri
+            property var settings: Settings
+            property var modelData: {
+            }
 
-      anchors {
-        top: true
-        left: true
-        right: true
-      }
+            implicitHeight: 32
 
-      implicitHeight: 32
+            anchors {
+                top: true
+                right: true
+                left: true
+            }
 
-      Text {
-        id: clock
-        anchors.centerIn: parent
+            Text {
+                id: settingsText
 
-        Process {
-          id: dateProc
-          command: ["date"]
-          running: true
+                anchors.centerIn: parent
+            }
 
-          stdout: StdioCollector {
-            onStreamFinished: clock.text = this.text
-          }
+            Text {
+                id: clock
+
+                anchors.centerIn: parent
+
+                Process {
+                    id: dateProc
+
+                    command: ["date"]
+                    running: true
+
+                    stdout: StdioCollector {
+                        onStreamFinished: clock.text = this.text
+                    }
+
+                }
+
+                Timer {
+                    interval: 1000
+                    running: true
+                    repeat: true
+                    onTriggered: () => {
+                        dateProc.running = true;
+                    }
+                }
+
+            }
+
         }
 
-        Timer {
-          interval: 1000
-          running: true
-          repeat: true
-          onTriggered: dateProc.running = true
-        }
-      }
     }
-  }
+
 }
