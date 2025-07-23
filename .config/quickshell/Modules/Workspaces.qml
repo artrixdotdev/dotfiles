@@ -8,11 +8,12 @@ PanelWindow {
 
    anchors {
       left: true
-      right: true
+      bottom: true
       top: true
    }
 
-   height: Settings.settings.sizing.base * 4
+   width: Settings.settings.sizing.base * 4
+
    color: "transparent"
 
    Rectangle {
@@ -22,8 +23,7 @@ PanelWindow {
       Row {
          id: workspaceRow
          anchors {
-            left: parent.left
-            leftMargin: 12
+            top: parent.top
             verticalCenter: parent.verticalCenter
          }
          spacing: 8
@@ -52,9 +52,6 @@ PanelWindow {
                      return "#f38ba8";
                   return "#45475a";
                }
-
-               border.color: isFocused ? "#b4befe" : "transparent"
-               border.width: isFocused ? 2 : 0
 
                Text {
                   anchors.centerIn: parent
