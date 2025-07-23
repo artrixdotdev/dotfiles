@@ -1,26 +1,26 @@
 {
-   "apps": {
-      "terminal": ["ghostty", "+new-window"],
-      "browser": "zen-browser",
-      "fileExplorer": "nautilus"
-   },
-   "sizing": {
-      "base": 8
-   },
-   "autostart": [
-      "vesktop",
-      "/usr/bin/polkit-gnome-authentication-agent-1",
-      "artrix-dots daemon"
-   ],
-   "outputs": [
-      {
-         "name": "DP-4",
-         "transform": "90",
-         "workspaces": ["Chats"],
-         "position": {
-            "x": 1280,
-            "y": -180
-         }
-      }
-   ]
+	"apps": {
+		"terminal": ["ghostty", "+new-window"],
+		"browser": "zen-browser",
+		"fileExplorer": "nautilus"
+	},
+	"sizing": {
+		"base": 8
+	},
+	"autostart": [
+		"vesktop",
+		"/usr/bin/polkit-gnome-authentication-agent-1",
+		"artrix-dots daemon"
+	],
+	"outputs": [
+		{
+			"name": "DP-4",
+			"transform": "90",
+			"workspaces": ["Chats"],
+			"position": {
+				"x": 1280,
+				"y": -180
+			}
+		}
+	]
 }
