@@ -17,9 +17,12 @@ binds {
     Mod+Return hotkey-overlay-title="Open a Terminal" {
       spawn {{#each settings.apps.terminal}}{{#if @index}} {{/if}}"{{this}}"{{else}}"{{settings.apps.terminal}}"{{/each}};
     }
-    Mod+B hotkey-overlay-title="Open a Browser" { spawn "{{settings.apps.browser}}"; }
-    Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-    Mod+F hotkey-overlay-title="Open File Explorer" { spawn "{{settings.apps.fileExplorer}}"; }
+    Mod+B hotkey-overlay-title="Open a Browser" {
+      spawn {{#each settings.apps.browser}}{{#if @index}} {{/if}}"{{this}}"{{else}}"{{settings.apps.browser}}"{{/each}};
+    }
+    Mod+E hotkey-overlay-title="Run File Explorer" {
+      spawn {{#each settings.apps.fileExplorer}}{{#if @index}} {{/if}}"{{this}}"{{else}}"{{settings.apps.fileExplorer}}"{{/each}};
+    }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
@@ -151,30 +154,30 @@ binds {
     //
     // For example, with 2 workspaces + 1 empty, indices 3, 4, 5 and so on
     // will all refer to the 3rd workspace.
-    Mod+1 { focus-workspace 1; }
-    Mod+2 { focus-workspace 2; }
-    Mod+3 { focus-workspace 3; }
-    Mod+4 { focus-workspace 4; }
-    Mod+5 { focus-workspace 5; }
-    Mod+6 { focus-workspace 6; }
-    Mod+7 { focus-workspace 7; }
-    Mod+8 { focus-workspace 8; }
-    Mod+9 { focus-workspace 9; }
-    Mod+Ctrl+1 { move-column-to-workspace 1; }
-    Mod+Ctrl+2 { move-column-to-workspace 2; }
-    Mod+Ctrl+3 { move-column-to-workspace 3; }
-    Mod+Ctrl+4 { move-column-to-workspace 4; }
-    Mod+Ctrl+5 { move-column-to-workspace 5; }
-    Mod+Ctrl+6 { move-column-to-workspace 6; }
-    Mod+Ctrl+7 { move-column-to-workspace 7; }
-    Mod+Ctrl+8 { move-column-to-workspace 8; }
-    Mod+Ctrl+9 { move-column-to-workspace 9; }
+    // Mod+1 { focus-workspace 1; }
+    // Mod+2 { focus-workspace 2; }
+    // Mod+3 { focus-workspace 3; }
+    // Mod+4 { focus-workspace 4; }
+    // Mod+5 { focus-workspace 5; }
+    // Mod+6 { focus-workspace 6; }
+    // Mod+7 { focus-workspace 7; }
+    // Mod+8 { focus-workspace 8; }
+    // Mod+9 { focus-workspace 9; }
+    // Mod+Ctrl+1 { move-column-to-workspace 1; }
+    // Mod+Ctrl+2 { move-column-to-workspace 2; }
+    // Mod+Ctrl+3 { move-column-to-workspace 3; }
+    // Mod+Ctrl+4 { move-column-to-workspace 4; }
+    // Mod+Ctrl+5 { move-column-to-workspace 5; }
+    // Mod+Ctrl+6 { move-column-to-workspace 6; }
+    // Mod+Ctrl+7 { move-column-to-workspace 7; }
+    // Mod+Ctrl+8 { move-column-to-workspace 8; }
+    // Mod+Ctrl+9 { move-column-to-workspace 9; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+1 { move-window-to-workspace 1; }
 
     // Switches focus between the current and the previous workspace.
-    // Mod+Tab { focus-workspace-previous; }
+    Alt+Tab { focus-workspace-previous; }
 
     // The following binds move the focused window in and out of a column.
     // If the window is alone, they will consume it into the nearby column to the side.
@@ -219,7 +222,6 @@ binds {
 
     // Move the focused window between the floating and the tiling layout.
     Mod+T       { toggle-window-floating; }
-    Mod+Shift+T { switch-focus-between-floating-and-tiling; }
 
     // Toggle tabbed column display mode.
     // Windows in this column will appear as vertical tabs,
