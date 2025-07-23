@@ -18,6 +18,10 @@ pub struct RenderCommand {
    #[arg(short, long, default_value = "config.kdl.hbs")]
    main_template: PathBuf,
 
+   /// Path to the colors.json file, relative to root_dir.
+   #[arg(short, long, default_value = ".cache/theme/colors.json")]
+   theme_file: PathBuf,
+
    /// Path where the final config.kdl should be written, relative to root_dir.
    #[arg(short, long, default_value = "config.kdl")]
    output_file: PathBuf,
@@ -35,6 +39,7 @@ impl RenderCommand {
       renderer.render_niri_config(
          &root,
          &self.settings_file,
+         &self.theme_file,
          &self.niri_dir,
          &self.main_template,
          &self.output_file,

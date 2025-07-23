@@ -1,5 +1,14 @@
 use std::{env, path::PathBuf};
 
+pub fn get_home_dir() -> PathBuf {
+   env::var_os("HOME")
+      .unwrap_or_else(|| {
+         eprintln!("WARN: HOME env var not found. Defaulting root_dir to current directory.");
+         std::ffi::OsString::from(".")
+      })
+      .into()
+}
+
 pub fn get_root_dir(override_root: Option<PathBuf>) -> PathBuf {
    override_root.unwrap_or_else(|| {
       let home = env::var_os("HOME").unwrap_or_else(|| {
@@ -8,6 +17,11 @@ pub fn get_root_dir(override_root: Option<PathBuf>) -> PathBuf {
       });
       PathBuf::from(home).join("dotfiles")
    })
+}
+
+pub fn get_cache_dir() -> PathBuf {
+   let root = get_home_dir();
+   root.join(".cache")
 }
 
 pub const DISCLAIMER: &str = r#"

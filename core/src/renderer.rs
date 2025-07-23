@@ -3,7 +3,7 @@ use serde_json::Value;
 use std::{collections::HashMap, fs, path::PathBuf};
 use walkdir::WalkDir;
 
-use crate::config::DISCLAIMER;
+use crate::config::{DISCLAIMER, get_home_dir};
 
 pub struct TemplateRenderer {
    handlebars: Handlebars<'static>,
@@ -34,19 +34,25 @@ impl TemplateRenderer {
       &self,
       root_dir: &PathBuf,
       settings_file: &PathBuf,
+      theme_file: &PathBuf,
       niri_dir: &PathBuf,
       main_template: &PathBuf,
       output_file: &PathBuf,
    ) -> Result<(), Box<dyn std::error::Error>> {
       let settings_path = root_dir.join(settings_file);
+      let theme_file = get_home_dir().join(theme_file);
       let niri_dir_full = root_dir.join(niri_dir);
       let niri_cfg_dir = niri_dir_full.join("config");
       let main_tpl_path = niri_dir_full.join(main_template);
       let output_path = niri_dir_full.join(output_file);
 
       println!("Reading settings from: {}", settings_path.display());
+      println!("Reading theme from: {}", theme_file.display());
       let settings_content = fs::read_to_string(&settings_path)?;
       let settings: Value = serde_json::from_str(&settings_content)?;
+
+      let theme_content = fs::read_to_string(&theme_file)?;
+      let theme: Value = serde_json::from_str(&theme_content)?;
 
       let mut configs: Vec<Value> = Vec::new();
 
@@ -73,6 +79,7 @@ impl TemplateRenderer {
             println!("Rendering template: {}", path.display());
             let mut data = HashMap::new();
             data.insert("settings", &settings);
+            data.insert("theme", &theme);
             let tpl_content = fs::read_to_string(path)?;
             let rendered = self.handlebars.render_template(&tpl_content, &data)?;
 

@@ -28,6 +28,10 @@ pub struct DaemonCommand {
    #[arg(short, long, default_value = "config.kdl")]
    output_file: PathBuf,
 
+   /// Path to the colors.json file, relative to root_dir.
+   #[arg(short, long, default_value = ".cache/theme/colors.json")]
+   theme_file: PathBuf,
+
    /// Debounce delay in milliseconds to avoid excessive re-renders
    #[arg(long, default_value = "500")]
    debounce_ms: u64,
@@ -48,6 +52,7 @@ impl DaemonCommand {
       if let Err(e) = renderer.render_niri_config(
          &root,
          &self.settings_file,
+         &self.theme_file,
          &self.niri_dir,
          &self.main_template,
          &self.output_file,
@@ -90,6 +95,7 @@ impl DaemonCommand {
                      if let Err(e) = renderer.render_niri_config(
                         &root,
                         &self.settings_file,
+                        &self.theme_file,
                         &self.niri_dir,
                         &self.main_template,
                         &self.output_file,

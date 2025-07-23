@@ -58,10 +58,10 @@ layout {
         // - CSS-like notation: "rgb(255, 127, 0)", rgba(), hsl() and a few others.
 
         // Color of the ring on the active monitor.
-        active-color "white"
+        active-color "{{theme.primary}}"
 
         // Color of the ring on inactive monitors.
-        inactive-color "#505050"
+        inactive-color "{{theme.outline}}"
 
         // You can also use gradients. They take precedence over solid colors.
         // Gradients are rendered the same as CSS linear-gradient(angle, from, to).
@@ -70,7 +70,7 @@ layout {
         // You can use any CSS linear-gradient tool on the web to set these up.
         // Changing the color space is also supported, check the wiki for more info.
         //
-        // active-gradient from="#80c8ff" to="#bbddff" angle=45
+        // active-gradient from="{{theme.primary}}" to="{{theme.inverse_primary}}" angle=45
 
         // You can also color the gradient relative to the entire view
         // of the workspace, rather than relative to just the window itself.
