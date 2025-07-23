@@ -6,8 +6,6 @@ import qs.Shared
 PanelWindow {
    id: workspacePanel
 
-   property var client: Niri
-
    anchors {
       left: true
       right: true
@@ -31,7 +29,7 @@ PanelWindow {
          spacing: 8
 
          Repeater {
-            model: client.currentOutputWorkspaces
+            model: Niri.currentOutputWorkspaces
 
             Rectangle {
                id: workspaceButton
@@ -74,7 +72,7 @@ PanelWindow {
                   anchors.fill: parent
                   onClicked: {
                      if (workspace) {
-                        client.switchToWorkspace(workspace.id);
+                        Niri.switchToWorkspace(workspace.id);
                      }
                   }
 
@@ -112,11 +110,11 @@ PanelWindow {
             rightMargin: 12
          }
 
-         text: client.focusedWindowTitle
+         text: Niri.focusedWindowTitle
          color: "#cdd6f4"
          font.pointSize: 9
          elide: Text.ElideRight
-         opacity: client.focusedWindowTitle !== "(No active window)" ? 1.0 : 0.6
+         opacity: Niri.focusedWindowTitle !== "(No active window)" ? 1.0 : 0.6
       }
 
       // Overview indicator
@@ -127,14 +125,14 @@ PanelWindow {
             verticalCenter: parent.verticalCenter
          }
 
-         visible: client.inOverview
+         visible: Niri.inOverview
          width: 8
          height: 8
          radius: 4
          color: "#fab387"
 
          SequentialAnimation {
-            running: client.inOverview
+            running: Niri.inOverview
             loops: Animation.Infinite
 
             PropertyAnimation {
