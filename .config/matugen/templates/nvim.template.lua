@@ -65,7 +65,7 @@ M.polish_hl = {
    },
    Syntax = {
       String = {
-         fg = "{{colors.tertiary.default.hex}}",
+         fg = "{{colors.green.default.hex}}",
       },
    },
    treesitter = {
@@ -73,7 +73,7 @@ M.polish_hl = {
          fg = M.base_16.base03,
       },
       ["@string"] = {
-         fg = "{{colors.tertiary.default.hex}}",
+         fg = "{{colors.green.default.hex}}",
       },
    },
 }
