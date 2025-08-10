@@ -1,22 +1,25 @@
 [
   {
-    "context": "Editor",
     "bindings": {
       "ctrl+w": "workspace::CloseWindow",
-      "ctrl+n": null
+      "ctrl+n": "project_panel::ToggleFocus"
+    }
+  },
+  {
+    "context": "!VimWaiting && !menu && !(vim_mode == insert)",
+    "bindings": {
+      ";": "command_palette::Toggle",
+      "space f f": "file_finder::Toggle",
+      "space f w": "workspace::NewSearch",
+      "space e": "project_panel::ToggleFocus"
     }
   },
   {
     "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
     "bindings": {
       "space": null,
-      ";": "command_palette::Toggle",
-      "space f f": "file_finder::Toggle",
       "space t b": "vim::ToggleVisualBlock",
-      "space f w": "workspace::NewSearch",
       "space g g": "git_panel::ToggleFocus",
-      "space e": "project_panel::ToggleFocus",
-      "ctrl+n": "project_panel::ToggleFocus",
       "space h": "terminal_panel::ToggleFocus",
       "space t h": "theme_selector::Toggle",
       "space /": "vim::ToggleComments",
