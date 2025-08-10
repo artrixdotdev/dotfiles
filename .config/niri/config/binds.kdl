@@ -12,7 +12,7 @@ binds {
     // Mod-Shift-/, which is usually the same as Mod-?,
     // shows a list of important hotkeys.
     Mod+Shift+Slash { show-hotkey-overlay; }
-
+    Mod+Space { spawn "fuzzel"; }
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Return hotkey-overlay-title="Open a Terminal" {
       spawn {{#each settings.apps.terminal}}{{#if @index}} {{/if}}"{{this}}"{{else}}"{{settings.apps.terminal}}"{{/each}};
