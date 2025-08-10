@@ -802,7 +802,18 @@ source ~/.zoxide.nu
 source ~/.cache/carapace/init.nu
 use ~/.cache/starship/init.nu
 
-pfetch
+let is_git_repo = if ($env.PWD | path exists) {
+    ($env.PWD | path join ".git" | path exists)
+} else {
+    false
+}
+
+if $is_git_repo {
+   onefetch
+} else {
+    pfetch
+}
+
 # let ruby_ver = "3.4.0"
 # let gem_home = ($nu.home-path | path join ".gem" "ruby" $ruby_ver)
 # let gem_bin = ($gem_home | path join "bin")
