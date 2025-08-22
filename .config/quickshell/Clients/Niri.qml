@@ -86,6 +86,7 @@ Singleton {
       stdout: SplitParser {
          onRead: data => {
             try {
+               console.log("[Niri] Event:", data);
                const event = JSON.parse(data.trim());
                handleNiriEvent(event);
             } catch (e) {
