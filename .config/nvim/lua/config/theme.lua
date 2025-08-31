@@ -1,0 +1,22 @@
+M.base46 = {
+   theme = "matugen",
+   changed_themes = {
+      catppuccin = {
+         base_30 = {
+            black = "#12121c",
+            darker_black = "#0e0e17",
+         },
+         base_16 = {
+            base00 = "#101019",
+            base01 = "#12121c",
+            base04 = "#0e0e17",
+         },
+      },
+   },
+   -- hl_override = {
+   -- 	Comment = { italic = true },
+   -- 	["@comment"] = { italic = true },
+   -- },
+}
+
+return M
