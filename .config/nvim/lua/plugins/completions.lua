@@ -1,3 +1,5 @@
+dofile(vim.g.base46_cache .. "cmp")
+
 return {
    "saghen/blink.cmp",
    -- optional: provides snippets for the snippet source
@@ -34,7 +36,19 @@ return {
       },
 
       -- (Default) Only show the documentation popup when manually triggered
-      completion = { documentation = { auto_show = true } },
+      completion = {
+         documentation = {
+            auto_show = true,
+            draw = function(opts)
+               if opts.item and opts.item.documentation and opts.item.documentation.value then
+                  local out = require("pretty_hover.parser").parse(opts.item.documentation.value)
+                  opts.item.documentation.value = out:string()
+               end
+
+               opts.default_implementation(opts)
+            end,
+         },
+      },
 
       -- Default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, due to `opts_extend`

@@ -1,3 +1,5 @@
+dofile(vim.g.base46_cache .. "whichkey")
+
 -- Visually displays keybindings and their descriptions
 return {
    "folke/which-key.nvim",

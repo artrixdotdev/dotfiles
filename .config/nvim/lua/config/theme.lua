@@ -1,5 +1,7 @@
+local M = {}
+
 M.base46 = {
-   theme = "matugen",
+   theme = "blossom_light",
    changed_themes = {
       catppuccin = {
          base_30 = {
@@ -18,5 +20,11 @@ M.base46 = {
    -- 	["@comment"] = { italic = true },
    -- },
 }
+
+-- local theme = require("base46-extracted").get_theme_tb "base_30"
+--
+-- for k, v in pairs(theme) do
+--    print(k .. " = " .. v)
+-- end
 
 return M
