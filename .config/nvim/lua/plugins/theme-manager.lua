@@ -1,8 +1,6 @@
 -- Theming system
 return {
-   dir = "~/Documents/Code/base46-extracted",
-   name = "base46-extracted",
-   dev = true,
+   "artrixdotdev/base46-extracted",
    build = function()
       require("base46-extracted").compile()
       require("base46-extracted").load_all_highlights()
