@@ -1,6 +1,6 @@
 local M = {}
 
-local lighten = require("base46.colors").change_hex_lightness
+local lighten = require("base46-extracted.colors").change_hex_lightness
 
 M.base_30 = {
    white = "{{colors.on_background.default.hex}}",

@@ -47,7 +47,7 @@ output_path = '~/.cache/theme/colors.toml'
 
 [templates.nvim]
 input_path = './templates/nvim.template.lua'
-output_path = '~/.local/share/nvim/lazy/base46/lua/base46/themes/matugen.lua'
+output_path = '~/.local/share/nvim/lazy/base46-extracted/lua/base46-extracted/themes/matugen.lua'
 
 [templates.nushell]
 input_path = './templates/nushell.template.nu'
