@@ -1,4 +1,6 @@
 return {
    "leath-dub/snipe.nvim",
-   opts = {},
+   opts = {
+      position = "center",
+   },
 }
