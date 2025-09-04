@@ -14,3 +14,7 @@ snipe.ui_select_menu:add_new_buffer_callback(function(m)
 end)
 vim.ui.select = snipe.ui_select
 vim.o.winborder = "single"
+
+-- Enable persistent undo
+vim.opt.undofile = true
+vim.opt.undodir = vim.fn.stdpath "cache" .. "/undo-history"
