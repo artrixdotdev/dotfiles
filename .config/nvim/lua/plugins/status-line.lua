@@ -5,6 +5,7 @@ return {
       "artrixdotdev/base46-extracted",
       "mrjones2014/smart-splits.nvim",
    },
+   priority = 850,
    opts = function()
       local colors = require("base46-extracted").get_theme_tb "base_30"
       local mux = require "smart-splits"
