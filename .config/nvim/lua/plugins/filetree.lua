@@ -1,4 +1,3 @@
-dofile(vim.g.base46_cache .. "nvimtree")
 -- File tree plugin
 return {
    {
