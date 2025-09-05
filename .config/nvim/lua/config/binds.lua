@@ -56,6 +56,7 @@ wk.add {
       desc = "Don't Save Current Session",
       mode = "n",
    },
+
    -- Clipboard
 
    { "cy", '"+y"', mode = { "v" }, desc = "Copy to clipboard", group = "clipboard" },
@@ -233,6 +234,23 @@ wk.add {
          vim.lsp.buf.type_definition()
       end,
       desc = "Type definition",
+      mode = "n",
+   },
+
+   -- Git
+   {
+      "<leader>g",
+      group = "git",
+      mode = "n",
+   },
+
+   {
+      "<leader>gg",
+      function()
+         -- Creates a new floating pane with lazygit
+         vim.system({ "zellij", "run", "--close-on-exit", "--floating", "--", "lazygit" }, { detach = true })
+      end,
+      desc = "Open lazygit",
       mode = "n",
    },
 }
