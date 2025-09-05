@@ -21,6 +21,41 @@ wk.add {
    },
    { "<leader>s", "<cmd>Telescope aerial<cr>", mode = "n", desc = "Show LSP symbols" },
 
+   -- Session Management
+   { "<leader>q", group = "session" },
+
+   {
+      "<leader>qs",
+      function()
+         require("persistence").load()
+      end,
+      desc = "Restore Session",
+      mode = "n",
+   },
+   {
+      "<leader>qS",
+      function()
+         require("persistence").select()
+      end,
+      desc = "Select Session",
+      mode = "n",
+   },
+   {
+      "<leader>ql",
+      function()
+         require("persistence").load { last = true }
+      end,
+      desc = "Restore Last Session",
+      mode = "n",
+   },
+   {
+      "<leader>qd",
+      function()
+         require("persistence").stop()
+      end,
+      desc = "Don't Save Current Session",
+      mode = "n",
+   },
    -- Clipboard
 
    { "cy", '"+y"', mode = { "v" }, desc = "Copy to clipboard", group = "clipboard" },
