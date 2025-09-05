@@ -23,7 +23,8 @@ wk.add {
 
    -- Clipboard
 
-   { "cy", '"+y"', mode = { "n", "v" }, desc = "Copy to clipboard", group = "clipboard" },
+   { "cy", '"+y"', mode = { "v" }, desc = "Copy to clipboard", group = "clipboard" },
+   { "cyy", '"+yy"', mode = { "n" }, desc = "Copy line to clipboard", group = "clipboard" },
    { "cp", '"+p"', mode = { "n", "v" }, desc = "Paste from clipboard", group = "clipboard" },
 
    -- File
