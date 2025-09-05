@@ -24,11 +24,18 @@ local function generate_colors()
 end
 
 return {
-   "neovim/nvim-lspconfig",
-   dependencies = {
-      "artrixdotdev/base46-extracted",
+   {
+      "neovim/nvim-lspconfig",
+      dependencies = {
+         "artrixdotdev/base46-extracted",
+      },
+      config = function()
+         generate_colors()
+      end,
    },
-   config = function()
-      generate_colors()
-   end,
+   {
+      "Fildo7525/pretty_hover",
+      event = "LspAttach",
+      opts = {},
+   },
 }
