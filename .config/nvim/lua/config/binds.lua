@@ -19,7 +19,7 @@ wk.add {
       mode = "n",
       desc = "Toggle undo tree",
    },
-   { "<leader>s", "<cmd>Telescope lsp_document_symbols<cr>", mode = "n", desc = "Show LSP symbols" },
+   { "<leader>s", "<cmd>Telescope aerial<cr>", mode = "n", desc = "Show LSP symbols" },
 
    -- Clipboard
 
