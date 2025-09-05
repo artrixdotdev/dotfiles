@@ -102,6 +102,7 @@ return {
       generate_colors()
       return {
          auto_install = true,
+         highlight = { enable = true },
          ensure_installed = {
             "markdown",
             "markdown_inline",
