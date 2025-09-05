@@ -29,4 +29,5 @@
 
 return {
    theme = "catppuccin",
+   integrations = {},
 }
