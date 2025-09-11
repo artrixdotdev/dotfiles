@@ -28,6 +28,6 @@
 -- end
 
 return {
-   theme = "catppuccin",
+   theme = "tokyonight",
    integrations = {},
 }
