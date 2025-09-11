@@ -229,7 +229,7 @@ wk.add {
       mode = "n",
    },
    {
-      "rt",
+      "<space>rt",
       function()
          vim.lsp.buf.type_definition()
       end,
@@ -248,7 +248,31 @@ wk.add {
       "<leader>gg",
       function()
          -- Creates a new floating pane with lazygit
-         vim.system({ "zellij", "run", "--close-on-exit", "--floating", "--", "lazygit" }, { detach = true })
+         -- local cols = tonumber(vim.fn.systemlist("tput cols")[1])
+         -- local lines = tonumber(vim.fn.systemlist("tput lines")[1])
+         -- print(cols, lines)
+         --
+         -- local width = cols
+         -- local height = lines
+         -- local x = math.floor((cols - width) / 2)
+         -- local y = math.floor((lines - height) / 2)
+
+         vim.system({
+            "zellij",
+            "run",
+            "--close-on-exit",
+            "--floating",
+            -- "--width",
+            -- tostring(width),
+            -- "--height",
+            -- tostring(height),
+            -- "--x",
+            -- tostring(x),
+            -- "--y",
+            -- tostring(y),
+            "--",
+            "lazygit",
+         }, { detach = true })
       end,
       desc = "Open lazygit",
       mode = "n",
