@@ -12,6 +12,14 @@ snipe.ui_select_menu:add_new_buffer_callback(function(m)
       m:close()
    end, { nowait = true, buffer = m.buf })
 end)
+
+vim.api.nvim_create_autocmd("LspAttach", {
+   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+   callback = function(ev)
+      local client = vim.lsp.get_client_by_id(ev.data.client_id)
+      client.server_capabilities.semanticTokensProvider = nil
+   end,
+})
 vim.ui.select = snipe.ui_select
 vim.o.winborder = "single"
 
