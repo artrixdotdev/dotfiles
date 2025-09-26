@@ -1,6 +1,8 @@
 local wk = require "which-key"
 local lspconfig = require "lspconfig"
 
+local pid = vim.fn.getpid()
+
 -- Keymaps for LSP
 function on_attach(client, bufnr)
    wk.add {
