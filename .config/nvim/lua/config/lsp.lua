@@ -76,6 +76,11 @@ local servers = {
    },
 
    {
+      "termux",
+      cmd = { "termux-language-server" },
+   },
+
+   {
       "qmlls",
       cmd = { "qmlls", "-E" },
    },

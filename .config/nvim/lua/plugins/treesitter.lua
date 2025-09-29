@@ -140,7 +140,8 @@ return {
             "ruby",
             "rust",
             "kdl",
-            "qml",
+            "qmljs",
+            "qmldir",
          },
       },
       config = function(_, opts)
