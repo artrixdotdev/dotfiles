@@ -69,6 +69,14 @@ wk.add {
    { "<leader>fw", "<cmd>Telescope live_grep<cr>", desc = "Search word", mode = "n" },
    { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find File", mode = "n" },
    {
+      "<leader>fd",
+      function()
+         require("oil").toggle_float()
+      end,
+      desc = "Open file buffer manager",
+      mode = "n",
+   },
+   {
       "<leader>fb",
       function()
          require("snipe").open_buffer_menu()
