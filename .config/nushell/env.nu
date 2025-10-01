@@ -72,6 +72,9 @@ $env.NU_PLUGIN_DIRS = [
 # An alternate way to add entries to $env.PATH is to use the custom command `path add`
 # which is built into the nushell stdlib:
 use std "path add"
+if ("~/.zvm/bin" | path expand | path exists) {
+   path add ~/.zvm/bin
+}
 # $env.PATH = ($env.PATH | split row (char esep))
 # path add /some/path
 # path add ($env.CARGO_HOME | path join "bin")
@@ -91,5 +94,9 @@ zoxide init nushell | save -f ~/.zoxide.nu
 $env.RUSTC_WRAPPER = "/usr/bin/sccache"
 $env.STARSHIP_CONFIG = ($env.XDG_CONFIG_HOME | path join "starship/starship.toml")
 $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional
+$env.FZF_DEFAULT_OPTS = "--height=40% --layout=reverse --border --margin=1,20%"
 mkdir ~/.cache/carapace
 carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
+
+echo $env.TERM
+
