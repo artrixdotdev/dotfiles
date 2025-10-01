@@ -61,7 +61,7 @@ end
 local hero = vim.split(hero_text, "\n")
 
 -- Generate ASCII art from image
-local image_path = vim.fn.expand "~/Pictures/wallpapers/Cloudy-Quasar_1.png"
+local image_path = vim.fn.expand "~/Pictures/wallpapers/Cosmic_Islands.png"
 local ascii_art = {}
 
 if vim.fn.filereadable(image_path) == 1 then
@@ -69,10 +69,7 @@ if vim.fn.filereadable(image_path) == 1 then
       "ascii-image-converter",
       image_path,
       "--color",
-      "-b",
-      "--dither",
-      "--threshold",
-      "1",
+
       "-H",
       "13",
    }, { text = true }):wait()
