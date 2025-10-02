@@ -31,6 +31,20 @@ return {
    opts = function()
       generate_colors()
       return {
+
+         file_ignore_patterns = {
+            "yarn%.lock",
+            "node_modules/",
+            "raycast/",
+            "dist/",
+            "%.next",
+            "%.git/",
+            "%.gitlab/",
+            "build/",
+            "target/",
+            "package%-lock%.json",
+         },
+
          extensions = {
             aerial = {
                -- Set the width of the first two columns (the second
