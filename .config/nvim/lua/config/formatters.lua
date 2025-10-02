@@ -2,6 +2,6 @@
 return {
    lua = { "stylua" },
    rust = { "rustfmt", lsp_format = "fallback" },
-   javascript = { "prettierd", "prettier", stop_after_first = true },
+   javascript = { "biome", "prettierd", "prettier", stop_after_first = true },
    kdl = { "kdlfmt" },
 }
