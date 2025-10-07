@@ -5,7 +5,16 @@
 # And here is the theme collection
 # https://github.com/nushell/nu_scripts/tree/main/themes
 
+source aliases.nu
+source startup.nu
+
+
+source ~/.zoxide.nu
+source ~/.cache/carapace/init.nu
 source ~/.cache/theme/theme.nu
+use ~/.cache/starship/init.nu
+
+
 
 $env.config = {
     show_banner: false
@@ -755,108 +764,4 @@ $env.config = {
     ]
 }
 
-def --env cx [arg] {
-    cd $arg
-    ls -l
-}
 
-alias l = ls --all
-alias c = clear
-alias ll = ls -l
-alias lt = eza --tree --level=2 --long --icons --git
-alias v = nvim
-
-# Git
-alias gc = git commit -m
-alias gca = git commit -a -m
-alias gp = git push origin HEAD
-alias gpu = git pull origin
-alias gst = git status
-alias glog = git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(black)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(white)%s %N' --abbrev-commit
-alias gdiff = git diff
-alias gco = git checkout
-alias gb = git branch
-alias gba = git branch -a
-alias gadd = git add
-alias ga = git add -p
-alias gcoall = git checkout -- .
-alias gr = git remote
-alias gre = git reset
-
-# K8s
-alias k = kubectl
-alias ka = kubectl apply -f
-alias kg = kubectl get
-alias kd = kubectl describe
-alias kdel = kubectl delete
-alias kl = kubectl logs
-alias kgpo = kubectl get pod
-alias kgd = kubectl get deployments
-alias kc = kubectx
-alias kns = kubens
-alias kl = kubectl logs -f
-alias ke = kubectl exec -it
-
-source ~/.config/nushell/env.nu
-source ~/.zoxide.nu
-source ~/.cache/carapace/init.nu
-use ~/.cache/starship/init.nu
-
-let is_git_repo = if ($env.PWD | path exists) {
-    ($env.PWD | path join ".git" | path exists)
-} else {
-    false
-}
-
-if $is_git_repo {
-   onefetch
-} else {
-    pfetch
-}
-
-
-def start_zellij [] {
-  if ('ZELLIJ' not-in ($env | columns) and 'TERM' in ($env | columns)) {
-    let sessions = (
-      zellij ls
-      | lines
-      | str replace -r '^(.*?)\s*\[.*$' '$1'
-      | ansi strip
-    )
-
-    let session = (
-      zellij ls
-      | fzf --ansi --print-query
-      | str trim
-      | str replace -r '^(.*?)\s*\[.*$' '$1'
-      | ansi strip
-    )
-
-    # Cancel if no session is selected
-    if ($session | is-empty) {
-      return
-    }
-
-    if $session in $sessions {
-      zellij attach $session
-    } else {
-      zellij attach $session --create
-    }
-  }
-}
-
-# Call the function when script is executed
-start_zellij
-
-# let ruby_ver = "3.4.0"
-# let gem_home = ($nu.home-path | path join ".gem" "ruby" $ruby_ver)
-# let gem_bin = ($gem_home | path join "bin")
-
-# # Set GEM paths
-# $env.GEM_HOME = $gem_home
-# $env.GEM_PATH = $gem_home
-
-# Add gem bin to PATH if it exists
-# if ($gem_bin | path exists) {
-#   $env.PATH = ($env.PATH | prepend $gem_bin)
-# }
