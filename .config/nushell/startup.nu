@@ -41,5 +41,9 @@ def start_zellij [] {
   }
 }
 
+# Only start zellij if not in a login shell
+if (not $nu.is-login) {
+    start_zellij
+}
 
-start_zellij
+
