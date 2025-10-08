@@ -2,7 +2,6 @@ pragma Singleton
 pragma ComponentBehavior: Bound
 
 import Qt.labs.platform
-import QtQuick
 import Quickshell
 import Quickshell.Io
 
@@ -17,6 +16,8 @@ Singleton {
       id: colorsFile
       path: themeUrl + "/colors.json"
       watchChanges: true
+      onFileChanged: reload()
+      onAdapterUpdated: reload()
       blockLoading: true
    }
    readonly property var colors: JSON.parse(colorsFile.text())
