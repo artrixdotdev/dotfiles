@@ -1,0 +1,3 @@
+**/*.wasm # Dont track plugin binaries
+**/*.kdl.bak.* # Backup files
+**/*.kdl.bak # Backup files
