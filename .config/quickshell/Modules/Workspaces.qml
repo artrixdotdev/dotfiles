@@ -22,7 +22,7 @@ PanelWindow {
       bottom: true
       top: true
    }
-   Row {
+   Column {
       anchors.fill: parent
 
       Repeater {
