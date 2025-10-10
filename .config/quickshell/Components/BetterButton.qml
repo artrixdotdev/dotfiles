@@ -24,9 +24,7 @@ Button {
    property int radius: 6
 
    // Layout defaults
-   implicitWidth: Math.max(100, contentItem.implicitWidth + 24)
-   implicitHeight: 40
-   padding: 12
+
    focusPolicy: Qt.StrongFocus
 
    // === Core Color Resolution ===
