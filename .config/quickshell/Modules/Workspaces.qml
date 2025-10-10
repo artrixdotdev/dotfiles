@@ -31,8 +31,12 @@ PanelWindow {
          delegate: BetterButton {
             property string workspaceId: modelData[0]
             property var workspace: modelData[1]
-            onClicked: () => Niri.moveToWorkspaceById(workspaceId)
-            text: workspaceId
+            property string name: workspace.name || workspace.idx
+            onClicked: () => {
+               console.log("Switching to workspace:", JSON.stringify(Niri.workspaces));
+               Niri.toWorkspace(workspace.idx, true);
+            }
+            text: name
          }
       }
    }
