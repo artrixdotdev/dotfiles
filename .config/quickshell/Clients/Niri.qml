@@ -7,6 +7,20 @@ import QtQuick
 Singleton {
    id: root
 
+   // ========== Enums ==========
+
+   enum Direction {
+      Up,
+      Down,
+      Left,
+      Right
+   }
+
+   enum LayoutSwitch {
+      Next,
+      Prev
+   }
+
    // ========== Properties ==========
 
    readonly property string socketPath: Quickshell.env("NIRI_SOCKET") ?? ""
@@ -34,6 +48,7 @@ Singleton {
 
    property var _requestQueue: []
    property bool _socketBusy: false
+   property var _currentCallback: null
 
    // ========== Event Stream Process ==========
 
@@ -44,7 +59,6 @@ Singleton {
 
       stdout: SplitParser {
          splitMarker: "\n"
-
          onRead: data => {
             try {
                const event = JSON.parse(data);
@@ -73,7 +87,6 @@ Singleton {
 
       parser: SplitParser {
          splitMarker: "\n"
-
          onRead: data => {
             try {
                const response = JSON.parse(data);
@@ -94,242 +107,32 @@ Singleton {
       }
    }
 
-   // ========== Public Methods ==========
+   // ========== Core Messaging ==========
 
-   function msg(command: var, callback: var) {
+   function msg(request: var, callback: var) {
+      console.log("Niri request:", JSON.stringify(request));
       if (!root.available) {
          console.error("Niri socket not available");
          if (callback)
             callback({
-               Err: "Niri socket not available"
+               error: "Niri socket not available"
             });
          return;
       }
 
-      // Convert command to request object
-      let request;
-
-      if (Array.isArray(command)) {
-         const cmd = command[0];
-         const args = command.slice(1);
-
-         // Parse common commands
-         if (cmd === "action") {
-            const actionName = args[0];
-            const actionArgs = args.slice(1);
-
-            // Map action names to Request format
-            request = root._buildActionRequest(actionName, actionArgs);
-         } else if (cmd === "workspaces") {
-            request = "Workspaces";
-         } else if (cmd === "windows") {
-            request = "Windows";
-         } else if (cmd === "outputs") {
-            request = "Outputs";
-         } else if (cmd === "focused-window") {
-            request = "FocusedWindow";
-         } else if (cmd === "focused-output") {
-            request = "FocusedOutput";
-         } else if (cmd === "version") {
-            request = "Version";
-         } else if (cmd === "keyboard-layouts") {
-            request = "KeyboardLayouts";
-         }
-      } else if (typeof command === "string") {
-         request = command;
-      } else {
-         request = command;
-      }
-
-      // Queue the request
       root._requestQueue.push({
          request,
          callback
       });
 
-      // Process if not busy
       if (!root._socketBusy) {
          root._processNextRequest();
       }
    }
 
-   function _buildActionRequest(actionName: string, args: var): var {
-      // Convert action name to proper format
-      const actionMap = {
-         "focus-workspace": data => ({
-                  Action: {
-                     FocusWorkspace: JSON.parse(data)
-                  }
-               }),
-         "focus-workspace-down": () => ({
-                  Action: "FocusWorkspaceDown"
-               }),
-         "focus-workspace-up": () => ({
-                  Action: "FocusWorkspaceUp"
-               }),
-         "move-window-to-workspace": data => ({
-                  Action: {
-                     MoveWindowToWorkspace: JSON.parse(data)
-                  }
-               }),
-         "move-window-to-workspace-down": () => ({
-                  Action: "MoveWindowToWorkspaceDown"
-               }),
-         "move-window-to-workspace-up": () => ({
-                  Action: "MoveWindowToWorkspaceUp"
-               }),
-         "focus-window": () => ({
-                  Action: {
-                     FocusWindow: {
-                        id: parseInt(args[1])
-                     }
-                  }
-               }),
-         "close-window": () => ({
-                  Action: {
-                     CloseWindow: {
-                        id: parseInt(args[1])
-                     }
-                  }
-               }),
-         "focus-window-down": () => ({
-                  Action: "FocusWindowDown"
-               }),
-         "focus-window-up": () => ({
-                  Action: "FocusWindowUp"
-               }),
-         "focus-window-left": () => ({
-                  Action: "FocusWindowLeft"
-               }),
-         "focus-window-right": () => ({
-                  Action: "FocusWindowRight"
-               }),
-         "focus-column-left": () => ({
-                  Action: "FocusColumnLeft"
-               }),
-         "focus-column-right": () => ({
-                  Action: "FocusColumnRight"
-               }),
-         "move-column-left": () => ({
-                  Action: "MoveColumnLeft"
-               }),
-         "move-column-right": () => ({
-                  Action: "MoveColumnRight"
-               }),
-         "move-window-down": () => ({
-                  Action: "MoveWindowDown"
-               }),
-         "move-window-up": () => ({
-                  Action: "MoveWindowUp"
-               }),
-         "move-window-down-or-to-workspace-down": () => ({
-                  Action: "MoveWindowDownOrToWorkspaceDown"
-               }),
-         "move-window-up-or-to-workspace-up": () => ({
-                  Action: "MoveWindowUpOrToWorkspaceUp"
-               }),
-         "fullscreen-window": () => ({
-                  Action: "FullscreenWindow"
-               }),
-         "set-window-height": () => ({
-                  Action: {
-                     SetWindowHeight: args[0]
-                  }
-               }),
-         "set-column-width": () => ({
-                  Action: {
-                     SetColumnWidth: args[0]
-                  }
-               }),
-         "maximize-column": () => ({
-                  Action: "MaximizeColumn"
-               }),
-         "focus-monitor-down": () => ({
-                  Action: "FocusMonitorDown"
-               }),
-         "focus-monitor-up": () => ({
-                  Action: "FocusMonitorUp"
-               }),
-         "focus-monitor-left": () => ({
-                  Action: "FocusMonitorLeft"
-               }),
-         "focus-monitor-right": () => ({
-                  Action: "FocusMonitorRight"
-               }),
-         "move-window-to-monitor-down": () => ({
-                  Action: "MoveWindowToMonitorDown"
-               }),
-         "move-window-to-monitor-up": () => ({
-                  Action: "MoveWindowToMonitorUp"
-               }),
-         "move-window-to-monitor-left": () => ({
-                  Action: "MoveWindowToMonitorLeft"
-               }),
-         "move-window-to-monitor-right": () => ({
-                  Action: "MoveWindowToMonitorRight"
-               }),
-         "switch-layout": () => {
-            if (args[0] === "next")
-               return {
-                  Action: {
-                     SwitchLayout: "Next"
-                  }
-               };
-            if (args[0] === "prev")
-               return {
-                  Action: {
-                     SwitchLayout: "Prev"
-                  }
-               };
-            return {
-               Action: {
-                  SwitchLayout: {
-                     Layout: parseInt(args[1])
-                  }
-               }
-            };
-         },
-         "screenshot": () => ({
-                  Action: "Screenshot"
-               }),
-         "screenshot-screen": () => ({
-                  Action: "ScreenshotScreen"
-               }),
-         "screenshot-window": () => ({
-                  Action: "ScreenshotWindow"
-               }),
-         "quit": () => ({
-                  Action: {
-                     Quit: {
-                        skip_confirmation: true
-                     }
-                  }
-               }),
-         "power-off-monitors": () => ({
-                  Action: "PowerOffMonitors"
-               }),
-         "spawn": () => ({
-                  Action: {
-                     Spawn: args
-                  }
-               })
-      };
-
-      const builder = actionMap[actionName];
-      if (builder) {
-         return builder(args[0]);
-      }
-
-      console.error("Unknown action:", actionName);
-      return {
-         Action: actionName
-      };
-   }
-
    function _processNextRequest() {
-      if (root._requestQueue.length === 0 || root._socketBusy) {
+      if (root._requestQueue.length === 0 || root._socketBusy)
          return;
-      }
 
       const {
          request,
@@ -338,12 +141,10 @@ Singleton {
       root._socketBusy = true;
       root._currentCallback = callback;
 
-      // Connect if not connected
       if (!requestSocket.connected) {
          requestSocket.connected = true;
       }
 
-      // Send request as JSON + newline
       const requestJson = JSON.stringify(request) + "\n";
       requestSocket.write(requestJson);
    }
@@ -351,7 +152,6 @@ Singleton {
    function _handleResponse(response: var) {
       root._socketBusy = false;
 
-      // Call the callback with unwrapped response
       if (root._currentCallback) {
          if (response.Ok !== undefined) {
             root._currentCallback(response.Ok);
@@ -366,263 +166,350 @@ Singleton {
          root._currentCallback = null;
       }
 
-      // Process next request in queue
       if (root._requestQueue.length > 0) {
          root._processNextRequest();
       } else {
-         // Disconnect after processing all requests
          requestSocket.connected = false;
       }
    }
 
-   property var _currentCallback: null
+   // ========== Helper Functions ==========
+
+   function _parseWorkspaceRef(ref: var, isIndex = false): var {
+      let reference = null;
+      if (typeof ref === "number") {
+         // Could be enum value or index
+         // Check if it's a direction enum
+         if (ref === Niri.Up || ref === Niri.Down || ref === Niri.Left || ref === Niri.Right) {
+            return null; // Handle separately
+         }
+
+         if (isIndex) {
+            reference = {
+               Index: ref
+            };
+         } else {
+            reference = {
+               Id: ref
+            };
+         }
+      }
+      if (typeof ref === "string") {
+         reference = {
+            Name: ref
+         };
+      }
+
+      return {
+         reference
+      };
+   }
 
    // ========== Workspace Methods ==========
 
-   function focusWorkspace(reference: var) {
-      msg(["action", "focus-workspace", JSON.stringify({
-            reference
-         })]);
+   function toWorkspace(ref: var, callback: var, isIndex = false) {
+      if (ref === Niri.Up) {
+         msg({
+            Action: "FocusWorkspaceUp"
+         }, callback);
+      } else if (ref === Niri.Down) {
+         msg({
+            Action: "FocusWorkspaceDown"
+         }, callback);
+      } else {
+         const wsRef = _parseWorkspaceRef(ref, isIndex);
+         if (wsRef) {
+            msg({
+               Action: {
+                  FocusWorkspace: wsRef
+               }
+            }, callback);
+         }
+      }
    }
 
-   function focusWorkspaceByIndex(index: int) {
-      focusWorkspace({
-         Index: index
-      });
-   }
-
-   function focusWorkspaceById(id: int) {
-      focusWorkspace({
-         Id: id
-      });
-   }
-
-   function focusWorkspaceByName(name: string) {
-      focusWorkspace({
-         Name: name
-      });
-   }
-
-   function focusWorkspaceDown() {
-      msg(["action", "focus-workspace-down"]);
-   }
-
-   function focusWorkspaceUp() {
-      msg(["action", "focus-workspace-up"]);
-   }
-
-   function moveToWorkspace(reference: var) {
-      msg(["action", "move-window-to-workspace", JSON.stringify({
-            reference
-         })]);
-   }
-
-   function moveToWorkspaceByIndex(index: int) {
-      moveToWorkspace({
-         Index: index
-      });
-   }
-
-   function moveToWorkspaceById(id: int) {
-      moveToWorkspace({
-         Id: id
-      });
-   }
-
-   function moveToWorkspaceByName(name: string) {
-      moveToWorkspace({
-         Name: name
-      });
-   }
-
-   function moveToWorkspaceDown() {
-      msg(["action", "move-window-to-workspace-down"]);
-   }
-
-   function moveToWorkspaceUp() {
-      msg(["action", "move-window-to-workspace-up"]);
+   function moveWindowToWorkspace(ref: var, callback: var, isIndex = false) {
+      if (ref === Niri.Up) {
+         msg({
+            Action: "MoveWindowToWorkspaceUp"
+         }, callback);
+      } else if (ref === Niri.Down) {
+         msg({
+            Action: "MoveWindowToWorkspaceDown"
+         }, callback);
+      } else {
+         const wsRef = _parseWorkspaceRef(ref, isIndex);
+         if (wsRef) {
+            msg({
+               Action: {
+                  MoveWindowToWorkspace: wsRef
+               }
+            }, callback);
+         }
+      }
    }
 
    // ========== Window Methods ==========
 
-   function focusWindow(windowId: int) {
-      msg(["action", "focus-window", "--id", windowId.toString()]);
+   function toWindow(ref: var, callback: var) {
+      if (ref === Niri.Up) {
+         msg({
+            Action: "FocusWindowUp"
+         }, callback);
+      } else if (ref === Niri.Down) {
+         msg({
+            Action: "FocusWindowDown"
+         }, callback);
+      } else if (ref === Niri.Left) {
+         msg({
+            Action: "FocusWindowLeft"
+         }, callback);
+      } else if (ref === Niri.Right) {
+         msg({
+            Action: "FocusWindowRight"
+         }, callback);
+      } else if (typeof ref === "number") {
+         msg({
+            Action: {
+               FocusWindow: {
+                  id: ref
+               }
+            }
+         }, callback);
+      }
    }
 
-   function closeWindow(windowId: int) {
-      msg(["action", "close-window", "--id", windowId.toString()]);
+   function closeWindow(windowId: int, callback: var) {
+      msg({
+         Action: {
+            CloseWindow: {
+               id: windowId
+            }
+         }
+      }, callback);
    }
 
-   function focusWindowDown() {
-      msg(["action", "focus-window-down"]);
+   function moveWindow(direction: int, callback: var) {
+      if (direction === Niri.Up) {
+         msg({
+            Action: "MoveWindowUp"
+         }, callback);
+      } else if (direction === Niri.Down) {
+         msg({
+            Action: "MoveWindowDown"
+         }, callback);
+      } else if (direction === Niri.Left) {
+         msg({
+            Action: "MoveColumnLeft"
+         }, callback);
+      } else if (direction === Niri.Right) {
+         msg({
+            Action: "MoveColumnRight"
+         }, callback);
+      }
    }
 
-   function focusWindowUp() {
-      msg(["action", "focus-window-up"]);
+   function moveWindowOrToWorkspace(direction: int, callback: var) {
+      if (direction === Niri.Up) {
+         msg({
+            Action: "MoveWindowUpOrToWorkspaceUp"
+         }, callback);
+      } else if (direction === Niri.Down) {
+         msg({
+            Action: "MoveWindowDownOrToWorkspaceDown"
+         }, callback);
+      }
    }
 
-   function focusWindowLeft() {
-      msg(["action", "focus-window-left"]);
+   function toColumn(direction: int, callback: var) {
+      if (direction === Niri.Left) {
+         msg({
+            Action: "FocusColumnLeft"
+         }, callback);
+      } else if (direction === Niri.Right) {
+         msg({
+            Action: "FocusColumnRight"
+         }, callback);
+      }
    }
 
-   function focusWindowRight() {
-      msg(["action", "focus-window-right"]);
+   function fullscreenWindow(callback: var) {
+      msg({
+         Action: "FullscreenWindow"
+      }, callback);
    }
 
-   function focusColumnLeft() {
-      msg(["action", "focus-column-left"]);
+   function setWindowHeight(height: string, callback: var) {
+      msg({
+         Action: {
+            SetWindowHeight: height
+         }
+      }, callback);
    }
 
-   function focusColumnRight() {
-      msg(["action", "focus-column-right"]);
+   function setColumnWidth(width: string, callback: var) {
+      msg({
+         Action: {
+            SetColumnWidth: width
+         }
+      }, callback);
    }
 
-   function moveColumnLeft() {
-      msg(["action", "move-column-left"]);
+   function maximizeColumn(callback: var) {
+      msg({
+         Action: "MaximizeColumn"
+      }, callback);
    }
 
-   function moveColumnRight() {
-      msg(["action", "move-column-right"]);
+   // ========== Output/Monitor Methods ==========
+
+   function toOutput(direction: int, callback: var) {
+      if (direction === Niri.Up) {
+         msg({
+            Action: "FocusMonitorUp"
+         }, callback);
+      } else if (direction === Niri.Down) {
+         msg({
+            Action: "FocusMonitorDown"
+         }, callback);
+      } else if (direction === Niri.Left) {
+         msg({
+            Action: "FocusMonitorLeft"
+         }, callback);
+      } else if (direction === Niri.Right) {
+         msg({
+            Action: "FocusMonitorRight"
+         }, callback);
+      }
    }
 
-   function moveWindowDown() {
-      msg(["action", "move-window-down"]);
+   function moveWindowToOutput(direction: int, callback: var) {
+      if (direction === Niri.Up) {
+         msg({
+            Action: "MoveWindowToMonitorUp"
+         }, callback);
+      } else if (direction === Niri.Down) {
+         msg({
+            Action: "MoveWindowToMonitorDown"
+         }, callback);
+      } else if (direction === Niri.Left) {
+         msg({
+            Action: "MoveWindowToMonitorLeft"
+         }, callback);
+      } else if (direction === Niri.Right) {
+         msg({
+            Action: "MoveWindowToMonitorRight"
+         }, callback);
+      }
    }
 
-   function moveWindowUp() {
-      msg(["action", "move-window-up"]);
-   }
+   // ========== Keyboard Layout Methods ==========
 
-   function moveWindowDownOrToWorkspaceDown() {
-      msg(["action", "move-window-down-or-to-workspace-down"]);
-   }
-
-   function moveWindowUpOrToWorkspaceUp() {
-      msg(["action", "move-window-up-or-to-workspace-up"]);
-   }
-
-   function fullscreenWindow() {
-      msg(["action", "fullscreen-window"]);
-   }
-
-   function setWindowHeight(height: string) {
-      msg(["action", "set-window-height", height]);
-   }
-
-   function setColumnWidth(width: string) {
-      msg(["action", "set-column-width", width]);
-   }
-
-   function maximizeColumn() {
-      msg(["action", "maximize-column"]);
-   }
-
-   // ========== Output Methods ==========
-
-   function focusOutputDown() {
-      msg(["action", "focus-monitor-down"]);
-   }
-
-   function focusOutputUp() {
-      msg(["action", "focus-monitor-up"]);
-   }
-
-   function focusOutputLeft() {
-      msg(["action", "focus-monitor-left"]);
-   }
-
-   function focusOutputRight() {
-      msg(["action", "focus-monitor-right"]);
-   }
-
-   function moveWindowToOutputDown() {
-      msg(["action", "move-window-to-monitor-down"]);
-   }
-
-   function moveWindowToOutputUp() {
-      msg(["action", "move-window-to-monitor-up"]);
-   }
-
-   function moveWindowToOutputLeft() {
-      msg(["action", "move-window-to-monitor-left"]);
-   }
-
-   function moveWindowToOutputRight() {
-      msg(["action", "move-window-to-monitor-right"]);
+   function switchLayout(layout: var, callback: var) {
+      if (layout === Niri.Next) {
+         msg({
+            Action: {
+               SwitchLayout: "Next"
+            }
+         }, callback);
+      } else if (layout === Niri.Prev) {
+         msg({
+            Action: {
+               SwitchLayout: "Prev"
+            }
+         }, callback);
+      } else if (typeof layout === "number") {
+         msg({
+            Action: {
+               SwitchLayout: {
+                  Layout: layout
+               }
+            }
+         }, callback);
+      } else if (typeof layout === "string") {
+         msg({
+            Action: {
+               SwitchLayout: {
+                  Layout: layout
+               }
+            }
+         }, callback);
+      }
    }
 
    // ========== Query Methods ==========
 
-   function queryWorkspaces(callback: var) {
-      msg(["workspaces"], callback);
+   function getWorkspaces(callback: var) {
+      msg("Workspaces", callback);
    }
 
-   function queryWindows(callback: var) {
-      msg(["windows"], callback);
+   function getWindows(callback: var) {
+      msg("Windows", callback);
    }
 
-   function queryOutputs(callback: var) {
-      msg(["outputs"], callback);
+   function getOutputs(callback: var) {
+      msg("Outputs", callback);
    }
 
-   function queryFocusedWindow(callback: var) {
-      msg(["focused-window"], callback);
+   function getFocusedWindow(callback: var) {
+      msg("FocusedWindow", callback);
    }
 
-   function queryFocusedOutput(callback: var) {
-      msg(["focused-output"], callback);
+   function getFocusedOutput(callback: var) {
+      msg("FocusedOutput", callback);
    }
 
-   function queryVersion(callback: var) {
-      msg(["version"], callback);
+   function getVersion(callback: var) {
+      msg("Version", callback);
    }
 
-   function queryKeyboardLayouts(callback: var) {
-      msg(["keyboard-layouts"], callback);
-   }
-
-   // ========== Keyboard Methods ==========
-
-   function switchKeyboardLayout(layout: var) {
-      if (typeof layout === "number") {
-         msg(["action", "switch-layout", "--layout", layout.toString()]);
-      } else {
-         msg(["action", "switch-layout", "--layout", layout]);
-      }
-   }
-
-   function switchKeyboardLayoutNext() {
-      msg(["action", "switch-layout", "next"]);
-   }
-
-   function switchKeyboardLayoutPrev() {
-      msg(["action", "switch-layout", "prev"]);
+   function getKeyboardLayouts(callback: var) {
+      msg("KeyboardLayouts", callback);
    }
 
    // ========== Other Actions ==========
 
-   function screenshot() {
-      msg(["action", "screenshot"]);
+   function screenshot(callback: var) {
+      msg({
+         Action: "Screenshot"
+      }, callback);
    }
 
-   function screenshotScreen() {
-      msg(["action", "screenshot-screen"]);
+   function screenshotScreen(callback: var) {
+      msg({
+         Action: "ScreenshotScreen"
+      }, callback);
    }
 
-   function screenshotWindow() {
-      msg(["action", "screenshot-window"]);
+   function screenshotWindow(callback: var) {
+      msg({
+         Action: "ScreenshotWindow"
+      }, callback);
    }
 
-   function quit() {
-      msg(["action", "quit", "--skip-confirmation"]);
+   function quit(callback: var) {
+      msg({
+         Action: {
+            Quit: {
+               skip_confirmation: true
+            }
+         }
+      }, callback);
    }
 
-   function powerOffMonitors() {
-      msg(["action", "power-off-monitors"]);
+   function powerOffMonitors(callback: var) {
+      msg({
+         Action: "PowerOffMonitors"
+      }, callback);
    }
 
-   function spawn(args) {
-      msg(["action", "spawn", ...args]);
+   function spawn(args: var, callback: var) {
+      const cmdArray = Array.isArray(args) ? args : [args];
+      msg({
+         Action: {
+            Spawn: cmdArray
+         }
+      }, callback);
    }
 
    // ========== Private Event Handler ==========
@@ -631,66 +518,40 @@ Singleton {
       if (!event)
          return;
 
-      // WorkspacesChanged
       if (event.WorkspacesChanged !== undefined) {
          const ws = {};
          event.WorkspacesChanged.workspaces.forEach(w => {
             ws[w.id] = w;
          });
          root.workspaces = ws;
-      } else
-
-      // WorkspaceActivated
-      if (event.WorkspaceActivated !== undefined) {
+      } else if (event.WorkspaceActivated !== undefined) {
          const wa = event.WorkspaceActivated;
          workspaceActivated(wa.id, wa.focused);
-      } else
-
-      // WorkspaceActiveWindowChanged
-      if (event.WorkspaceActiveWindowChanged !== undefined) {} else
-
-      // WindowsChanged
-      if (event.WindowsChanged !== undefined) {
+      } else if (event.WorkspaceActiveWindowChanged !== undefined)
+      // Update internal state if needed
+      {} else if (event.WindowsChanged !== undefined) {
          const wins = {};
          event.WindowsChanged.windows.forEach(w => {
             wins[w.id] = w;
          });
          root.windows = wins;
-      } else
-
-      // WindowOpenedOrChanged
-      if (event.WindowOpenedOrChanged !== undefined) {
+      } else if (event.WindowOpenedOrChanged !== undefined) {
          const window = event.WindowOpenedOrChanged.window;
          windowOpenedOrChanged(window);
-      } else
-
-      // WindowClosed
-      if (event.WindowClosed !== undefined) {
+      } else if (event.WindowClosed !== undefined) {
          windowClosed(event.WindowClosed.id);
-      } else
-
-      // WindowFocusChanged
-      if (event.WindowFocusChanged !== undefined) {
+      } else if (event.WindowFocusChanged !== undefined) {
          root.focusedWindow = event.WindowFocusChanged.id;
          windowFocusChanged(event.WindowFocusChanged.id);
-      } else
-
-      // OutputsChanged
-      if (event.OutputsChanged !== undefined) {
+      } else if (event.OutputsChanged !== undefined) {
          const outs = {};
          event.OutputsChanged.outputs.forEach(o => {
             outs[o.name] = o;
          });
          root.outputs = outs;
-      } else
-
-      // KeyboardLayoutsChanged
-      if (event.KeyboardLayoutsChanged !== undefined) {
+      } else if (event.KeyboardLayoutsChanged !== undefined) {
          keyboardLayoutsChanged(event.KeyboardLayoutsChanged.keyboard_layouts);
-      } else
-
-      // KeyboardLayoutSwitched
-      if (event.KeyboardLayoutSwitched !== undefined) {
+      } else if (event.KeyboardLayoutSwitched !== undefined) {
          root.keyboardLayout = event.KeyboardLayoutSwitched.idx.toString();
          keyboardLayoutSwitched(event.KeyboardLayoutSwitched.idx);
       }
@@ -699,20 +560,23 @@ Singleton {
    // ========== Initialization ==========
 
    function populate() {
-      root.queryWindows(result => {
-         if (result.Windows)
+      getWindows(result => {
+         if (result.Windows) {
             root.windows = result.Windows;
-         console.log(`Found ${Object.keys(root.windows).length} windows`);
+            console.log(`Found ${Object.keys(root.windows).length} windows`);
+         }
       });
-      root.queryWorkspaces(result => {
-         if (result.Workspaces)
+      getWorkspaces(result => {
+         if (result.Workspaces) {
             root.workspaces = result.Workspaces;
-         console.log(`Found ${Object.keys(root.workspaces).length} workspaces`);
+            console.log(`Found ${Object.keys(root.workspaces).length} workspaces`);
+         }
       });
-      root.queryOutputs(result => {
-         if (result.Outputs)
+      getOutputs(result => {
+         if (result.Outputs) {
             root.outputs = result.Outputs;
-         console.log(`Found ${Object.keys(root.outputs).length} outputs`);
+            console.log(`Found ${Object.keys(root.outputs).length} outputs`);
+         }
       });
    }
 
