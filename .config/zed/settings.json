@@ -53,8 +53,8 @@
   "agent": {
     "always_allow_tool_actions": true,
     "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-sonnet-4"
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-5-latest"
     },
     "commit_message_model": {
       "provider": "ollama",
