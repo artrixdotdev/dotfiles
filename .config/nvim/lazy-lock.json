@@ -35,7 +35,7 @@
   "pretty_hover": { "branch": "master", "commit": "700f5721a3774bd7007d1b41491711411494fb47" },
   "roslyn.nvim": { "branch": "main", "commit": "4deb46ce892c279d3183661342c93aa2ec9716c6" },
   "rust.vim": { "branch": "master", "commit": "889b9a7515db477f4cb6808bef1769e53493c578" },
-  "rustaceanvim": { "branch": "master", "commit": "0fa0462a2d6c9629e0bd03d1902e6a1472ceac3e" },
+  "rustaceanvim": { "branch": "master", "commit": "01c45937691914ce985a66f22bab34a1098aa26f" },
   "schemastore.nvim": { "branch": "main", "commit": "5ed01fc84e587e0883e7d04122684d768eb76bbc" },
   "smart-splits.nvim": { "branch": "master", "commit": "f259035bdeda675f51e8461136c272f2bc667342" },
   "snipe.nvim": { "branch": "main", "commit": "d2d196c335919767803f905d573ce66340e33ee6" },
