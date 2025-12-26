@@ -74,6 +74,18 @@ if ("~/.zvm/bin" | path expand | path exists) {
    path add ~/.zvm/bin
 }
 
+if ("~/.turso" | path expand | path exists) {
+   path add ~/.turso
+}
+
+if ("~/.cargo/bin" | path expand | path exists) {
+   path add ~/.cargo/bin
+}
+
+if ("~/.bun/bin" | path expand | path exists) {
+   path add ~/.bun/bin
+}
+
 mkdir ~/.cache/starship
 starship init nu | save -f ~/.cache/starship/init.nu
 zoxide init nushell | save -f ~/.zoxide.nu
