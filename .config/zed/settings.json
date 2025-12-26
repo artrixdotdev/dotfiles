@@ -26,7 +26,7 @@
   "preview_tabs": {
     "enabled": true,
     "enable_preview_from_file_finder": true,
-    "enable_preview_from_code_navigation": true
+    "enable_keep_preview_on_code_navigation": true
   },
   "toolbar": {
     "breadcrumbs": false,
@@ -105,7 +105,7 @@
   "theme": {
     "mode": "system",
     "light": "One Light",
-    "dark": "Matugen"
+    "dark": "Fleet Dark Purple"
   },
 
   "languages": {
