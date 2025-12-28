@@ -1,5 +1,4 @@
 local wk = require "which-key"
-local lspconfig = require "lspconfig"
 
 local pid = vim.fn.getpid()
 
@@ -136,5 +135,5 @@ for _, lsp in ipairs(servers) do
 
    config = vim.tbl_deep_extend("force", config, opts)
 
-   lspconfig[name].setup(config)
+   vim.lsp.config[name].setup(config)
 end
