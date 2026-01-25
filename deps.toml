@@ -1,0 +1,97 @@
+[packages]
+core = [
+   "arrpc",
+   "base-devel",
+   "bluez",
+   "bluez-utils",
+   "blueman",
+   "brightnessctl",
+   "carapace-bin",
+   "cliphist",
+   "ddcutil",
+   "dms-shell-git",
+   "fd",
+   "flatpak",
+   "fuzzel",
+   "fzf",
+   "ghostty-git",
+   "git",
+   "gnome-keyring",
+   "grim",
+   "imagemagick",
+   "jq",
+   "matugen-bin",
+   "neowall-git",
+   "neovim",
+   "btop",
+   "celluloid",
+   "network-manager-applet",
+   "mission-center",
+   "networkmanager",
+   "niri-git",
+   "nushell",
+   "onefetch",
+   "pamixer",
+   "paru",
+   "pavucontrol",
+   "pfetch-git",
+   "pipewire",
+   "playerctl",
+   "polkit-gnome",
+   "python",
+   "quickshell-git",
+   "ripgrep",
+   "slurp",
+   "starship",
+   "swww-git",
+   "swappy",
+   "wireplumber",
+   "xwayland-satellite-git",
+   "yazi",
+   "zed-preview-bin",
+   "zellij",
+   "zen-browser-bin",
+   "zoxide",
+   "nautilus",
+]
+
+desktop = [
+   "vesktop-bin",
+   "wl-clipboard",
+   "xdg-desktop-portal",
+   "xdg-desktop-portal-gnome",
+   "xdg-desktop-portal-gtk",
+]
+
+fonts_theme = [
+   "adw-gtk-theme",
+   "bibata-cursor-theme",
+   "noto-fonts-emoji",
+   "otf-font-awesome",
+   "ttf-jetbrains-mono-nerd",
+   "ttf-material-symbols-variable-git",
+   "ttf-readex-pro",
+]
+
+dev = [
+   "bun",
+   "go",
+   "rustup",
+   "lazygit",
+   "lua-language-server",
+   "sccache",
+   "stylua",
+   "tree-sitter-cli",
+   "typescript-language-server",
+]
+
+[optional]
+creative = ["blender", "gimp", "inkscape", "kdenlive", "obs-studio-browser"]
+
+gaming = ["steam", "minecraft-launcher", "modrinth-app-bin", "curseforge-bin"]
+
+work = ["notion-app-electron", "gnome-calendar", "gnome-calculator"]
+
+services = ["docker"]
+
+vpn = ["surfshark-client"]
