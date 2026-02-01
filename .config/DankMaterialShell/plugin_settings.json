@@ -1,0 +1,47 @@
+{
+  "dankActions": {
+    "enabled": true
+  },
+  "gitmojiLauncher": {
+    "enabled": true
+  },
+  "discordVoice": {
+    "enabled": true
+  },
+  "niriWindows": {
+    "enabled": true
+  },
+  "volumeMixer": {
+    "enabled": true,
+    "pillIcon": "volume",
+    "pillDisplay": "icon"
+  },
+  "dankHooks": {
+    "enabled": true
+  },
+  "ddcBrightness": {
+    "enabled": true
+  },
+  "screenRecorder": {
+    "enabled": true
+  },
+  "emojiLauncher": {
+    "enabled": true,
+    "recentEmojis": "🦅,🇺🇸"
+  },
+  "worldClock": {
+    "enabled": true,
+    "showAll": true,
+    "timezones": [
+      {
+        "timezone": "Etc/UTC",
+        "label": "UTC",
+        "showOnBar": true
+      }
+    ]
+  },
+  "calculator": {
+    "enabled": true,
+    "trigger": "="
+  }
+}
