@@ -1,87 +1,30 @@
+[config]
+
 [config.wallpaper]
 command = "swww"
 arguments = ["img", "--transition-type", "center"]
-set = true
+set = false
 
+[templates.spicetify]
+input_path = '/home/artrix/dotfiles/.config/matugen/templates/spicetify.template.ini'
+output_path = '/home/artrix/.config/spicetify/Themes/matugen/color.ini'
 
-[templates.ghostty]
-input_path = './templates/ghostty.template'
-output_path = '~/dotfiles/.config/ghostty/theme'
-# Reload ghostty service
-post_hook = "systemctl reload --user app-com.mitchellh.ghostty.service"
+[templates.nushell-dank16]
+input_path = '/home/artrix/dotfiles/.config/matugen/templates/nushell-dank16.template.nu'
+output_path = '/home/artrix/.cache/theme/theme.nu'
 
-[templates.discord-midnight]
-input_path = './templates/discord-midnight.template.css'
-output_path = '~/.config/vesktop/themes/midnight.theme.css'
+[templates.starship-dank16]
+input_path = '/home/artrix/dotfiles/.config/matugen/templates/starship-dank16.template.toml'
+output_path = '/home/artrix/.config/starship/starship.toml'
 
-# DMS does this automatically
-# [templates.qt5ct]
-# input_path = './templates/qtct-colors.template.conf'
-# output_path = '~/.config/qt5ct/colors/matugen.conf'
-#
-# [templates.qt6ct]
-# input_path = './templates/qtct-colors.template.conf'
-# output_path = '~/.config/qt6ct/colors/matugen.conf'
+[templates.zen-userchrome]
+input_path = '/home/artrix/dotfiles/.config/matugen/templates/zen-userchrome.template.css'
+output_path = '/home/artrix/.config/DankMaterialShell/zen.css'
 
-[templates.css]
-pre_hook = "mkdir ~/.cache/theme"
-input_path = './templates/colors.template.css'
-output_path = '~/.cache/theme/colors.css'
+[templates.zellij]
+input_path = '/home/artrix/dotfiles/.config/matugen/templates/zellij.template.kdl'
+output_path = '/home/artrix/.config/zellij/themes/dank-material.kdl'
 
-[templates.json]
-pre_hook = "mkdir ~/.cache/theme"
-input_path = './templates/colors.template.json'
-output_path = '~/.cache/theme/colors.json'
-
-[templates.toml]
-pre_hook = "mkdir ~/.cache/theme"
-input_path = './templates/colors.template.toml'
-output_path = '~/.cache/theme/colors.toml'
-
-[templates.nvim]
-input_path = './templates/nvim.template.lua'
-output_path = '~/.local/share/nvim/lazy/base46-extracted/lua/base46-extracted/themes/matugen.lua'
-
-[templates.nushell]
-input_path = './templates/nushell.template.nu'
-output_path = '~/.cache/theme/theme.nu'
-
-[templates.starship]
-input_path = './templates/starship.template.toml'
-output_path = '~/.config/starship/starship.toml'
-
-[templates.zed]
-input_path = './templates/zed.template.json'
-output_path = '~/.config/zed/themes/matugen.json'
-
-[config.custom_keywords]
-font_mono = "JetBrainsMono Nerd Font Mono"
-font_sans = "Readex Pro"
-
-[config.custom_colors.red]
-color = "#FF0000"
-blend = true
-
-[config.custom_colors.green]
-color = "#00FF00"
-blend = true
-
-[config.custom_colors.yellow]
-color = "#FFFF00"
-blend = true
-
-[config.custom_colors.blue]
-color = "#0000FF"
-blend = true
-
-[config.custom_colors.magenta]
-color = "#FF00FF"
-blend = true
-
-[config.custom_colors.cyan]
-color = "#00FFFF"
-blend = true
-
-[config.custom_colors.white]
-color = "#FFFFFF"
-blend = true
+[templates.opencode-dank16]
+input_path = '/home/artrix/dotfiles/.config/matugen/templates/opencode-dank16.template.json'
+output_path = '/home/artrix/.config/opencode/themes/dank16.json'
