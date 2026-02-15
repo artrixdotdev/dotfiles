@@ -1,0 +1,116 @@
+themes {
+    dank-material {
+        ribbon_unselected {
+            base {{colors.on_surface.default.red}} {{colors.on_surface.default.green}} {{colors.on_surface.default.blue}}
+            background {{colors.surface_container_highest.default.red}} {{colors.surface_container_highest.default.green}} {{colors.surface_container_highest.default.blue}}
+            emphasis_0 {{colors.error.default.red}} {{colors.error.default.green}} {{colors.error.default.blue}}
+            emphasis_1 {{colors.secondary.default.red}} {{colors.secondary.default.green}} {{colors.secondary.default.blue}}
+            emphasis_2 {{colors.tertiary.default.red}} {{colors.tertiary.default.green}} {{colors.tertiary.default.blue}}
+            emphasis_3 {{colors.primary_fixed_dim.default.red}} {{colors.primary_fixed_dim.default.green}} {{colors.primary_fixed_dim.default.blue}}
+        }
+        ribbon_selected {
+            base {{colors.on_primary.default.red}} {{colors.on_primary.default.green}} {{colors.on_primary.default.blue}}
+            background {{colors.primary.default.red}} {{colors.primary.default.green}} {{colors.primary.default.blue}}
+            emphasis_0 {{colors.error.default.red}} {{colors.error.default.green}} {{colors.error.default.blue}}
+            emphasis_1 {{colors.primary_fixed.default.red}} {{colors.primary_fixed.default.green}} {{colors.primary_fixed.default.blue}}
+            emphasis_2 {{colors.secondary_fixed_dim.default.red}} {{colors.secondary_fixed_dim.default.green}} {{colors.secondary_fixed_dim.default.blue}}
+            emphasis_3 {{colors.tertiary_fixed.default.red}} {{colors.tertiary_fixed.default.green}} {{colors.tertiary_fixed.default.blue}}
+        }
+        text_unselected {
+            base {{colors.on_surface.default.red}} {{colors.on_surface.default.green}} {{colors.on_surface.default.blue}}
+            background {{colors.surface.default.red}} {{colors.surface.default.green}} {{colors.surface.default.blue}}
+            emphasis_0 {{colors.error.default.red}} {{colors.error.default.green}} {{colors.error.default.blue}}
+            emphasis_1 {{colors.secondary.default.red}} {{colors.secondary.default.green}} {{colors.secondary.default.blue}}
+            emphasis_2 {{colors.tertiary.default.red}} {{colors.tertiary.default.green}} {{colors.tertiary.default.blue}}
+            emphasis_3 {{colors.primary_fixed_dim.default.red}} {{colors.primary_fixed_dim.default.green}} {{colors.primary_fixed_dim.default.blue}}
+        }
+        text_selected {
+            base {{colors.on_primary_container.default.red}} {{colors.on_primary_container.default.green}} {{colors.on_primary_container.default.blue}}
+            background {{colors.primary_container.default.red}} {{colors.primary_container.default.green}} {{colors.primary_container.default.blue}}
+            emphasis_0 {{colors.error_container.default.red}} {{colors.error_container.default.green}} {{colors.error_container.default.blue}}
+            emphasis_1 {{colors.surface_container_highest.default.red}} {{colors.surface_container_highest.default.green}} {{colors.surface_container_highest.default.blue}}
+            emphasis_2 {{colors.primary_fixed.default.red}} {{colors.primary_fixed.default.green}} {{colors.primary_fixed.default.blue}}
+            emphasis_3 {{colors.secondary_fixed.default.red}} {{colors.secondary_fixed.default.green}} {{colors.secondary_fixed.default.blue}}
+        }
+        table_title {
+            base {{colors.on_surface.default.red}} {{colors.on_surface.default.green}} {{colors.on_surface.default.blue}}
+            background {{colors.surface_container_high.default.red}} {{colors.surface_container_high.default.green}} {{colors.surface_container_high.default.blue}}
+            emphasis_0 {{colors.error.default.red}} {{colors.error.default.green}} {{colors.error.default.blue}}
+            emphasis_1 {{colors.secondary.default.red}} {{colors.secondary.default.green}} {{colors.secondary.default.blue}}
+            emphasis_2 {{colors.tertiary.default.red}} {{colors.tertiary.default.green}} {{colors.tertiary.default.blue}}
+            emphasis_3 {{colors.primary.default.red}} {{colors.primary.default.green}} {{colors.primary.default.blue}}
+        }
+        table_cell_unselected {
+            base {{colors.on_surface.default.red}} {{colors.on_surface.default.green}} {{colors.on_surface.default.blue}}
+            background {{colors.surface.default.red}} {{colors.surface.default.green}} {{colors.surface.default.blue}}
+            emphasis_0 {{colors.error.default.red}} {{colors.error.default.green}} {{colors.error.default.blue}}
+            emphasis_1 {{colors.secondary.default.red}} {{colors.secondary.default.green}} {{colors.secondary.default.blue}}
+            emphasis_2 {{colors.tertiary.default.red}} {{colors.tertiary.default.green}} {{colors.tertiary.default.blue}}
+            emphasis_3 {{colors.primary.default.red}} {{colors.primary.default.green}} {{colors.primary.default.blue}}
+        }
+        table_cell_selected {
+            base {{colors.on_primary_container.default.red}} {{colors.on_primary_container.default.green}} {{colors.on_primary_container.default.blue}}
+            background {{colors.primary_container.default.red}} {{colors.primary_container.default.green}} {{colors.primary_container.default.blue}}
+            emphasis_0 {{colors.error_container.default.red}} {{colors.error_container.default.green}} {{colors.error_container.default.blue}}
+            emphasis_1 {{colors.surface_container_highest.default.red}} {{colors.surface_container_highest.default.green}} {{colors.surface_container_highest.default.blue}}
+            emphasis_2 {{colors.primary_fixed.default.red}} {{colors.primary_fixed.default.green}} {{colors.primary_fixed.default.blue}}
+            emphasis_3 {{colors.secondary_fixed.default.red}} {{colors.secondary_fixed.default.green}} {{colors.secondary_fixed.default.blue}}
+        }
+        list_unselected {
+            base {{colors.on_surface.default.red}} {{colors.on_surface.default.green}} {{colors.on_surface.default.blue}}
+            background {{colors.surface.default.red}} {{colors.surface.default.green}} {{colors.surface.default.blue}}
+            emphasis_0 {{colors.error.default.red}} {{colors.error.default.green}} {{colors.error.default.blue}}
+            emphasis_1 {{colors.secondary.default.red}} {{colors.secondary.default.green}} {{colors.secondary.default.blue}}
+            emphasis_2 {{colors.tertiary.default.red}} {{colors.tertiary.default.green}} {{colors.tertiary.default.blue}}
+            emphasis_3 {{colors.primary.default.red}} {{colors.primary.default.green}} {{colors.primary.default.blue}}
+        }
+        list_selected {
+            base {{colors.on_primary_container.default.red}} {{colors.on_primary_container.default.green}} {{colors.on_primary_container.default.blue}}
+            background {{colors.primary_container.default.red}} {{colors.primary_container.default.green}} {{colors.primary_container.default.blue}}
+            emphasis_0 {{colors.error_container.default.red}} {{colors.error_container.default.green}} {{colors.error_container.default.blue}}
+            emphasis_1 {{colors.surface_container_highest.default.red}} {{colors.surface_container_highest.default.green}} {{colors.surface_container_highest.default.blue}}
+            emphasis_2 {{colors.primary_fixed.default.red}} {{colors.primary_fixed.default.green}} {{colors.primary_fixed.default.blue}}
+            emphasis_3 {{colors.secondary_fixed.default.red}} {{colors.secondary_fixed.default.green}} {{colors.secondary_fixed.default.blue}}
+        }
+        frame_unselected {
+            base {{colors.outline_variant.default.red}} {{colors.outline_variant.default.green}} {{colors.outline_variant.default.blue}}
+            background {{colors.surface.default.red}} {{colors.surface.default.green}} {{colors.surface.default.blue}}
+            emphasis_0 {{colors.error.default.red}} {{colors.error.default.green}} {{colors.error.default.blue}}
+            emphasis_1 {{colors.secondary.default.red}} {{colors.secondary.default.green}} {{colors.secondary.default.blue}}
+            emphasis_2 {{colors.tertiary.default.red}} {{colors.tertiary.default.green}} {{colors.tertiary.default.blue}}
+            emphasis_3 {{colors.primary.default.red}} {{colors.primary.default.green}} {{colors.primary.default.blue}}
+        }
+        frame_selected {
+            base {{colors.primary.default.red}} {{colors.primary.default.green}} {{colors.primary.default.blue}}
+            background {{colors.surface.default.red}} {{colors.surface.default.green}} {{colors.surface.default.blue}}
+            emphasis_0 {{colors.error.default.red}} {{colors.error.default.green}} {{colors.error.default.blue}}
+            emphasis_1 {{colors.secondary.default.red}} {{colors.secondary.default.green}} {{colors.secondary.default.blue}}
+            emphasis_2 {{colors.tertiary.default.red}} {{colors.tertiary.default.green}} {{colors.tertiary.default.blue}}
+            emphasis_3 {{colors.primary_fixed.default.red}} {{colors.primary_fixed.default.green}} {{colors.primary_fixed.default.blue}}
+        }
+        frame_highlight {
+            base {{colors.secondary.default.red}} {{colors.secondary.default.green}} {{colors.secondary.default.blue}}
+            background {{colors.surface.default.red}} {{colors.surface.default.green}} {{colors.surface.default.blue}}
+            emphasis_0 {{colors.error.default.red}} {{colors.error.default.green}} {{colors.error.default.blue}}
+            emphasis_1 {{colors.primary.default.red}} {{colors.primary.default.green}} {{colors.primary.default.blue}}
+            emphasis_2 {{colors.tertiary.default.red}} {{colors.tertiary.default.green}} {{colors.tertiary.default.blue}}
+            emphasis_3 {{colors.primary_fixed.default.red}} {{colors.primary_fixed.default.green}} {{colors.primary_fixed.default.blue}}
+        }
+        exit_code_success {
+            base {{colors.tertiary.default.red}} {{colors.tertiary.default.green}} {{colors.tertiary.default.blue}}
+            background {{colors.surface.default.red}} {{colors.surface.default.green}} {{colors.surface.default.blue}}
+            emphasis_0 {{colors.tertiary.default.red}} {{colors.tertiary.default.green}} {{colors.tertiary.default.blue}}
+            emphasis_1 {{colors.tertiary.default.red}} {{colors.tertiary.default.green}} {{colors.tertiary.default.blue}}
+            emphasis_2 {{colors.tertiary.default.red}} {{colors.tertiary.default.green}} {{colors.tertiary.default.blue}}
+            emphasis_3 {{colors.tertiary.default.red}} {{colors.tertiary.default.green}} {{colors.tertiary.default.blue}}
+        }
+        exit_code_error {
+            base {{colors.error.default.red}} {{colors.error.default.green}} {{colors.error.default.blue}}
+            background {{colors.surface.default.red}} {{colors.surface.default.green}} {{colors.surface.default.blue}}
+            emphasis_0 {{colors.error.default.red}} {{colors.error.default.green}} {{colors.error.default.blue}}
+            emphasis_1 {{colors.error.default.red}} {{colors.error.default.green}} {{colors.error.default.blue}}
+            emphasis_2 {{colors.error.default.red}} {{colors.error.default.green}} {{colors.error.default.blue}}
+            emphasis_3 {{colors.error.default.red}} {{colors.error.default.green}} {{colors.error.default.blue}}
+        }
+    }
+}
