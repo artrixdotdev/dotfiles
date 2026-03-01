@@ -1,0 +1,11 @@
+[Unit]
+Description=Sync NeoWall into DMS wallpaper state
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/nu %h/dotfiles/scripts/neowall-dms-sync.nu
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=graphical-session.target
