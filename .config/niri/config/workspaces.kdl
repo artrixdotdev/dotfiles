@@ -1,8 +1,30 @@
-{{#each settings.outputs}}
-// {{this.name}} Workspaces
-{{#each this.workspaces}}
-workspace "{{this}}" {
-   open-on-output "{{../this.name}}"
+// Named workspaces pinned to the current monitor identities reported by niri.
+// Main monitor: Acer XV272U W2 on DP-2
+workspace "home" {
+   open-on-output "Acer Technologies XV272U W2 B414027E94220"
 }
-   {{/each}}
-{{/each}}
+
+workspace "code" {
+   open-on-output "Acer Technologies XV272U W2 B414027E94220"
+}
+
+workspace "work" {
+   open-on-output "Acer Technologies XV272U W2 B414027E94220"
+}
+
+// Second monitor: ASUS VG248 on DP-3
+workspace "chat" {
+   open-on-output "ASUSTek COMPUTER INC VG248 LALMQS129671"
+}
+
+workspace "music" {
+   open-on-output "ASUSTek COMPUTER INC VG248 LALMQS129671"
+}
+
+workspace "research" {
+   open-on-output "ASUSTek COMPUTER INC VG248 LALMQS129671"
+}
+
+workspace "monitor" {
+   open-on-output "ASUSTek COMPUTER INC VG248 LALMQS129671"
+}
