@@ -47,9 +47,39 @@ window-rule {
    clip-to-geometry true
 }
 
+// Workspace routing for task-specific apps.
+// Ghostty and Zen are intentionally excluded so they can still be opened anywhere.
 window-rule {
-   match at-startup=true app-id="vesktop"
+   match app-id=r#"^vesktop$"#
+   open-on-workspace "chat"
+}
 
-   open-maximized true
-   open-on-workspace "Chats"
+window-rule {
+   match app-id=r#"^spotify$"#
+   open-on-workspace "music"
+}
+
+window-rule {
+   match app-id=r#"^(io\.missioncenter\.MissionCenter|missioncenter)$"#
+   open-on-workspace "monitor"
+}
+
+window-rule {
+   match app-id=r#"^(dev\.zed\.Zed(-Preview)?|zed|zeditor)$"#
+   open-on-workspace "code"
+}
+
+window-rule {
+   match app-id=r#"^microsoft-edge-dev$"#
+   open-on-workspace "work"
+}
+
+window-rule {
+   match app-id=r#"^(notion|notion-app)$"#
+   open-on-workspace "work"
+}
+
+window-rule {
+   match app-id=r#"^(Cron|notion-calendar)$"#
+   open-on-workspace "work"
 }
