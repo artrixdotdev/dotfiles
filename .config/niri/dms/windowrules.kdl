@@ -1,0 +1,15 @@
+// DMS Window Rules - Managed by DankMaterialShell
+// Do not edit manually - changes may be overwritten
+
+// @id=wr_1776924902063059761 @name=vesktop
+window-rule {
+    match app-id="^vesktop$"
+    open-maximized true
+}
+
+// @id=wr_1776969083156305750 @name=Surfshark
+window-rule {
+    match app-id="^Surfshark$"
+    open-maximized true
+    open-on-workspace "monitor"
+}
