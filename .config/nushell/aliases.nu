@@ -13,4 +13,6 @@ def --env cx [arg] {
     ls -l
 }
 
-alias v = nvim
+def --wrapped v [...args] {
+    nvim ...$args
+}
