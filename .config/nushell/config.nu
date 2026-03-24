@@ -6,11 +6,13 @@
 # https://github.com/nushell/nu_scripts/tree/main/themes
 
 source aliases.nu
-source startup.nu
+if $nu.is-interactive {
+    source startup.nu
+}
+source ~/.cache/theme/theme.nu
 
 
 source ~/.zoxide.nu
-source ~/.cache/carapace/init.nu
 source ~/.cache/theme/theme.nu
 use ~/.cache/starship/init.nu
 
@@ -764,4 +766,4 @@ $env.config = {
     ]
 }
 
-
+source ~/.cache/carapace/init.nu
