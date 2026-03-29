@@ -5,7 +5,8 @@ font-size = 16
 window-decoration = false
 window-padding-x = 12
 window-padding-y = 12
-background-opacity = 1.0
+background-opacity = 0.8
+background-blur = true
 background-blur-radius = 32
 
 # Cursor Configuration
@@ -36,6 +37,8 @@ keybind = ctrl+zero=reset_font_size
 unfocused-split-opacity = 0.7
 unfocused-split-fill = #44464f
 
+custom-shader = ~/.config/ghostty/shaders/cursor-smear.glsl
+
 # Tab configuration
 gtk-titlebar = false
 
@@ -48,4 +51,6 @@ keybind = shift+enter=text:\n
 gtk-single-instance = true
 
 # Dank color generation
-config-file = ./config-dankcolors
+theme = dankcolors
+
+font-family=JetBrainsMono Nerd Font Mono
