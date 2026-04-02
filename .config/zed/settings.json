@@ -7,7 +7,36 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "cli_default_open_behavior": "new_window",
+  "context_servers": {
+    "mcp-server-playwright": {
+      "enabled": true,
+      "remote": false,
+      "settings": {}
+    }
+  },
+  "outline_panel": {
+    "dock": "left"
+  },
+  "collaboration_panel": {
+    "dock": "left"
+  },
+  "git_panel": {
+    "dock": "left"
+  },
+  "agent_servers": {
+    "codex-acp": {
+      "type": "registry"
+    },
+    "kilo": {
+      "type": "registry"
+    },
+    "opencode": {
+      "type": "registry"
+    }
+  },
   "edit_predictions": {
+    "provider": "zed",
     "mode": "eager",
     "copilot": {
       "proxy": null,
@@ -18,7 +47,11 @@
   "auto_update": false,
   "restore_on_startup": "last_session",
 
-  "icon_theme": "Catppuccin Frappé",
+  "icon_theme": {
+    "mode": "dark",
+    "light": "Material Icon Theme",
+    "dark": "Material Icon Theme"
+  },
   "project_panel": {
     "dock": "right",
     "folder_icons": true
@@ -51,10 +84,15 @@
     }
   },
   "agent": {
-    "always_allow_tool_actions": true,
+    "dock": "right",
+    "tool_permissions": {
+      "default": "allow"
+    },
     "default_model": {
+      "effort": "high",
+      "enable_thinking": true,
       "provider": "anthropic",
-      "model": "claude-sonnet-4-5-latest"
+      "model": "claude-sonnet-4-6-latest"
     },
     "commit_message_model": {
       "provider": "ollama",
@@ -76,9 +114,6 @@
       "hyprland.hl",
       "hyprlandd.hl"
     ]
-  },
-  "features": {
-    "edit_prediction_provider": "zed"
   },
   "vim_mode": true,
   "ui_font_size": 20.0,
@@ -103,9 +138,9 @@
   },
   "autosave": "on_window_change",
   "theme": {
-    "mode": "system",
-    "light": "One Light",
-    "dark": "Fleet Dark Purple"
+    "mode": "dark",
+    "light": "DankShell Light",
+    "dark": "DankShell Dark"
   },
 
   "languages": {
