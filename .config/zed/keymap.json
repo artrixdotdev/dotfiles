@@ -2,8 +2,8 @@
   {
     "bindings": {
       "ctrl+w": "workspace::CloseWindow",
-      "ctrl+n": "project_panel::ToggleFocus"
-    }
+      "ctrl+n": "project_panel::ToggleFocus",
+    },
   },
   {
     "context": "!VimWaiting && !menu && !(vim_mode == insert)",
@@ -11,8 +11,8 @@
       ";": "command_palette::Toggle",
       "space f f": "file_finder::Toggle",
       "space f w": "workspace::NewSearch",
-      "space e": "project_panel::ToggleFocus"
-    }
+      "space e": "project_panel::ToggleFocus",
+    },
   },
   {
     "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
@@ -30,8 +30,6 @@
       "space d n": "editor::GoToPreviousDiagnostic",
       "space s": "outline::Toggle",
       "space shift-s": "project_symbols::Toggle",
-      "space c c": "editor::Fold",
-      "space c o": "editor::UnfoldRecursive"
-    }
-  }
+    },
+  },
 ]
