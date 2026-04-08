@@ -3,6 +3,7 @@ ui {
         rounded_corners true
     }
 }
+
 keybinds clear-defaults=true {
     locked {
         bind "Ctrl g" {
@@ -340,13 +341,6 @@ keybinds clear-defaults=true {
         }
     }
     shared_except "locked" {
-        bind "Ctrl s" {
-            // Note: you must use the absolute path to the plugin file
-            LaunchOrFocusPlugin "file:/home/artrix/.config/zellij/plugins/zsm.wasm" {
-                floating true
-                move_to_focused_tab true
-            }
-        }
         bind "Alt +" {
             Resize "Increase"
         }
@@ -382,39 +376,21 @@ keybinds clear-defaults=true {
         }
     }
     shared_except "locked" "move" {
-        bind "Ctrl h" {
+        bind "Alt m" {
             SwitchToMode "move"
+        }
+    }
+    shared_except "locked" "scroll" "search" {
+        bind "Ctrl s" {
+            LaunchOrFocusPlugin "zsm" {
+                floating true
+                move_to_focused_tab true
+            }
         }
     }
     shared_except "locked" "session" {
         bind "Ctrl o" {
             SwitchToMode "session"
-        }
-    }
-    shared_except "locked" "scroll" {
-        bind "Alt left" {
-            MoveFocusOrTab "left"
-        }
-        bind "Alt down" {
-            MoveFocus "down"
-        }
-        bind "Alt up" {
-            MoveFocus "up"
-        }
-        bind "Alt right" {
-            MoveFocusOrTab "right"
-        }
-        bind "Alt h" {
-            MoveFocusOrTab "left"
-        }
-        bind "Alt j" {
-            MoveFocus "down"
-        }
-        bind "Alt k" {
-            MoveFocus "up"
-        }
-        bind "Alt l" {
-            MoveFocusOrTab "right"
         }
     }
     shared_except "locked" "scroll" "search" "tmux" {
@@ -617,11 +593,8 @@ keybinds clear-defaults=true {
             MessagePlugin "https://github.com/hiasr/vim-zellij-navigator/releases/download/0.3.0/vim-zellij-navigator.wasm" {
                 name "move_focus_or_tab"
                 payload "left"
-                // Plugin Configuration
                 move_mod "ctrl"
-                // Optional, should be added on every move command if changed.
                 use_arrow_keys "false"
- // Optional, uses arrow keys instead of hjkl. Should be added to every command where you want to use it.
             }
         }
         bind "Ctrl j" {
@@ -645,7 +618,6 @@ keybinds clear-defaults=true {
                 name "move_focus_or_tab"
                 payload "right"
                 move_mod "ctrl"
-                // Optional, should be added on every command if you want to use it
                 use_arrow_keys "false"
             }
         }
@@ -696,6 +668,7 @@ plugins {
     welcome-screen location="zellij:session-manager" {
         welcome_screen true
     }
+    zsm location="file:/home/artrix/.config/zellij/plugins/zsm.wasm"
 }
 // Plugins to load in the background when a new session starts
 // eg. "file:/path/to/my-plugin.wasm"
@@ -715,7 +688,7 @@ simplified_ui true
 // Choose the theme that is specified in the themes section.
 // Default: default
 //
-theme "dracula"
+theme "dank-material"
 // Choose the base input mode of zellij.
 // Default: normal
 //
@@ -730,7 +703,7 @@ default_shell "nu"
 // The name of the default layout to load on startup
 // Default: "default"
 //
-// default_layout "compact"
+default_layout "default"
 // The folder in which Zellij will look for layouts
 // (Requires restart)
 //
@@ -739,6 +712,7 @@ default_shell "nu"
 // (Requires restart)
 //
 // theme_dir "/tmp"
+theme_dir "/home/artrix/.config/zellij/themes"
 // Toggle enabling the mouse mode.
 // On certain configurations, or terminals this could
 // potentially interfere with copying text.
@@ -935,4 +909,3 @@ show_startup_tips false
 // can be useful for removing wrappers around commands
 // Note: be sure to escape backslashes and similar characters properly
 // post_command_discovery_hook "echo $RESURRECT_COMMAND | sed <your_regex_here>"
-
