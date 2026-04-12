@@ -3,12 +3,12 @@ require "config.options"
 require "config.binds"
 require "config.lsp"
 
--- local base16 = require("base46-extracted").get_theme_tb "base_16"
-local theme = require("base46-extracted").get_theme_tb "base_30"
-local lighten = require("base46-extracted.colors").change_hex_lightness
+local base46 = require "config.base46"
+local theme = base46.get_theme_tb "base_30"
+local lighten = require("base46.colors").change_hex_lightness
 
 -- Syntax
-require("base46-extracted").install_integration("syntax", {
+base46.install_integration("syntax", {
    Boolean = { fg = theme.base09 },
    Character = { fg = theme.base08 },
    Conditional = { fg = theme.base0E },
@@ -39,7 +39,7 @@ require("base46-extracted").install_integration("syntax", {
 })
 
 -- Defaults
-require("base46-extracted").install_integration("defaults", {
+base46.install_integration("defaults", {
    Added = { fg = theme.green },
    Removed = { fg = theme.red },
    Changed = { fg = theme.yellow },
@@ -54,10 +54,11 @@ require("base46-extracted").install_integration("defaults", {
    LineNr = { fg = theme.grey },
    FloatBorder = { fg = theme.blue },
    FloatTitle = { fg = theme.white, bg = theme.grey },
-   NormalFloat = { bg = theme.darker_black },
+   NormalFloat = { bg = "NONE" },
    NvimInternalError = { fg = theme.red },
    WinSeparator = { fg = theme.line },
-   Normal = { fg = theme.base05, bg = theme.black },
+   Normal = { fg = theme.base05, bg = "NONE" },
+   NormalNC = { fg = theme.base05, bg = "NONE" },
    DevIconDefault = { fg = theme.red },
    Debug = { fg = theme.base08 },
    Directory = { fg = theme.base0D },
@@ -65,7 +66,7 @@ require("base46-extracted").install_integration("defaults", {
    ErrorMsg = { fg = theme.base08, bg = theme.base00 },
    Exception = { fg = theme.base08 },
    FoldColumn = { bg = "none" },
-   Folded = { fg = theme.light_grey, bg = theme.black2 },
+   Folded = { fg = theme.light_grey, bg = "NONE" },
    IncSearch = { fg = theme.base01, bg = theme.base09 },
    Macro = { fg = theme.base08 },
    ModeMsg = { fg = theme.base0B },
@@ -83,7 +84,7 @@ require("base46-extracted").install_integration("defaults", {
    Conceal = { bg = "NONE" },
    Cursor = { fg = theme.base00, bg = theme.base05 },
    NonText = { fg = theme.base03 },
-   SignColumn = { fg = theme.base03 },
+   SignColumn = { fg = theme.base03, bg = "NONE" },
    ColorColumn = { bg = theme.black2 },
    CursorColumn = { bg = theme.base01 },
    CursorLine = { bg = theme.black2 },
@@ -119,7 +120,7 @@ require("base46-extracted").install_integration("defaults", {
    LazyProgressDone = { fg = theme.green },
 })
 
-require("base46-extracted").install_integration("tokens", {
+base46.install_integration("semantic_tokens", {
    ["@lsp.type.class"] = { link = "Structure" },
    ["@lsp.type.decorator"] = { link = "Function" },
    ["@lsp.type.enum"] = { link = "Type" },

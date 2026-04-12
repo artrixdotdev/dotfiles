@@ -245,6 +245,9 @@ wk.add {
       mode = "n",
    },
 
+   -- AI
+   { "<leader>o", group = "opencode", mode = "n" },
+
    -- Git
    {
       "<leader>g",
