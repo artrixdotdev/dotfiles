@@ -24,11 +24,9 @@ function on_attach(client, bufnr)
    }
 end
 
--- Disable semantic tokens if server supports it
+-- Disable semantic tokens globally; treesitter highlighting is configured separately.
 function on_init(client, _)
-   if client.supports_method "textDocument/semanticTokens" then
-      client.server_capabilities.semanticTokensProvider = nil
-   end
+   client.server_capabilities.semanticTokensProvider = nil
 end
 
 -- Capabilities
@@ -61,6 +59,32 @@ local servers = {
    "mdx_analyzer",
 
    {
+      "tailwindcss",
+      filetypes = {
+         "astro",
+         "css",
+         "html",
+         "javascript",
+         "javascriptreact",
+         "mdx",
+         "svelte",
+         "typescript",
+         "typescriptreact",
+         "vue",
+      },
+      settings = {
+         tailwindCSS = {
+            includeLanguages = {
+               eelixir = "html-eex",
+               eruby = "erb",
+               htmlangular = "html",
+               templ = "html",
+            },
+         },
+      },
+   },
+
+   {
       "lua_ls",
       settings = {
          Lua = {
@@ -75,20 +99,19 @@ local servers = {
    },
 
    {
-      "termux",
-      cmd = { "termux-language-server" },
-   },
-
-   {
       "qmlls",
       cmd = { "qmlls", "-E" },
+      filetypes = { "qml", "qmldir" },
    },
 
    {
       "nushell",
       cmd = { "nu", "--lsp" },
       filetypes = { "nu" },
-      root_dir = require("lspconfig.util").find_git_ancestor,
+      root_dir = function(bufnr, on_dir)
+         local path = vim.api.nvim_buf_get_name(bufnr)
+         on_dir(vim.fs.root(path, ".git") or vim.fs.dirname(path))
+      end,
       single_file_support = true,
    },
 
@@ -104,6 +127,7 @@ local servers = {
 
    {
       "yamlls",
+      filetypes = { "yaml" },
       settings = {
          yaml = {
             schemaStore = {
@@ -115,6 +139,14 @@ local servers = {
       },
    },
 }
+
+if vim.env.PREFIX and vim.env.PREFIX:match "com%.termux" then
+   table.insert(servers, {
+      "termux",
+      cmd = { "termux-language-server" },
+      filetypes = { "sh", "bash" },
+   })
+end
 
 -- Setup all servers
 for _, lsp in ipairs(servers) do
@@ -135,5 +167,6 @@ for _, lsp in ipairs(servers) do
 
    config = vim.tbl_deep_extend("force", config, opts)
 
-   vim.lsp.config[name].setup(config)
+   vim.lsp.config(name, config)
+   vim.lsp.enable(name)
 end

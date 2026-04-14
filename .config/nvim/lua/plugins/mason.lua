@@ -2,12 +2,12 @@
 return {
    "mason-org/mason.nvim",
    dependencies = {
-      "artrixdotdev/base46-extracted",
+      "AvengeMedia/base46",
    },
    on_init = function()
-      local colors = require("base46-extracted").get_theme_tb "base_30"
+      local colors = require("config.base46").get_theme_tb "base_30"
 
-      require("base46-extracted").install_integration("mason", {
+      require("config.base46").install_integration("mason", {
          MasonHeader = { bg = colors.red, fg = colors.black },
          MasonHighlight = { fg = colors.blue },
          MasonHighlightBlock = { fg = colors.black, bg = colors.green },

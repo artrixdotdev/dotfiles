@@ -1,6 +1,6 @@
 local function generate_colors()
-   local colors = require("base46-extracted").get_theme_tb "base_30"
-   local colorize = require("base46-extracted.colors").change_hex_lightness
+   local colors = require("config.base46").get_theme_tb "base_30"
+   local colorize = require("base46.colors").change_hex_lightness
 
    local hl = {
       -- LSP References
@@ -20,14 +20,14 @@ local function generate_colors()
          fg = colors.light_grey,
       },
    }
-   require("base46-extracted").install_integration("lsp", hl)
+   require("config.base46").install_integration("lsp", hl)
 end
 
 return {
    {
       "neovim/nvim-lspconfig",
       dependencies = {
-         "artrixdotdev/base46-extracted",
+         "AvengeMedia/base46",
       },
       config = function()
          generate_colors()
