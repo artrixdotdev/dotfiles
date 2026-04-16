@@ -21,13 +21,27 @@
 --    -- },
 -- }
 
--- local theme = require("base46-extracted").get_theme_tb "base_30"
+-- local theme = require("config.base46").get_theme_tb "base_30"
 --
 -- for k, v in pairs(theme) do
 --    print(k .. " = " .. v)
 -- end
 
 return {
-   theme = "tokyonight",
-   integrations = {},
+   integrations = {
+      defaults = true,
+      syntax = true,
+      treesitter = true,
+      semantic_tokens = true,
+      lsp = true,
+      telescope = true,
+      mason = true,
+      blink = true,
+      whichkey = true,
+      alpha = true,
+      devicons = true,
+      git = true,
+      statusline = true,
+      notify = true,
+   },
 }
