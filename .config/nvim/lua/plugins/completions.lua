@@ -1,6 +1,7 @@
 local function generate_colors()
-   local base16 = require("base46-extracted").get_theme_tb "base_16"
-   local colors = require("base46-extracted").get_theme_tb "base_30"
+   local base46 = require "config.base46"
+   local base16 = base46.get_theme_tb "base_16"
+   local colors = base46.get_theme_tb "base_30"
 
    local highlights = {
       BlinkCmpMenu = { bg = colors.black },
@@ -64,14 +65,16 @@ local function generate_colors()
       highlights["BlinkCmpKind" .. kind] = { fg = color }
    end
 
-   require("base46-extracted").install_integration("blink", highlights)
+   base46.install_integration("blink", highlights)
 end
 
 return {
    "saghen/blink.cmp",
-   build = "cargo build --release",
+   build = function()
+      require("blink.cmp").build():wait(60000)
+   end,
    -- optional: provides snippets for the snippet source
-   dependencies = { "rafamadriz/friendly-snippets", "onsails/lspkind.nvim", "artrixdotdev/base46-extracted" },
+   dependencies = { "saghen/blink.lib", "rafamadriz/friendly-snippets", "onsails/lspkind.nvim", "AvengeMedia/base46" },
 
    -- use a release tag to download pre-built binaries
    -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
