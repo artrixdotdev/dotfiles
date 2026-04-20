@@ -2,19 +2,21 @@ return {
    -- QOL rust plugin
    {
       "mrcjkb/rustaceanvim",
+      dependencies = {
+         "mfussenegger/nvim-dap",
+      },
       lazy = false, -- This plugin is already lazy
       ft = "rust",
       config = function()
          vim.g.rustaceanvim = function()
-            -- Update this path
-            local extension_path = vim.env.HOME .. "/.vscode/extensions/vadimcn.vscode-lldb-1.10.0/"
-            local codelldb_path = extension_path .. "adapter/codelldb"
+            local extension_path = vim.fn.stdpath "data" .. "/mason/packages/codelldb/extension/"
+            local codelldb_path = vim.fn.stdpath "data" .. "/mason/packages/codelldb/codelldb"
             local liblldb_path = extension_path .. "lldb/lib/liblldb"
             local this_os = vim.uv.os_uname().sysname
 
             -- The path is different on Windows
             if this_os:find "Windows" then
-               codelldb_path = extension_path .. "adapter\\codelldb.exe"
+               codelldb_path = vim.fn.stdpath "data" .. "\\mason\\packages\\codelldb\\codelldb.exe"
                liblldb_path = extension_path .. "lldb\\bin\\liblldb.dll"
             else
                -- The liblldb extension is .so for Linux and .dylib for MacOS
@@ -37,5 +39,20 @@ return {
       init = function()
          vim.g.rustfmt_autosave = 1
       end,
+   },
+   {
+      "lommix/bevy_inspector.nvim",
+      dependencies = {
+         "nvim-telescope/telescope.nvim",
+         "nvim-lua/plenary.nvim",
+      },
+      ft = "rust",
+      cmd = { "BevyInspect", "BevyInspectNamed", "BevyInspectQuery" },
+      keys = {
+         { "<leader>bia", "<cmd>BevyInspect<cr>", desc = "List Bevy entities" },
+         { "<leader>bin", "<cmd>BevyInspectNamed<cr>", desc = "List named Bevy entities" },
+         { "<leader>biq", "<cmd>BevyInspectQuery<cr>", desc = "Query Bevy component" },
+      },
+      opts = {},
    },
 }

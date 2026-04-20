@@ -1,7 +1,11 @@
 return {
    {
       "davidmh/mdx.nvim",
-      config = true,
+      config = function()
+         pcall(function()
+            require("mdx").setup()
+         end)
+      end,
       dependencies = { "nvim-treesitter/nvim-treesitter" },
    },
    {
@@ -13,11 +17,17 @@ return {
          "nvim-telescope/telescope.nvim",
          "neovim/nvim-lspconfig",
       },
-      opts = {}, -- your configuration
+      opts = {
+         server = {
+            override = false,
+         },
+      },
    },
    {
       "pmizio/typescript-tools.nvim",
       dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-      opts = {},
+      opts = {
+         filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+      },
    },
 }

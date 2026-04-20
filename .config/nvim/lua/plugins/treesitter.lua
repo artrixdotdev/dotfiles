@@ -1,6 +1,7 @@
 local function generate_colors()
-   local theme = require("base46-extracted").get_theme_tb "base_16"
-   local base30 = require("base46-extracted").get_theme_tb "base_30"
+   local base46 = require "config.base46"
+   local theme = base46.get_theme_tb "base_16"
+   local base30 = base46.get_theme_tb "base_30"
    local opts = require "config.theme"
 
    local higlights = {
@@ -89,7 +90,7 @@ local function generate_colors()
       ["@diff.minus"] = { fg = base30.red },
       ["@diff.delta"] = { fg = base30.light_grey },
    }
-   require("base46-extracted").install_integration("treesitter", higlights)
+   base46.install_integration("treesitter", higlights)
 end
 
 -- modified version of code from this config
@@ -121,7 +122,6 @@ return {
             "tsx",
             "jsdoc",
             "json",
-            "jsonc",
             "json5",
             "lua",
             "luadoc",
@@ -147,25 +147,31 @@ return {
       config = function(_, opts)
          generate_colors()
          require "config.filemap"
+         local parser_filetypes = {
+            javascript = { "javascript", "javascriptreact" },
+            qmljs = { "qml" },
+            tsx = { "typescriptreact" },
+         }
+
          -- install parsers from custom opts.ensure_installed
          if opts.ensure_installed and #opts.ensure_installed > 0 then
             require("nvim-treesitter").install(opts.ensure_installed)
             -- register and start parsers for filetypes
             for _, parser in ipairs(opts.ensure_installed) do
-               local filetypes = parser -- In this case, parser is the filetype/language name
+               local filetypes = parser_filetypes[parser] or { parser }
                vim.treesitter.language.register(parser, filetypes)
 
                vim.api.nvim_create_autocmd({ "FileType" }, {
                   pattern = filetypes,
                   callback = function(event)
-                     vim.treesitter.start(event.buf, parser)
+                     pcall(vim.treesitter.start, event.buf, parser)
                   end,
                })
             end
          end
 
-         -- Auto-install and start parsers for any buffer
-         vim.api.nvim_create_autocmd({ "BufRead" }, {
+         -- Auto-install and start parsers for filetypes not listed above.
+         vim.api.nvim_create_autocmd({ "FileType" }, {
             callback = function(event)
                local bufnr = event.buf
                local filetype = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
@@ -176,8 +182,8 @@ return {
                end
 
                -- Check if this filetype is already handled by explicit opts.ensure_installed config
-               for _, filetypes in pairs(opts.ensure_installed) do
-                  local ft_table = type(filetypes) == "table" and filetypes or { filetypes }
+               for _, parser in pairs(opts.ensure_installed) do
+                  local ft_table = parser_filetypes[parser] or { parser }
                   if vim.tbl_contains(ft_table, filetype) then
                      return -- Already handled above
                   end
@@ -188,12 +194,6 @@ return {
                if not parser_name then
                   return
                end
-               -- Try to get existing parser (helpful check if filetype was returned above)
-               local parser_configs = require "nvim-treesitter.parsers"
-               if not parser_configs[parser_name] then
-                  return -- Parser not available, skip silently
-               end
-
                local parser_installed = pcall(vim.treesitter.get_parser, bufnr, parser_name)
 
                if not parser_installed then
@@ -206,7 +206,7 @@ return {
 
                if parser_installed then
                   -- Start treesitter for this buffer
-                  vim.treesitter.start(bufnr, parser_name)
+                  pcall(vim.treesitter.start, bufnr, parser_name)
                end
             end,
          })
