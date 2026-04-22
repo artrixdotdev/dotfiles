@@ -29,7 +29,7 @@ local function center_text(lines)
 end
 
 local function generate_colors()
-   local theme = require("base46-extracted").get_theme_tb "base_16"
+   local theme = require("config.base46").get_theme_tb "base_16"
 
    local highlights = {
       AlphaHeader = { fg = theme.base0D, bold = true },
@@ -43,7 +43,7 @@ local function generate_colors()
       AlphaHighlight = { fg = theme.base0B, bold = true },
    }
 
-   require("base46-extracted").install_integration("greeter", highlights)
+   require("config.base46").install_integration("alpha", highlights)
 end
 
 -- Generate username header

@@ -2,28 +2,28 @@ return {
    "nvim-lualine/lualine.nvim",
    dependencies = {
       "nvim-tree/nvim-web-devicons",
-      "artrixdotdev/base46-extracted",
+      "AvengeMedia/base46",
       "mrjones2014/smart-splits.nvim",
    },
    priority = 850,
    opts = function()
-      local colors = require("base46-extracted").get_theme_tb "base_30"
+      local colors = require("config.base46").get_theme_tb "base_30"
       local mux = require "smart-splits"
 
       local bubbles_theme = {
          normal = {
-            a = { fg = colors.black, bg = colors.cyan },
-            b = {},
-            c = {},
+            a = { fg = colors.black, bg = colors.blue, gui = "bold" },
+            b = { fg = colors.white, bg = colors.black2 },
+            c = { fg = colors.light_grey, bg = colors.black },
          },
-         insert = { a = { fg = colors.black, bg = colors.blue } },
-         visual = { a = { fg = colors.black, bg = colors.purple } },
-         replace = { a = { fg = colors.black, bg = colors.red } },
-         command = { a = { fg = colors.black, bg = colors.orange } },
+         insert = { a = { fg = colors.black, bg = colors.green, gui = "bold" } },
+         visual = { a = { fg = colors.black, bg = colors.purple, gui = "bold" } },
+         replace = { a = { fg = colors.black, bg = colors.red, gui = "bold" } },
+         command = { a = { fg = colors.black, bg = colors.orange, gui = "bold" } },
          inactive = {
-            a = { fg = colors.white, bg = colors.black },
-            b = { fg = colors.white, bg = colors.black },
-            c = { fg = colors.white, bg = colors.black },
+            a = { fg = colors.grey_fg, bg = colors.black },
+            b = { fg = colors.grey_fg, bg = colors.black },
+            c = { fg = colors.grey_fg, bg = colors.black },
          },
       }
 
@@ -39,6 +39,7 @@ return {
             draw_empty = true,
             component_separators = "|",
             section_separators = "",
+            disabled_filetypes = { statusline = { "alpha" } },
          },
          sections = {
             -- LEFT SIDE
@@ -120,7 +121,17 @@ return {
                      modified = "● ",
                      removed = "✕ ",
                   },
-                  color = { bg = colors.black },
+                  color = { bg = colors.black, fg = colors.light_grey },
+               },
+               {
+                  function()
+                     local ok, opencode = pcall(require, "opencode")
+                     if not ok then
+                        return ""
+                     end
+                     return opencode.statusline()
+                  end,
+                  color = { bg = colors.black2, fg = colors.teal, gui = "bold" },
                },
             },
             lualine_z = {

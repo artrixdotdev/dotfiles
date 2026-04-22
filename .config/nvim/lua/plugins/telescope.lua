@@ -1,5 +1,5 @@
 local function generate_colors()
-   local colors = require("base46-extracted").get_theme_tb "base_30"
+   local colors = require("config.base46").get_theme_tb "base_30"
 
    local hl = {
       TelescopePromptTitle = {
@@ -17,17 +17,17 @@ local function generate_colors()
       TelescopePromptBorder = { fg = colors.one_bg3 },
       TelescopeResultsTitle = { fg = colors.black, bg = colors.green },
       TelescopePreviewTitle = { fg = colors.black, bg = colors.blue },
-      TelescopePromptPrefix = { fg = colors.red, bg = colors.black },
-      TelescopeNormal = { bg = colors.black },
-      TelescopePromptNormal = { bg = colors.black },
+      TelescopePromptPrefix = { fg = colors.red, bg = "NONE" },
+      TelescopeNormal = { bg = "NONE" },
+      TelescopePromptNormal = { bg = "NONE" },
    }
-   require("base46-extracted").install_integration("telescope", hl)
+   require("config.base46").install_integration("telescope", hl)
 end
 
 return {
    "nvim-telescope/telescope.nvim",
    event = "VeryLazy",
-   requires = { { "nvim-lua/plenary.nvim", "artrixdotdev/base46-extracted", "nvim-treesitter/nvim-treesitter" } },
+   dependencies = { "nvim-lua/plenary.nvim", "AvengeMedia/base46", "nvim-treesitter/nvim-treesitter" },
    opts = function()
       generate_colors()
       return {
