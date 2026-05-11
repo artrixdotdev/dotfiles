@@ -64,7 +64,7 @@ float ease(float x) {
 // https://enchanted.games/app/colour-converter/
 // const vec4 TRAIL_COLOR = vec4(1., 1., 0., 1.0); // yellow
 // const vec4 TRAIL_COLOR = vec4(0.976, 0.302, 1.0, 1.0); // cursor
-const vec4 TRAIL_COLOR = vec4(0.914, 0.702, 0.992, 1.0); // light cursor
+const vec4 TRAIL_COLOR = vec4(0.515, 0.515, 0.515, 1.0); // light cursor
 // const vec4 TRAIL_COLOR = vec4(0.016, 0.82, 0.976, 1.0); // cyan
 // const vec4 TRAIL_COLOR = vec4(0.216, 0.957, 0.6, 1.0); // green
 const float OPACITY = 0.6;
