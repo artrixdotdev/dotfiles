@@ -21,6 +21,7 @@ output "DP-2" {
     mode "2560x1440@240.001"
     scale 1
     position x=1080 y=180
+    variable-refresh-rate on-demand=true
     focus-at-startup
     hot-corners {
         off
