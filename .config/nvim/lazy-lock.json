@@ -1,6 +1,6 @@
 {
   "Preview.nvim": { "branch": "main", "commit": "388882f3bfd09bcb0d5b4ab3d0fa5bc2dacbbc2e" },
-  "aerial.nvim": { "branch": "master", "commit": "585db11015abccf673dc5bd6502714d5655554be" },
+  "aerial.nvim": { "branch": "master", "commit": "28fe6e822ae344544c379d60fcb13c9519a1f08a" },
   "alpha-nvim": { "branch": "main", "commit": "6d191598d1bce6c5414e472c1918d8ad58ad1dcd" },
   "baleia.nvim": { "branch": "main", "commit": "880e97c02edf3148ba2bdc6305ac03eb3c3711e0" },
   "base46": { "branch": "v3.0", "commit": "eb54ce645266cac86bb6a4241428fefe61e90a8a" },
