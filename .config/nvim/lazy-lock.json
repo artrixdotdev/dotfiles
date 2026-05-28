@@ -3,7 +3,7 @@
   "aerial.nvim": { "branch": "master", "commit": "28fe6e822ae344544c379d60fcb13c9519a1f08a" },
   "alpha-nvim": { "branch": "main", "commit": "6d191598d1bce6c5414e472c1918d8ad58ad1dcd" },
   "baleia.nvim": { "branch": "main", "commit": "880e97c02edf3148ba2bdc6305ac03eb3c3711e0" },
-  "base46": { "branch": "v3.0", "commit": "eb54ce645266cac86bb6a4241428fefe61e90a8a" },
+  "base46": { "branch": "v3.0", "commit": "cb8a1257bbc2640f6e7415a01219b34d3efd1494" },
   "bevy_inspector.nvim": { "branch": "master", "commit": "debdf31e5f4b862447ecbf4a9ebfc61b5a9d0772" },
   "blink.cmp": { "branch": "main", "commit": "82efc953a6121822fda1974241a4d1af74c6c026" },
   "blink.lib": { "branch": "main", "commit": "f29d8bac6549bc1e7d699c83f680823d7def98bd" },
