@@ -63,6 +63,16 @@ wk.add {
    { "cyy", '"+yy"', mode = { "n" }, desc = "Copy line to clipboard", group = "clipboard" },
    { "cp", '"+p"', mode = { "n", "v" }, desc = "Paste from clipboard", group = "clipboard" },
 
+   -- Textobjects
+   { "a", mode = { "x", "o" }, desc = "Around textobject" },
+   { "i", mode = { "x", "o" }, desc = "Inside textobject" },
+   { "an", mode = { "x", "o" }, desc = "Around next textobject" },
+   { "in", mode = { "x", "o" }, desc = "Inside next textobject" },
+   { "al", mode = { "x", "o" }, desc = "Around last textobject" },
+   { "il", mode = { "x", "o" }, desc = "Inside last textobject" },
+   { "g[", mode = { "n", "x", "o" }, desc = "Go to left textobject edge" },
+   { "g]", mode = { "n", "x", "o" }, desc = "Go to right textobject edge" },
+
    -- File
    { "<leader>f", group = "file" },
    { "<leader>ft", "<cmd>Neotree position=right toggle <cr>", desc = "Open file tree", mode = "n" },
