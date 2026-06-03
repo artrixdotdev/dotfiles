@@ -8,7 +8,7 @@ return {
       lazy = false, -- This plugin is already lazy
       ft = "rust",
       version = "^9",
-      config = function()
+      init = function()
          vim.g.rustaceanvim = function()
             local extension_path = vim.fn.stdpath "data" .. "/mason/packages/codelldb/extension/"
             local codelldb_path = vim.fn.stdpath "data" .. "/mason/packages/codelldb/codelldb"
