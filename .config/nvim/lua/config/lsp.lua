@@ -49,6 +49,8 @@ capabilities.textDocument.completion.completionItem = {
    },
 }
 
+_G.lsp_capabilities = capabilities
+
 -- Servers list
 local servers = {
    "html",
