@@ -2,14 +2,20 @@
 return {
 
    {
-      "stevearc/oil.nvim",
-      ---@module 'oil'
-      ---@type oil.SetupOpts
-      opts = {},
-      -- Optional dependencies
-      dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
-      -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
-      lazy = false,
+      "mikavilpas/yazi.nvim",
+      version = "*",
+      cmd = { "Yazi" },
+      dependencies = {
+         { "nvim-lua/plenary.nvim", lazy = true },
+      },
+      opts = {
+         open_for_directories = false,
+         floating_window_scaling_factor = 0.9,
+         yazi_floating_window_border = "rounded",
+         keymaps = {
+            show_help = "<f1>",
+         },
+      },
    },
    {
       "nvim-neo-tree/neo-tree.nvim",
