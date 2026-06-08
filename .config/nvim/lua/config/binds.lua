@@ -80,11 +80,9 @@ wk.add {
    { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find File", mode = "n" },
    {
       "<leader>fd",
-      function()
-         require("oil").toggle_float()
-      end,
+      "<cmd>Yazi<cr>",
       desc = "Open file buffer manager",
-      mode = "n",
+      mode = { "n", "v" },
    },
    {
       "<leader>fb",
