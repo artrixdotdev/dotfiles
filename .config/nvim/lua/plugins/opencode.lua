@@ -1,15 +1,14 @@
 return {
    "nickjvandyke/opencode.nvim",
    version = "*",
-   cmd = { "Opencode" },
    keys = {
       {
          "<leader>oo",
          function()
-            require("opencode").toggle()
+            require("opencode").start()
          end,
          mode = { "n", "t" },
-         desc = "Toggle opencode",
+         desc = "Start opencode",
       },
       {
          "<leader>oa",
