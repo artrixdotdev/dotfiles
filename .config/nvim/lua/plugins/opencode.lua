@@ -21,7 +21,7 @@ return {
       {
          "<leader>oA",
          function()
-            require("opencode").ask("@this: ", { submit = true })
+            require("opencode").prompt "@this:"
          end,
          mode = { "n", "x" },
          desc = "Ask opencode and submit",
