@@ -135,19 +135,12 @@ return {
       end
 
       local opts = {
-         lsp = {
-            enabled = true,
-         },
       }
 
       if has_zellij() then
          opts.server = {
             url = "http://127.0.0.1:4096",
             start = open_in_zellij,
-            toggle = open_in_zellij,
-            stop = function()
-               vim.notify("Close the opencode zellij pane to stop opencode", vim.log.levels.INFO)
-            end,
          }
       end
 
