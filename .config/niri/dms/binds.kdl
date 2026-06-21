@@ -26,6 +26,10 @@ binds {
         spawn "dms" "ipc" "call" "dankdash" "wallpaper";
     }
 
+    Mod+Period hotkey-overlay-title="Emoji Menu" {
+        spawn "dms" "ipc" "call" "launcher" "openQuery" ":e";
+    }
+
     Mod+Shift+N hotkey-overlay-title="Notepad" {
       spawn "dms" "ipc" "call" "notepad" "toggle";
     }
