@@ -21,10 +21,18 @@ window-rule {
     open-floating true
 }
 
-// Block out password managers from screen capture.
+// Keep Bitwarden popups floating and centered by default.
 window-rule {
     match app-id=r#"(?i)bitwarden"#
     match title=r#"(?i)bitwarden"#
+
+    open-floating true
+    open-focused true
+    block-out-from "screen-capture"
+}
+
+// Block out password managers from screen capture.
+window-rule {
     match app-id=r#"^org\.keepassxc\.KeePassXC$"#
     match app-id=r#"^org\.gnome\.World\.Secrets$"#
 
