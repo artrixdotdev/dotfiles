@@ -13,5 +13,6 @@ return {
    javascriptreact = get_js_formatter,
    typescript = get_js_formatter,
    typescriptreact = get_js_formatter,
+   astro = { "prettierd", "prettier", lsp_format = "fallback" },
    kdl = { "kdlfmt" },
 }
