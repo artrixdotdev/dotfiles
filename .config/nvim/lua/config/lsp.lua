@@ -127,20 +127,20 @@ local servers = {
       },
    },
 
-   {
-      "yamlls",
-      filetypes = { "yaml" },
-      settings = {
-         yaml = {
-            schemaStore = {
-               enable = false,
-               url = "",
-            },
-            schemas = require("schemastore").yaml.schemas(),
-         },
-      },
-   },
-}
+{
+       "yamlls",
+       filetypes = { "yaml" },
+       settings = {
+          yaml = {
+             schemaStore = {
+                enable = false,
+                url = "",
+             },
+             schemas = require("schemastore").yaml.schemas(),
+          },
+       },
+    },
+ }
 
 if vim.env.PREFIX and vim.env.PREFIX:match "com%.termux" then
    table.insert(servers, {
