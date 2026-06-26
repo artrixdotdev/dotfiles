@@ -140,6 +140,11 @@ local servers = {
           },
        },
     },
+
+    {
+       "astro",
+       filetypes = { "astro" },
+    },
  }
 
 if vim.env.PREFIX and vim.env.PREFIX:match "com%.termux" then
