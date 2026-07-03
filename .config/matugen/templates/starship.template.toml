@@ -3,7 +3,7 @@
 add_newline = true
 
 format = """
-$cmd_duration  $directory
+$cmd_duration  $directory $custom
 $character
 """
 
@@ -76,7 +76,6 @@ $gcloud\
 $openstack\
 $azure\
 $crystal\
-$custom\
 $status\
 $os\
 $battery\
@@ -160,3 +159,9 @@ format = '[](bold fg:tertiary_fixed_dim)[$path]($style)[](bold fg:tertiary
 [cmd_duration]
 min_time = 0
 format = '[](bold fg:tertiary_fixed)[󰔶 $duration](bold bg:tertiary_fixed fg:on_tertiary_fixed)[](bold fg:tertiary_fixed)'
+
+[custom.ssh_session]
+command = "tailscale status --json | jq -r '.Self.DNSName' | cut -d. -f1"
+shell = ["bash", "--noprofile", "--norc"]
+when = 'test -n "$SSH_CONNECTION"'
+format = '[](bold fg:primary_fixed)[󰢹 $output](bold bg:primary_fixed fg:on_primary_fixed)[](bold fg:primary_fixed) '
