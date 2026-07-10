@@ -1,1 +1,0 @@
-When working in `/home/artrix/Documents/Code/artrix.dev`, read that repository's local `AGENTS.md` before editing. The project expects shadcn-style shared primitives where practical, semantic design tokens for colors/surfaces/shadows, and no ad hoc opacity color utilities such as `text-white/40` in component markup.
