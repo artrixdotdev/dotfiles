@@ -235,16 +235,47 @@ def show-summary [dotfiles_dir: path] {
   print $"(ansi light_gray)Start or restart your user session when you are ready.(ansi reset)"
 }
 
-def main [] {
+def show-help [] {
+  print "Usage: ./setup.nu [command]"
+  print ""
+  print "Commands:"
+  print "  all      Run the guided full setup (default)"
+  print "  install  Select and install packages from deps.toml"
+  print "  sync     Symlink all managed scripts and config"
+  print "  link     Alias for sync"
+  print "  post     Install and enable post-setup user services"
+  print "  help     Show this help"
+}
+
+def install-only [deps_file: path] {
+  ensure-command "paru"
+  let deps = (load-deps $deps_file)
+  let packages = (select-packages $deps)
+  configure-chaotic-aur
+  install-packages $packages
+}
+
+def sync-only [dotfiles_dir: path] {
+  step "Linking scripts"
+  link-scripts $dotfiles_dir
+  step "Linking config"
+  link-config $dotfiles_dir
+}
+
+def post-only [dotfiles_dir: path] {
+  ensure-command "systemctl"
+  step "Installing services"
+  install-services $dotfiles_dir
+}
+
+def full-setup [script_dir: path, dotfiles_dir: path] {
   banner
   ensure-command "nu"
   ensure-command "zellij"
   ensure-command "paru"
   ensure-command "git"
 
-  let script_dir = ($env.CURRENT_FILE | path dirname)
   let deps_file = ($script_dir | path join "deps.toml")
-  let dotfiles_dir = ($env.HOME | path join $dotfiles_dir_name)
   let deps = (load-deps $deps_file)
   let packages = (select-packages $deps)
 
@@ -260,4 +291,22 @@ def main [] {
   if (confirm "Install user systemd services?") { step "Installing services"; install-services $dotfiles_dir }
 
   show-summary $dotfiles_dir
+}
+
+def main [command: string = "all"] {
+  let script_dir = ($env.CURRENT_FILE | path dirname)
+  let dotfiles_dir = ($env.HOME | path join $dotfiles_dir_name)
+  let deps_file = ($script_dir | path join "deps.toml")
+
+  match $command {
+    "all" => { full-setup $script_dir $dotfiles_dir }
+    "install" => { install-only $deps_file }
+    "sync" | "link" => { sync-only $script_dir }
+    "post" => { post-only $script_dir }
+    "help" | "--help" | "-h" => { show-help }
+    _ => {
+      show-help
+      fail $"Unknown command: ($command)"
+    }
+  }
 }
