@@ -1,0 +1,4 @@
+interface:
+  display_name: "Use Tailscale"
+  short_description: "Connect to and operate your Tailscale devices"
+  default_prompt: "Use $use-tailscale to connect to the appropriate device and complete this task."
