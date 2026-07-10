@@ -86,6 +86,22 @@ if ("~/.bun/bin" | path expand | path exists) {
    path add ~/.bun/bin
 }
 
+# Turns { desktop: "desktop.tailscale.com" } into $env.TAILSCALE_DESKTOP
+let tailscale_urls_file = "~/dotfiles/.encrypted/tailscale.json" | path expand
+if ($tailscale_urls_file | path exists) {
+   let tailscale_urls = open $tailscale_urls_file
+   let tailscale_env = (
+      $tailscale_urls
+      | transpose key value
+      | reduce --fold {} { |item, acc|
+         $acc | merge { ($"TAILSCALE_($item.key | str uppercase)"): $item.value }
+      }
+   )
+
+   $env.TAILSCALE_URLS = $tailscale_urls
+   load-env $tailscale_env
+}
+
 mkdir ~/.cache/starship
 starship init nu | save -f ~/.cache/starship/init.nu
 zoxide init nushell | save -f ~/.zoxide.nu
@@ -95,6 +111,9 @@ $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional
 $env.FZF_DEFAULT_OPTS = "--height=40% --layout=reverse --border --margin=1,20%"
 mkdir ~/.cache/carapace
 carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
+if (~/.bitwarden.ssh-agent.sock | path exists) {
+    $env.SSH_AUTH_SOCK = "~/.bitwarden-ssh-agent.sock"
+}
 
 
 
