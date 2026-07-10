@@ -1,0 +1,12 @@
+[Unit]
+Description=Zellij web server
+Documentation=https://zellij.dev/documentation/web-client.html
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/zellij web --start
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=default.target
