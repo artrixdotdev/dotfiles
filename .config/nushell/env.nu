@@ -111,7 +111,7 @@ $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional
 $env.FZF_DEFAULT_OPTS = "--height=40% --layout=reverse --border --margin=1,20%"
 mkdir ~/.cache/carapace
 carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
-if (~/.bitwarden.ssh-agent.sock | path exists) {
+if (~/.bitwarden-ssh-agent.sock | path exists) {
     $env.SSH_AUTH_SOCK = "~/.bitwarden-ssh-agent.sock"
 }
 
