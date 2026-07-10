@@ -190,9 +190,35 @@ def link-config [dotfiles_dir: path] {
   }
 
   mkdir $target_dir
-  ls $config_dir | each { |item|
+  ls $config_dir | where { |item| ($item.name | path basename) != "codex" } | each { |item|
     let target = ($target_dir | path join ($item.name | path basename))
     safe-symlink $item.name $target
+  }
+}
+
+def link-codex-config [dotfiles_dir: path] {
+  let codex_dir = ($dotfiles_dir | path join ".config" "codex")
+  let target_dir = ($env.HOME | path join ".codex")
+
+  if not ($codex_dir | path exists) {
+    warn $"No Codex config directory found: ($codex_dir)"
+    return
+  }
+
+  mkdir $target_dir
+  ls $codex_dir | where { |item| ($item.name | path basename) != "skills" } | each { |item|
+    let target = ($target_dir | path join ($item.name | path basename))
+    safe-symlink $item.name $target
+  }
+
+  let skills_dir = ($codex_dir | path join "skills")
+  let target_skills_dir = ($target_dir | path join "skills")
+  if ($skills_dir | path exists) {
+    mkdir $target_skills_dir
+    ls $skills_dir | each { |skill|
+      let target = ($target_skills_dir | path join ($skill.name | path basename))
+      safe-symlink $skill.name $target
+    }
   }
 }
 
@@ -229,7 +255,7 @@ def show-summary [dotfiles_dir: path] {
   print ""
   print $"(ansi green_bold)Setup complete.(ansi reset)"
   print $"Dotfiles: ($dotfiles_dir)"
-  print "Linked: scripts -> ~/.local/bin, ~/dotfiles/.config/* -> ~/.config/*"
+  print "Linked: scripts -> ~/.local/bin, config -> ~/.config, Codex config -> ~/.codex"
   print "Services: installed under ~/.config/systemd/user"
   print ""
   print $"(ansi light_gray)Start or restart your user session when you are ready.(ansi reset)"
@@ -260,6 +286,8 @@ def sync-only [dotfiles_dir: path] {
   link-scripts $dotfiles_dir
   step "Linking config"
   link-config $dotfiles_dir
+  step "Linking Codex config"
+  link-codex-config $dotfiles_dir
 }
 
 def post-only [dotfiles_dir: path] {
@@ -288,6 +316,7 @@ def full-setup [script_dir: path, dotfiles_dir: path] {
 
   if (confirm "Symlink scripts into ~/.local/bin?") { step "Linking scripts"; link-scripts $dotfiles_dir }
   if (confirm "Symlink ~/dotfiles/.config entries into ~/.config?") { step "Linking config"; link-config $dotfiles_dir }
+  if (confirm "Symlink ~/dotfiles/.config/codex entries into ~/.codex?") { step "Linking Codex config"; link-codex-config $dotfiles_dir }
   if (confirm "Install user systemd services?") { step "Installing services"; install-services $dotfiles_dir }
 
   show-summary $dotfiles_dir
