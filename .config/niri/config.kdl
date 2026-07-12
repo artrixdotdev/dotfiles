@@ -234,8 +234,20 @@ window-rule {
    match app-id="^gnome-calculator$"
    match app-id="^galculator$"
    match app-id="^blueman-manager$"
-   match app-id="^steam$"
    match app-id="^xdg-desktop-portal$"
+   open-floating true
+}
+// Keep the Steam client and games in the scrolling layout. Steam games running
+// through XWayland commonly identify themselves as steam_app_<numeric app id>.
+window-rule {
+   match app-id="(?i)^steam$"
+   match app-id="(?i)^steam_app_[0-9]+$"
+   open-floating false
+}
+// Steam's auxiliary windows are more useful as centered floating dialogs.
+// New floating windows are centered by default in niri.
+window-rule {
+   match app-id="(?i)^steam$" title="(?i)^(Friends List|Steam Settings|Settings|.* Properties|Game Properties|Special Offers|Steam - News|Steam Guard|CD Key|Product Key|Controller Settings|Screenshot Manager|Storage Manager|Downloads)$"
    open-floating true
 }
 window-rule {
