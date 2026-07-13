@@ -13,3 +13,12 @@ window-rule {
     open-maximized true
     open-on-workspace "monitor"
 }
+
+// @id=wr_1783747027240740646 @name=org.gnome.Nautilus
+window-rule {
+    match app-id="^org.gnome.Nautilus$"
+    background-effect {
+        blur true
+        xray true
+    }
+}
