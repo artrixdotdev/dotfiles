@@ -22,3 +22,12 @@ window-rule {
         xray true
     }
 }
+
+// @id=wr_1783747145807715527 @name=Bitwarden
+window-rule {
+    match title="^Bitwarden$"
+    open-floating true
+    open-focused true
+    default-column-width { fixed 800; }
+    default-window-height { fixed 800; }
+}
