@@ -102,6 +102,13 @@ if ($tailscale_urls_file | path exists) {
    load-env $tailscale_env
 }
 
+# Optional encrypted, machine-specific fleet policy. The launcher remains
+# generic while exclusions and future policy stay out of plaintext config.
+let zellij_fleet_file = "~/dotfiles/.encrypted/zellij-fleet.json" | path expand
+if ($zellij_fleet_file | path exists) {
+   $env.ZELLIJ_FLEET_CONFIG = (open $zellij_fleet_file)
+}
+
 mkdir ~/.cache/starship
 starship init nu | save -f ~/.cache/starship/init.nu
 zoxide init nushell | save -f ~/.zoxide.nu
