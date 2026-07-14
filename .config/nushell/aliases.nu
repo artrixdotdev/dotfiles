@@ -16,3 +16,7 @@ def --env cx [arg] {
 def --wrapped v [...args] {
     nvim ...$args
 }
+
+def --wrapped fleet [...args] {
+    ^~/dotfiles/scripts/zellij-fleet.nu ...$args
+}
