@@ -4,6 +4,10 @@ Documentation=https://zellij.dev/documentation/web-client.html
 
 [Service]
 Type=simple
+# Matugen owns the generated theme file, so fresh/headless machines can have no
+# theme directory yet. Zellij requires the configured directory to exist even
+# when it can fall back without the generated theme.
+ExecStartPre=/usr/bin/mkdir -p %h/.config/zellij/themes
 ExecStart=/usr/bin/zellij web --start
 Restart=on-failure
 RestartSec=3
