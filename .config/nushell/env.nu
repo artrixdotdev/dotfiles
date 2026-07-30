@@ -89,35 +89,46 @@ if ("~/.bun/bin" | path expand | path exists) {
 # Turns { desktop: "desktop.tailscale.com" } into $env.TAILSCALE_DESKTOP
 let tailscale_urls_file = "~/dotfiles/.encrypted/tailscale.json" | path expand
 if ($tailscale_urls_file | path exists) {
-   let tailscale_urls = open $tailscale_urls_file
-   let tailscale_env = (
-      $tailscale_urls
-      | transpose key value
-      | reduce --fold {} { |item, acc|
-         $acc | merge { ($"TAILSCALE_($item.key | str uppercase)"): $item.value }
-      }
-   )
+   let tailscale_urls = try { open $tailscale_urls_file } catch { null }
+   if $tailscale_urls != null and (($tailscale_urls | describe) | str starts-with "record") {
+      let tailscale_env = (
+         $tailscale_urls
+         | transpose key value
+         | reduce --fold {} { |item, acc|
+            $acc | merge { ($"TAILSCALE_($item.key | str uppercase)"): $item.value }
+         }
+      )
 
-   $env.TAILSCALE_URLS = $tailscale_urls
-   load-env $tailscale_env
+      $env.TAILSCALE_URLS = $tailscale_urls
+      load-env $tailscale_env
+   }
 }
 
 # Optional encrypted, machine-specific fleet policy. The launcher remains
 # generic while exclusions and future policy stay out of plaintext config.
 let zellij_fleet_file = "~/dotfiles/.encrypted/zellij-fleet.json" | path expand
 if ($zellij_fleet_file | path exists) {
-   $env.ZELLIJ_FLEET_CONFIG = (open $zellij_fleet_file)
+   let zellij_fleet_config = try { open $zellij_fleet_file } catch { null }
+   if $zellij_fleet_config != null and (($zellij_fleet_config | describe) | str starts-with "record") {
+      $env.ZELLIJ_FLEET_CONFIG = $zellij_fleet_config
+   }
 }
 
-mkdir ~/.cache/starship
-starship init nu | save -f ~/.cache/starship/init.nu
-zoxide init nushell | save -f ~/.zoxide.nu
+if (which starship | is-not-empty) {
+   mkdir ~/.cache/starship
+   starship init nu | save -f ~/.cache/starship/init.nu
+}
+if (which zoxide | is-not-empty) {
+   zoxide init nushell | save -f ~/.zoxide.nu
+}
 $env.RUSTC_WRAPPER = "/usr/bin/sccache"
 $env.STARSHIP_CONFIG = ($env.XDG_CONFIG_HOME | path join "starship/starship.toml")
 $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional
 $env.FZF_DEFAULT_OPTS = "--height=40% --layout=reverse --border --margin=1,20%"
-mkdir ~/.cache/carapace
-carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
+if (which carapace | is-not-empty) {
+   mkdir ~/.cache/carapace
+   carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
+}
 let bitwarden_ssh_agent_socket = "~/.bitwarden-ssh-agent.sock" | path expand
 if ($bitwarden_ssh_agent_socket | path exists) {
     $env.SSH_AUTH_SOCK = $bitwarden_ssh_agent_socket

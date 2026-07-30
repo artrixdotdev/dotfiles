@@ -9,12 +9,45 @@ source aliases.nu
 if $nu.is-interactive {
     source startup.nu
 }
-source ~/.cache/theme/theme.nu
 
-
-source ~/.zoxide.nu
-source ~/.cache/theme/theme.nu
-use ~/.cache/starship/init.nu
+# Generated and machine-local integrations are optional. `source null` and
+# `use null` are intentional no-ops, which keeps fresh and headless machines
+# usable until their generators have run.
+$env.theme = {}
+$env.raw_theme = {
+    error: red
+    on_error: white
+    on_primary: black
+    on_primary_container: white
+    on_secondary_container: white
+    on_surface: white
+    on_surface_variant: light_gray
+    on_tertiary_container: white
+    primary: cyan
+    primary_container: dark_gray
+    primary_fixed: light_cyan
+    secondary_container: dark_gray
+    surface_container: dark_gray
+    tertiary_container: dark_gray
+}
+const theme_file = if ("~/.cache/theme/theme.nu" | path expand | path exists) {
+    "~/.cache/theme/theme.nu"
+} else {
+    null
+}
+const zoxide_file = if ("~/.zoxide.nu" | path expand | path exists) {
+    "~/.zoxide.nu"
+} else {
+    null
+}
+const starship_file = if ("~/.cache/starship/init.nu" | path expand | path exists) {
+    "~/.cache/starship/init.nu"
+} else {
+    null
+}
+source $theme_file
+source $zoxide_file
+use $starship_file
 
 
 
@@ -766,4 +799,9 @@ $env.config = {
     ]
 }
 
-source ~/.cache/carapace/init.nu
+const carapace_file = if ("~/.cache/carapace/init.nu" | path expand | path exists) {
+    "~/.cache/carapace/init.nu"
+} else {
+    null
+}
+source $carapace_file
