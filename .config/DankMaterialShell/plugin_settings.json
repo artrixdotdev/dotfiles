@@ -27,7 +27,7 @@
   },
   "emojiLauncher": {
     "enabled": true,
-    "recentEmojis": "🦅,🇺🇸"
+    "recentEmojis": "🤨,🥷🏿,🥷,🦅,🇺🇸"
   },
   "worldClock": {
     "enabled": true,
@@ -43,5 +43,18 @@
   "calculator": {
     "enabled": true,
     "trigger": "="
+  },
+  "ocrScanner": {
+    "enabled": true
+  },
+  "qcalCalendar": {
+    "enabled": false
+  },
+  "quickCapture": {
+    "enabled": true
+  },
+  "nextBootSelector": {
+    "enabled": true,
+    "privCmd": "pkexec"
   }
 }
