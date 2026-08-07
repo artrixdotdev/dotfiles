@@ -1,0 +1,80 @@
+{
+  "lockfileVersion": 1,
+  "plugins": {
+    "calculator": {
+      "repo": "https://github.com/rochacbruno/DankCalculator",
+      "commit": "1db5865419a40a33171a475855a59e0b8bf7187f"
+    },
+    "cavaVisualizer": {
+      "repo": "https://github.com/ernestowgg/cava-visualizer",
+      "commit": "2d08bef95bc7cd170ad5730a27791c9af6d80a52"
+    },
+    "dankActions": {
+      "repo": "https://github.com/AvengeMedia/dms-plugins",
+      "path": "DankActions",
+      "commit": "3ad0e7845b62a9aca56f7959dd086b2a85655079"
+    },
+    "dankAudioVisualizer": {
+      "repo": "https://github.com/odtgit/DankAudioVisualizer",
+      "commit": "25424e8d570e000f4ab086c9e5e1122180861a65"
+    },
+    "dankHooks": {
+      "repo": "https://github.com/AvengeMedia/dms-plugins",
+      "path": "DankHooks",
+      "commit": "3ad0e7845b62a9aca56f7959dd086b2a85655079"
+    },
+    "dankKDEConnect": {
+      "repo": "https://github.com/AvengeMedia/dms-plugins",
+      "path": "DankKDEConnect",
+      "commit": "3ad0e7845b62a9aca56f7959dd086b2a85655079"
+    },
+    "ddcBrightness": {
+      "repo": "https://github.com/smithyyang/dms-brightness-plugin",
+      "commit": "d3221bb267e99f02dd7793b505ece2cbae118623"
+    },
+    "desktopCommand": {
+      "repo": "https://github.com/yayuuu/desktopCommand",
+      "commit": "a2e663ee031918ea01e2e65cf88aa3ded85a53f8"
+    },
+    "discordVoice": {
+      "repo": "https://github.com/PandorasFox/dms-discord-widget",
+      "commit": "937e33a6c362546fa0a0e8546ff565b3f0945e0b"
+    },
+    "emojiLauncher": {
+      "repo": "https://github.com/devnullvoid/dms-emoji-launcher",
+      "commit": "8ff394e3ddfcb2fd755ed2e7b4c6f01f3e26e596"
+    },
+    "mediaPlayer": {
+      "repo": "https://github.com/arrifat346afs/mediaPlayer",
+      "commit": "56ec160ed3fe32ad55b920ff462727d918b6eb51"
+    },
+    "nextBootSelector": {
+      "repo": "https://github.com/arcatva/dms-next-boot-selector",
+      "commit": "78e75e8e0555f9a8f860f4be98a39cd22e1c09bf"
+    },
+    "niriWindows": {
+      "repo": "https://github.com/rochacbruno/DankNiriWindows",
+      "commit": "f2c0b0fc0325e3299257cc5d1895069a3d49247f"
+    },
+    "ocrScanner": {
+      "repo": "https://github.com/hthienloc/dms-ocr-scanner",
+      "commit": "268a7fca154edaf2f05ed12700fa968a0f8b75bc"
+    },
+    "quickCapture": {
+      "repo": "https://github.com/hthienloc/dms-quick-capture",
+      "commit": "8db7eb6f38db637885db21891f91553f893c56e8"
+    },
+    "screenRecorder": {
+      "repo": "https://github.com/arqueon/dms-screen-recorder",
+      "commit": "1c3464e4644076fea31e5e7d6987b8b9354df288"
+    },
+    "volumeMixer": {
+      "repo": "https://github.com/cwelsys/dms-volume-mixer",
+      "commit": "353e00b659a16df07105b16c8790e6b526743471"
+    },
+    "worldClock": {
+      "repo": "https://github.com/rochacbruno/WorldClock",
+      "commit": "f10e1f9c1ce14a819640fbea9e2787472cf3815f"
+    }
+  }
+}
