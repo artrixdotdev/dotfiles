@@ -193,41 +193,7 @@
   "showOnLastDisplay": {
     "notifications": true
   },
-  "niriOutputSettings": {
-    "DP-2": {
-      "hotCorners": {
-        "off": true
-      },
-      "layout": null,
-      "focusAtStartup": true
-    },
-    "DP-3": {
-      "hotCorners": {
-        "off": true
-      },
-      "layout": {
-        "alwaysCenterSingleColumn": true,
-        "defaultColumnWidth": {
-          "type": "proportion",
-          "value": 1
-        },
-        "presetColumnWidths": [
-          {
-            "type": "proportion",
-            "value": 1
-          }
-        ]
-      },
-      "disabled": false
-    }
-  },
-  "hyprlandOutputSettings": {},
-  "displayProfiles": {},
-  "activeDisplayProfile": {},
-  "displayProfileAutoSelect": false,
-  "displayShowDisconnected": false,
-  "displaySnapToEdge": true,
-  "connectedFrameBarStyleBackups": {},
+  "displayProfileAutoSelect": true,
   "barConfigs": [
     {
       "id": "default",
@@ -239,15 +205,21 @@
       ],
       "showOnLastDisplay": true,
       "leftWidgets": [
-        "launcherButton",
-        "workspaceSwitcher",
+        {
+          "id": "launcherButton",
+          "enabled": true
+        },
+        {
+          "id": "workspaceSwitcher",
+          "enabled": true
+        },
         {
           "id": "privacyIndicator",
           "enabled": false
         },
         {
-          "id": "discordVoice",
-          "enabled": true
+          "id": "ocrScanner",
+          "enabled": false
         }
       ],
       "centerWidgets": [
@@ -263,14 +235,6 @@
         {
           "id": "notificationButton",
           "enabled": true
-        },
-        {
-          "id": "ddcBrightness",
-          "enabled": true
-        },
-        {
-          "id": "worldClock",
-          "enabled": true
         }
       ],
       "rightWidgets": [
@@ -281,7 +245,10 @@
         {
           "id": "systemTray",
           "enabled": true,
-          "trayUseInlineExpansion": true
+          "trayUseInlineExpansion": false,
+          "trayPopupSingleLine": true,
+          "trayAutoOverflow": true,
+          "trayMaxVisibleItems": 0
         },
         {
           "id": "vpn",
