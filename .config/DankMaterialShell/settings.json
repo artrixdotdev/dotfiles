@@ -259,12 +259,8 @@
           "enabled": true
         },
         {
-          "id": "separator",
-          "enabled": true
-        },
-        {
-          "id": "systemUpdate",
-          "enabled": true
+          "id": "nextBootSelector",
+          "enabled": false
         },
         {
           "id": "controlCenterButton",
@@ -285,7 +281,7 @@
       "borderColor": "surfaceText",
       "borderOpacity": 1,
       "borderThickness": 1,
-      "fontScale": 1.2000000000000002,
+      "fontScale": 1.25,
       "autoHide": true,
       "autoHideDelay": 250,
       "openOnOverview": true,
@@ -295,13 +291,10 @@
       "widgetOutlineEnabled": false,
       "maximizeWidgetIcons": false,
       "clickThrough": false,
-      "shadowIntensity": 0
+      "shadowIntensity": 0,
+      "iconScale": 0.82
     }
   ],
-  "desktopClockEnabled": false,
-  "desktopClockStyle": "analog",
-  "desktopClockTransparency": 0.8,
-  "desktopClockColorMode": "primary",
   "desktopClockCustomColor": {
     "r": 1,
     "g": 1,
@@ -315,20 +308,6 @@
     "hslLightness": 1,
     "valid": true
   },
-  "desktopClockShowDate": true,
-  "desktopClockShowAnalogNumbers": false,
-  "desktopClockShowAnalogSeconds": true,
-  "desktopClockX": -1,
-  "desktopClockY": -1,
-  "desktopClockWidth": 280,
-  "desktopClockHeight": 180,
-  "desktopClockDisplayPreferences": [
-    "all"
-  ],
-  "systemMonitorEnabled": false,
-  "systemMonitorShowHeader": true,
-  "systemMonitorTransparency": 0.8,
-  "systemMonitorColorMode": "primary",
   "systemMonitorCustomColor": {
     "r": 1,
     "g": 1,
