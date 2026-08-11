@@ -321,35 +321,6 @@
     "hslLightness": 1,
     "valid": true
   },
-  "systemMonitorShowCpu": true,
-  "systemMonitorShowCpuGraph": true,
-  "systemMonitorShowCpuTemp": true,
-  "systemMonitorShowGpuTemp": false,
-  "systemMonitorGpuPciId": "",
-  "systemMonitorShowMemory": true,
-  "systemMonitorShowMemoryGraph": true,
-  "systemMonitorShowNetwork": true,
-  "systemMonitorShowNetworkGraph": true,
-  "systemMonitorShowDisk": true,
-  "systemMonitorShowTopProcesses": false,
-  "systemMonitorTopProcessCount": 3,
-  "systemMonitorTopProcessSortBy": "cpu",
-  "systemMonitorGraphInterval": 60,
-  "systemMonitorLayoutMode": "auto",
-  "systemMonitorX": -1,
-  "systemMonitorY": -1,
-  "systemMonitorWidth": 320,
-  "systemMonitorHeight": 480,
-  "systemMonitorDisplayPreferences": [
-    "all"
-  ],
-  "systemMonitorVariants": [],
-  "desktopWidgetPositions": {},
-  "desktopWidgetGridSettings": {
-    "DP-2": {
-      "enabled": true
-    }
-  },
   "desktopWidgetInstances": [
     {
       "id": "dw_1776966721851_3u8rxs5o0",
@@ -376,26 +347,6 @@
         "sensitivity": 135,
         "colorChoice": "secondary",
         "syncPositionAcrossScreens": false
-      },
-      "positions": {
-        "DP-3": {
-          "width": 200,
-          "height": 200,
-          "x": 440,
-          "y": 860
-        },
-        "DP-2": {
-          "width": 2520,
-          "height": 400,
-          "x": 40,
-          "y": 1040
-        },
-        "_synced": {
-          "x": 0,
-          "y": 0.6388888888888888,
-          "width": 2560,
-          "height": 520
-        }
       }
     },
     {
@@ -418,26 +369,6 @@
         "backgroundOpacity": 81,
         "borderOpacity": 0,
         "rotateThumbnail": true
-      },
-      "positions": {
-        "DP-3": {
-          "width": 320,
-          "height": 200,
-          "x": 380,
-          "y": 860
-        },
-        "DP-2": {
-          "width": 320,
-          "height": 200,
-          "x": 1120,
-          "y": 620
-        },
-        "_synced": {
-          "x": 0.78125,
-          "y": 0.027777777777777776,
-          "width": 520,
-          "height": 200
-        }
       }
     },
     {
@@ -458,26 +389,6 @@
         ],
         "clickThrough": false,
         "syncPositionAcrossScreens": true
-      },
-      "positions": {
-        "DP-3": {
-          "width": 200,
-          "height": 200,
-          "x": 880,
-          "y": 1720
-        },
-        "DP-2": {
-          "width": 240,
-          "height": 240,
-          "x": 40,
-          "y": 40
-        },
-        "_synced": {
-          "x": 0.03125,
-          "y": 0.027777777777777776,
-          "width": 200,
-          "height": 200
-        }
       }
     }
   ],
@@ -491,30 +402,24 @@
   "builtInPluginSettings": {
     "dms_settings_search": {
       "trigger": "?"
+    },
+    "dms_clipboard_search": {
+      "trigger": "cb"
+    },
+    "dms_qr_generator": {
+      "trigger": "qrg"
     }
   },
-  "clipboardEnterToPaste": false,
   "launcherPluginVisibility": {
     "gitmojiLauncher": {
       "allowWithoutTrigger": true
     }
   },
-  "launcherPluginOrder": [],
-  "frameEnabled": false,
-  "frameThickness": 4,
-  "frameRounding": 23,
-  "frameColor": "",
+  "frameThickness": 2,
+  "frameRounding": 22,
+  "frameColor": "primary",
   "frameOpacity": 0,
-  "frameScreenPreferences": [
-    "all"
-  ],
-  "frameBarSize": 40,
-  "frameShowOnOverview": false,
+  "frameBarSize": 24,
   "frameBlurEnabled": false,
-  "frameCloseGaps": true,
-  "frameLauncherEmergeSide": "bottom",
-  "frameLauncherArcExtender": false,
-  "frameUseSpotlightLauncher": false,
-  "frameMode": "connected",
-  "configVersion": 11
+  "configVersion": 16
 }
