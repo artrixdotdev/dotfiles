@@ -309,6 +309,7 @@ window-rule {
    match app-id="dev.zed.Zed-Preview"
    match app-id="cider"
    match app-id="Codex"
+   match app-id="t3code"
    background-effect {
       blur true
       xray true
@@ -721,3 +722,4 @@ include "dms/wpblur.kdl"
 include "dms/windowrules.kdl"
 include "dms/binds.kdl"
 include "dms/layout.kdl"
+include "dms/input.kdl"
