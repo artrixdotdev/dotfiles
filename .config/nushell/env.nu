@@ -70,6 +70,10 @@ $env.NU_PLUGIN_DIRS = [
 
 # Add zvm to PATH if it exists
 use std "path add"
+if ("~/.local/bin" | path expand | path exists) {
+   path add ~/.local/bin
+}
+
 if ("~/.zvm/bin" | path expand | path exists) {
    path add ~/.zvm/bin
 }
