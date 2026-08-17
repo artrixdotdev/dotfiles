@@ -90,6 +90,21 @@ if ("~/.bun/bin" | path expand | path exists) {
    path add ~/.bun/bin
 }
 
+# Load every environment variable managed by keyring-env when the login keyring
+# is available. Values flow directly from the keyring into this Nushell process
+# and are never written to a plaintext environment file.
+let keyring_env = "/home/artrix/.local/bin/keyring-env"
+if ($keyring_env | path exists) {
+   let keyring_result = (^$keyring_env export | complete)
+   if $keyring_result.exit_code == 0 and ($keyring_result.stdout | is-not-empty) {
+      try {
+         $keyring_result.stdout | from nuon | load-env
+      } catch {
+         print --stderr "keyring-env: could not load managed variables into Nushell"
+      }
+   }
+}
+
 # Turns { desktop: "desktop.tailscale.com" } into $env.TAILSCALE_DESKTOP
 let tailscale_urls_file = "~/dotfiles/.encrypted/tailscale.json" | path expand
 if ($tailscale_urls_file | path exists) {
