@@ -1,11 +1,3 @@
-// Zed settings
-//
-// For information on how to configure Zed, see the Zed
-// documentation: https://zed.dev/docs/configuring-zed
-//
-// To see all of Zed's default settings without changing your
-// custom settings, run the `open default settings` command
-// from the command palette or from `Zed` application menu.
 {
   "cli_default_open_behavior": "new_window",
   "context_servers": {
@@ -13,6 +5,11 @@
       "enabled": true,
       "remote": false,
       "settings": {}
+    },
+    "tauri": {
+      "command": "npx @hypothesi/tauri-mcp-server",
+      "args": [],
+      "env": {}
     }
   },
   "outline_panel": {
@@ -46,7 +43,6 @@
   },
   "auto_update": false,
   "restore_on_startup": "last_session",
-
   "icon_theme": {
     "mode": "dark",
     "light": "Material Icon Theme",
