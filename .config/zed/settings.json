@@ -95,15 +95,14 @@
       "model": "qwen3:latest"
     }
   },
-
   "vim": {
     "use_system_clipboard": "always",
     "toggle_relative_line_numbers": true
   },
-  // "relative_line_numbers": true,
-  // Set .conf files as github config
   "file_types": {
-    ".service": ["Git Config"],
+    ".service": [
+      "Git Config"
+    ],
     "Hyprland Config": [
       "hyprland.conf",
       "hyprlandd.conf",
@@ -112,7 +111,7 @@
     ]
   },
   "vim_mode": true,
-  "ui_font_size": 20.0,
+  "ui_font_size": 20,
   "tabs": {
     "file_icons": true,
     "git_status": true,
@@ -138,7 +137,6 @@
     "light": "DankShell Light",
     "dark": "DankShell Dark"
   },
-
   "languages": {
     "Rust": {
       "formatter": "language_server"
@@ -147,12 +145,13 @@
       "formatter": {
         "external": {
           "command": "qmlformat",
-          "arguments": ["{buffer_path}"]
+          "arguments": [
+            "{buffer_path}"
+          ]
         }
       }
     }
   },
-
   "formatter": "prettier",
   "format_on_save": "on"
 }
