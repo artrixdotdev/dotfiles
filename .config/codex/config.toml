@@ -1,0 +1,81 @@
+approvals_reviewer = "user"
+model = "gpt-5.6-luna"
+model_reasoning_effort = "medium"
+
+[projects]
+[projects."/home/artrix"]
+trust_level = "trusted"
+
+[projects."/home/artrix/dotfiles"]
+trust_level = "trusted"
+
+[projects."/home/artrix/Documents/Code/artrix.dev"]
+trust_level = "trusted"
+
+[projects."/home/artrix/Documents/Codex/2026-07-10/wha"]
+trust_level = "trusted"
+
+[projects."/home/artrix/Documents/Code/Pake"]
+trust_level = "trusted"
+
+[projects."/home/artrix/Documents/Code/dankcalendar"]
+trust_level = "trusted"
+
+[projects."/home/artrix/Documents/Code/SelfCheck"]
+trust_level = "trusted"
+
+[projects."/home/artrix/Documents/Code/tortillas"]
+trust_level = "trusted"
+
+[projects."/home/artrix/Documents/Code/slider-gallery"]
+trust_level = "trusted"
+
+[projects."/home/artrix/Documents/Code/DankMaterialShell"]
+trust_level = "trusted"
+
+[projects."/home/artrix/Documents/Code/sam-edit"]
+trust_level = "trusted"
+
+[tui]
+[tui.model_availability_nux]
+"gpt-5.6-sol" = 4
+
+[desktop]
+followUpQueueMode = "queue"
+conversationDetailMode = "STEPS_PROSE"
+
+[mcp_servers]
+[mcp_servers.tauri]
+command = "npx"
+args = ["-y", "@hypothesi/tauri-mcp-server"]
+
+[mcp_servers.calendar]
+command = "npx"
+args = ["-y", "caldav-mcp"]
+env_vars = ["CALDAV_BASE_URL", "CALDAV_USERNAME", "CALDAV_PASSWORD"]
+
+[mcp_servers.calendar.tools.list-calendars]
+approval_mode = "approve"
+
+[mcp_servers.calendar.tools.list-events]
+approval_mode = "approve"
+
+[marketplaces.openai-primary-runtime]
+last_updated = "2026-08-02T22:40:11Z"
+source_type = "local"
+source = "/home/artrix/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
+
+[plugins."documents@openai-primary-runtime"]
+enabled = true
+
+[plugins."pdf@openai-primary-runtime"]
+enabled = true
+
+[plugins."spreadsheets@openai-primary-runtime"]
+enabled = true
+
+[plugins."presentations@openai-primary-runtime"]
+enabled = true
+
+[plugins."template-creator@openai-primary-runtime"]
+enabled = true
