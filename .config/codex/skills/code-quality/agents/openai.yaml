@@ -1,0 +1,4 @@
+interface:
+  display_name: "Code Quality"
+  short_description: "Write DRY, composable, single-source code"
+  default_prompt: "Use $code-quality to implement this with DRY, least-common-denominator, single-source-of-truth code."
