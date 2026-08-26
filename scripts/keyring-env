@@ -1,0 +1,157 @@
+#!/usr/bin/env nu
+
+const keyring_application = "keyring-env"
+
+def fail [message: string] {
+  print --stderr $"(ansi red_bold)keyring-env:(ansi reset) ($message)"
+  exit 1
+}
+
+def require-secret-tool [] {
+  if (which secret-tool | is-empty) {
+    fail "required command not found: secret-tool"
+  }
+}
+
+def validate-name [name: string] {
+  if $name !~ '^[A-Za-z_][A-Za-z0-9_]*$' {
+    fail $"invalid environment variable name: ($name)"
+  }
+}
+
+def load-secret [name: string] {
+  let result = (
+    ^secret-tool lookup
+      application $keyring_application
+      environment $name
+    | complete
+  )
+
+  if $result.exit_code != 0 {
+    fail $"could not read ($name) from the keyring"
+  }
+
+  # `secret-tool lookup` terminates its output with a newline. Remove only that
+  # delimiter so leading or trailing spaces in a stored value remain intact.
+  let value = ($result.stdout | str trim --right --char "\n")
+  if ($value | is-empty) {
+    fail $"missing ($name); run `keyring-env set ($name)`"
+  }
+
+  $value
+}
+
+def load-index [] {
+  let result = (
+    ^secret-tool lookup
+      application $keyring_application
+      metadata "environment-index"
+    | complete
+  )
+
+  if $result.exit_code != 0 or ($result.stdout | is-empty) {
+    return []
+  }
+
+  try {
+    $result.stdout | from nuon
+  } catch {
+    fail "the environment-variable index in the keyring is invalid"
+  }
+}
+
+def save-index [names: list<string>] {
+  let normalized = ($names | uniq | sort)
+  let result = (
+    $normalized
+    | to nuon
+    | ^secret-tool store
+        "--label=Managed environment variable names"
+        application $keyring_application
+        metadata "environment-index"
+    | complete
+  )
+
+  if $result.exit_code != 0 {
+    fail "could not update the environment-variable index in the keyring"
+  }
+}
+
+def "main set" [name: string, --visible] {
+  require-secret-tool
+  validate-name $name
+
+  let value = if $visible {
+    input $"($name): "
+  } else {
+    input --suppress-output $"($name): "
+  }
+
+  if ($value | is-empty) {
+    fail $"($name) cannot be empty"
+  }
+
+  let result = (
+    $value
+    | ^secret-tool store
+        $"--label=Environment variable ($name)"
+        application $keyring_application
+        environment $name
+    | complete
+  )
+
+  if $result.exit_code != 0 {
+    fail $"could not save ($name) in the keyring: ($result.stderr | str trim)"
+  }
+
+  save-index (load-index | append $name)
+  print $"(ansi green)Saved ($name) in the system keyring.(ansi reset)"
+}
+
+def "main unset" [name: string] {
+  require-secret-tool
+  validate-name $name
+
+  let result = (
+    ^secret-tool clear
+      application $keyring_application
+      environment $name
+    | complete
+  )
+
+  if $result.exit_code != 0 {
+    fail $"could not remove ($name) from the keyring"
+  }
+
+  save-index (load-index | where { |stored_name| $stored_name != $name })
+  print $"(ansi green)Removed ($name) from the system keyring.(ansi reset)"
+}
+
+def "main export" [] {
+  require-secret-tool
+
+  let environment = (load-index | reduce --fold {} { |name, values|
+    validate-name $name
+    $values | upsert $name (load-secret $name)
+  })
+
+  print --raw ($environment | to nuon)
+}
+
+def --wrapped "main run" [variables: string, command: string, ...arguments: string] {
+  require-secret-tool
+
+  let names = ($variables | split row "," | each { |name| $name | str trim })
+  let environment = ($names | reduce --fold {} { |name, values|
+    validate-name $name
+    $values | upsert $name (load-secret $name)
+  })
+
+  with-env $environment {
+    exec $command ...$arguments
+  }
+}
+
+def main [] {
+  help main
+}
