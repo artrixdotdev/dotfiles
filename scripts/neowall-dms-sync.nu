@@ -49,7 +49,7 @@ def get-output-aspect-distance [output_name: string] {
 }
 
 def get-symlink-output [lines: list<string>] {
-  let output_names = (get-output-names $lines)
+  let output_names = (get-live-output-names $lines)
   if ($output_names | is-empty) {
     return ""
   }
@@ -174,7 +174,7 @@ def shader-probe-key [shader: string] {
   }
 
   let stat = (ls -D $shader_path | first)
-  $"(($shader_path | str replace '/' '_'))-($stat.modified)"
+  $"v2-surfaceless-egl-(($shader_path | str replace '/' '_'))-($stat.modified)"
 }
 
 def is-renderable-shader [shader: string] {
@@ -219,9 +219,18 @@ def is-renderable-shader [shader: string] {
   }
 }
 
-def safe-dms-set [target: string] {
-  let result = (do -i { ^dms ipc wallpaper set $target } | complete)
-  $result.exit_code == 0
+def safe-dms-set [target: string, lines: list<string>] {
+  let output_names = (get-live-output-names $lines)
+  if ($output_names | is-empty) {
+    let result = (do -i { ^dms ipc wallpaper set $target } | complete)
+    return ($result.exit_code == 0)
+  }
+
+  $output_names
+  | all {|output_name|
+    let result = (do -i { ^dms ipc wallpaper setFor $output_name $target } | complete)
+    $result.exit_code == 0
+  }
 }
 
 def safe-systemctl-user [action: string, unit: string] {
