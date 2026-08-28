@@ -295,6 +295,24 @@ def get-output-names [lines: list<string>] {
   | each {|line| $line | str replace "name=" "" }
 }
 
+# The NeoWall state file is persistent and may still contain outputs from a
+# previous monitor layout. Prefer the compositor's current output list, and
+# only use state as a startup/failure fallback.
+def get-live-output-names [lines: list<string>] {
+  let outputs_json = (safe-niri-json "msg" "--json" "outputs")
+  if ($outputs_json | is-not-empty) {
+    try {
+      let names = ($outputs_json | from json | columns | sort)
+      if ($names | is-not-empty) {
+        return $names
+      }
+    } catch {
+    }
+  }
+
+  get-output-names $lines
+}
+
 def resolve-target-output [lines: list<string>] {
   let configured = if ($settings_file | path exists) {
     try {
@@ -442,7 +460,7 @@ def copy-output-image [source_path: string, output_name: string] {
 }
 
 def ensure-all-output-images [lines: list<string>, source_path: string] {
-  let output_names = (get-output-names $lines)
+  let output_names = (get-live-output-names $lines)
   if ($output_names | is-empty) {
     return false
   }
@@ -606,7 +624,7 @@ def get-output-modes [lines: list<string>] {
   let overview_open = (is-overview-open)
   let active_workspaces = (get-active-workspaces)
 
-  get-output-names $lines
+  get-live-output-names $lines
   | each {|output_name|
       let has_window = if $overview_open {
         false
@@ -615,6 +633,8 @@ def get-output-modes [lines: list<string>] {
           (($ws.output? | default "") == $output_name) and (($ws.active_window_id? | default null) != null)
         })
       }
+      # Freeze each output as soon as it has a visible window. Outputs without
+      # a window continue using the live shader.
       let mode = if $has_window { "static" } else { "shader" }
 
       {
