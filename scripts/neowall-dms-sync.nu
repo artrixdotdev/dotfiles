@@ -651,6 +651,15 @@ def build-neowall-config [output_modes: list<any>, live_shader: string] {
     ""
   ]
 
+  # Keep a valid default for every output, including outputs that appear after
+  # a hotplug/reconfigure and therefore are not in the old state file yet.
+  let shader_speed = (get-shader-speed)
+  $lines = ($lines | append "default {")
+  $lines = ($lines | append $"  shader ($live_shader)")
+  $lines = ($lines | append $"  shader_speed ($shader_speed)")
+  $lines = ($lines | append "  pause_on_fullscreen true")
+  $lines = ($lines | append "}")
+  $lines = ($lines | append "")
   $lines = ($lines | append "output {")
 
   for row in $output_modes {
@@ -663,7 +672,7 @@ def build-neowall-config [output_modes: list<any>, live_shader: string] {
       $lines = ($lines | append $"  ($row.output) {")
       $lines = ($lines | append $"    shader ($live_shader)")
       $lines = ($lines | append $"    shader_speed (get-shader-speed)")
-      $lines = ($lines | append "    pause_on_fullscreen false")
+      $lines = ($lines | append "    pause_on_fullscreen true")
       $lines = ($lines | append "  }")
     }
   }
@@ -760,19 +769,35 @@ def sync-once [] {
     ""
   }
 
-  if $stable_signature == $current_signature {
-    return
-  }
-
-  if (is-exported-picture $wallpaper_path_after) {
-    $stable_signature | save --force $signature_file
+  if ($stable_signature == $current_signature) and (not (is-exported-picture $wallpaper_path_after)) {
     return
   }
 
   mut rendered = false
   mut status_message = ""
 
-  if (($wallpaper_path_after | is-not-empty) and ($wallpaper_path_after | path exists)) {
+  if (is-exported-picture $wallpaper_path_after) {
+    # A generated PNG is an output freeze, not a new wallpaper source. Rebuild
+    # it from the real shader, then let output modes decide per monitor.
+    let render_shader_path = (resolve-live-shader $lines_after)
+    if (($render_shader_path | is-empty) or (not ($render_shader_path | path exists))) {
+      $stable_signature | save --force $signature_file
+      return
+    }
+
+    let rendered = (ensure-all-output-images $lines_after $render_shader_path)
+    if $rendered {
+      let _ = (update-shared-picture-link $lines_after)
+      let dms_picture = $picture
+      if ($dms_picture | path exists) and (safe-dms-set $dms_picture $lines_after) {
+        $stable_signature | save --force $signature_file
+        apply-output-modes $lines_after
+      }
+    } else {
+      $stable_signature | save --force $signature_file
+    }
+    return
+  } else if (($wallpaper_path_after | is-not-empty) and ($wallpaper_path_after | path exists)) {
     let lowered = ($wallpaper_path_after | str downcase)
     $rendered = (ensure-all-output-images $lines_after $wallpaper_path_after)
     if (
@@ -805,7 +830,7 @@ def sync-once [] {
   let dms_picture = $picture
 
   if $rendered and ($dms_picture | path exists) {
-    if (safe-dms-set $dms_picture) {
+    if (safe-dms-set $dms_picture $lines_after) {
       $stable_signature | save --force $signature_file
       apply-output-modes $lines_after
       notify-sync "normal" "NeoWall Sync Complete" $status_message
