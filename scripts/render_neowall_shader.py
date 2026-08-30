@@ -120,7 +120,22 @@ class EglContext:
         self.context = None
 
     def __enter__(self):
-        self.display = EGL.eglGetDisplay(EGL.EGL_DEFAULT_DISPLAY)
+        # The sync service has no drawable Wayland surface. Mesa's surfaceless
+        # EGL platform provides a real off-screen GLES context for rendering
+        # previews and DMS theme images. The default display is retained as a
+        # fallback for non-Mesa/desktop environments.
+        surfaceless_platform = 0x31DD  # EGL_PLATFORM_SURFACELESS_MESA
+        try:
+            self.display = EGL.eglGetPlatformDisplay(
+                surfaceless_platform,
+                EGL.EGL_DEFAULT_DISPLAY,
+                None,
+            )
+        except Exception:
+            self.display = EGL.EGL_NO_DISPLAY
+
+        if self.display == EGL.EGL_NO_DISPLAY:
+            self.display = EGL.eglGetDisplay(EGL.EGL_DEFAULT_DISPLAY)
         if self.display == EGL.EGL_NO_DISPLAY:
             raise RuntimeError("eglGetDisplay failed")
 
@@ -301,6 +316,9 @@ def render_shader(shader_path: Path, output_path: Path, width: int, height: int,
 
 def cache_key(shader_path: Path, width: int, height: int, shader_time: float) -> str:
     digest = hashlib.sha256()
+    # Bump when the rendering backend changes. This prevents frames produced by
+    # the old/default-display EGL path from surviving a renderer fix.
+    digest.update(b"neowall-renderer-v2-surfaceless-egl\0")
     digest.update(str(shader_path.resolve()).encode("utf-8"))
     digest.update(str(shader_path.stat().st_mtime_ns).encode("utf-8"))
     digest.update(f"{width}x{height}@{shader_time:.3f}".encode("utf-8"))
