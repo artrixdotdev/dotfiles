@@ -1,5 +1,8 @@
 [Unit]
 Description=Sync NeoWall into DMS wallpaper state
+PartOf=graphical-session.target
+After=graphical-session.target neowall.service
+Requisite=graphical-session.target
 
 [Service]
 Type=simple
