@@ -150,14 +150,15 @@ def safe-symlink [source: path, target: path] {
 
   mkdir ($target | path dirname)
 
-  if ($target | path exists) {
-    if (($target | path type) == "symlink") {
-      rm $target
-    } else {
-      let backup = $"($target).bak.(date now | format date '%Y%m%d%H%M%S')"
-      warn $"Moving existing target to ($backup)"
-      mv $target $backup
-    }
+  # `path exists` is false for a dangling symlink, but `path type` still
+  # identifies it. Check the type first so repeated syncs can repair stale
+  # links instead of failing when `ln` finds an existing path.
+  if (($target | path type) == "symlink") {
+    rm $target
+  } else if ($target | path exists) {
+    let backup = $"($target).bak.(date now | format date '%Y%m%d%H%M%S')"
+    warn $"Moving existing target to ($backup)"
+    mv $target $backup
   }
 
   ln -s $source $target
