@@ -256,7 +256,7 @@ def show-summary [dotfiles_dir: path] {
   print ""
   print $"(ansi green_bold)Setup complete.(ansi reset)"
   print $"Dotfiles: ($dotfiles_dir)"
-  print "Linked: scripts -> ~/.local/bin, config -> ~/.config, Codex config -> ~/.codex"
+  print "Linked: scripts -> ~/.local/bin, config -> ~/.config, managed Codex entries -> ~/.codex"
   print "Services: installed under ~/.config/systemd/user"
   print ""
   print $"(ansi light_gray)Start or restart your user session when you are ready.(ansi reset)"
