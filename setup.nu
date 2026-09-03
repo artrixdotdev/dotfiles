@@ -317,7 +317,7 @@ def full-setup [script_dir: path, dotfiles_dir: path] {
 
   if (confirm "Symlink scripts into ~/.local/bin?") { step "Linking scripts"; link-scripts $dotfiles_dir }
   if (confirm "Symlink ~/dotfiles/.config entries into ~/.config?") { step "Linking config"; link-config $dotfiles_dir }
-  if (confirm "Symlink ~/dotfiles/.config/codex entries into ~/.codex?") { step "Linking Codex config"; link-codex-config $dotfiles_dir }
+  if (confirm "Symlink managed ~/dotfiles/.config/codex entries into ~/.codex?") { step "Linking Codex config"; link-codex-config $dotfiles_dir }
   if (confirm "Install user systemd services?") { step "Installing services"; install-services $dotfiles_dir }
 
   show-summary $dotfiles_dir
