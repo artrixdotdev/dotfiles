@@ -1,0 +1,11 @@
+{
+  "name": "local-calendar-mcp",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@miguelarios/cal-mcp": "0.13.0"
+  },
+  "overrides": {
+    "@miguelarios/pim-core": "0.9.0"
+  }
+}

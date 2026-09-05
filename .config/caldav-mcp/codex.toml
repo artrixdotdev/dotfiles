@@ -1,0 +1,8 @@
+[mcp_servers.calendar]
+command = "/usr/bin/python3"
+args = ["/home/artrix/dotfiles/.config/caldav-mcp/launch.py"]
+# Enable after filling .encrypted/caldav.json and testing list_calendars.
+enabled = false
+startup_timeout_sec = 20
+tool_timeout_sec = 60
+enabled_tools = ["get_calendar_context", "list_calendars", "list_events", "get_today_events", "search_events", "get_event", "find_free_slots", "create_event", "update_event", "create_events_batch", "import_ics"]
