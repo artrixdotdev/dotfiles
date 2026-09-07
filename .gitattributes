@@ -1,2 +1,3 @@
 .encrypted/** filter=git-crypt diff=git-crypt
 .config/codex/skills/use-tailscale/references/machines.md filter=git-crypt diff=git-crypt
+.config/codex/skills/calendar/references/calendar.md filter=git-crypt diff=git-crypt
