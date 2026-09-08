@@ -1,0 +1,4 @@
+interface:
+  display_name: "Calendar"
+  short_description: "Safely manage your personal calendar"
+  default_prompt: "Use $calendar to answer or complete this calendar request accurately."
