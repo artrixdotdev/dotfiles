@@ -49,17 +49,6 @@ conversationDetailMode = "STEPS_PROSE"
 command = "npx"
 args = ["-y", "@hypothesi/tauri-mcp-server"]
 
-[mcp_servers.calendar]
-command = "npx"
-args = ["-y", "caldav-mcp"]
-env_vars = ["CALDAV_BASE_URL", "CALDAV_USERNAME", "CALDAV_PASSWORD"]
-
-[mcp_servers.calendar.tools.list-calendars]
-approval_mode = "approve"
-
-[mcp_servers.calendar.tools.list-events]
-approval_mode = "approve"
-
 [marketplaces.openai-primary-runtime]
 last_updated = "2026-08-02T22:40:11Z"
 source_type = "local"
@@ -79,3 +68,11 @@ enabled = true
 
 [plugins."template-creator@openai-primary-runtime"]
 enabled = true
+
+[mcp_servers.calendar]
+command = "/usr/bin/python3"
+args = ["/home/artrix/dotfiles/.config/caldav-mcp/launch.py"]
+# Enable after filling .encrypted/caldav.json and testing list_calendars.
+enabled = true
+tool_timeout_sec = 60
+enabled_tools = ["get_calendar_context", "list_calendars", "list_events", "get_today_events", "search_events", "get_event", "find_free_slots", "create_event", "update_event", "create_events_batch", "import_ics"]
