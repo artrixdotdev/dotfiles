@@ -1,5 +1,5 @@
 approvals_reviewer = "user"
-model = "gpt-5.6-luna"
+model = "gpt-6-sol"
 model_reasoning_effort = "medium"
 
 [projects]
@@ -37,8 +37,12 @@ trust_level = "trusted"
 trust_level = "trusted"
 
 [tui]
+screen_reader_detection_done = true
+
 [tui.model_availability_nux]
 "gpt-5.6-sol" = 4
+gpt-6-astra = 4
+"gpt-6.1-sol" = 4
 
 [desktop]
 followUpQueueMode = "queue"
