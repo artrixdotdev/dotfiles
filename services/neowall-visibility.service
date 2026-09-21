@@ -1,12 +1,12 @@
 [Unit]
-Description=Sync NeoWall into DMS wallpaper state
-PartOf=graphical-session.target
+Description=Pause NeoWall when windows are visible or power saving is active
+PartOf=graphical-session.target neowall.service
 After=graphical-session.target neowall.service
 Requisite=graphical-session.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/nu %h/dotfiles/scripts/neowall-dms-sync.nu
+ExecStart=/usr/bin/nu %h/dotfiles/scripts/neowall-visibility.nu
 Restart=on-failure
 RestartSec=3
 
