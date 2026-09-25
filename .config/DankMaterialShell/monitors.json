@@ -183,6 +183,41 @@
           "niri": {}
         }
       }
+    },
+    {
+      "id": "auto_201b32",
+      "name": "",
+      "outputs": {
+        "DP-3": {
+          "mode": "1920x1080@119.982",
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "scale": 1,
+          "transform": "270",
+          "vrr": false,
+          "disabled": false,
+          "niri": {
+            "hotCorners": {
+              "off": true
+            },
+            "layout": {
+              "alwaysCenterSingleColumn": true,
+              "defaultColumnWidth": {
+                "type": "proportion",
+                "value": 1
+              },
+              "presetColumnWidths": [
+                {
+                  "type": "proportion",
+                  "value": 1
+                }
+              ]
+            }
+          }
+        }
+      }
     }
   ]
 }

@@ -3,7 +3,7 @@
 output "DP-3" {
     mode "1920x1080@119.982"
     scale 1
-    transform "90"
+    transform "270"
     position x=0 y=0
     hot-corners {
         off

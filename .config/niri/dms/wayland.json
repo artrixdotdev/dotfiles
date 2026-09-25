@@ -1,0 +1,16 @@
+{
+  "Outputs": [],
+  "LowTemp": 4000,
+  "HighTemp": 6500,
+  "Latitude": null,
+  "Longitude": null,
+  "UseIPLocation": false,
+  "ManualSunrise": null,
+  "ManualSunset": null,
+  "ManualDuration": null,
+  "Gamma": 1,
+  "Contrast": 1,
+  "Enabled": false,
+  "ElevationTwilight": -6,
+  "ElevationDaylight": 3
+}
