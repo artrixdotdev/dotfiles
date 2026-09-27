@@ -17,6 +17,9 @@ binds {
    Mod+N hotkey-overlay-title="Notification Center" {
       spawn "dms" "ipc" "call" "notifications" "toggle"
    }
+   Mod+P hotkey-overlay-title="Power Profiles" {
+      spawn "dms" "ipc" "call" "powerprofile" "toggle"
+   }
    Mod+Period hotkey-overlay-title="Emoji Menu" {
       spawn "dms" "ipc" "call" "launcher" "openQuery" ":e"
    }
