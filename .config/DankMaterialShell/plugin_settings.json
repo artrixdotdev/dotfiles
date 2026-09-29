@@ -56,5 +56,8 @@
   "nextBootSelector": {
     "enabled": true,
     "privCmd": "pkexec"
+  },
+  "mediaPlayer": {
+    "enabled": true
   }
 }
