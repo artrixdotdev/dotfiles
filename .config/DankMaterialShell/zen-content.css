@@ -5,9 +5,9 @@
     --gm3-sys-color-background: transparent !important;
     --gm3-sys-color-surface: color-mix(in srgb, #000000 80%, transparent) !important;
     --gm3-sys-color-surface-container: color-mix(in srgb, #000000 80%, transparent) !important;
-    --gm3-sys-color-on-surface: #e6f0ff !important;
+    --gm3-sys-color-on-surface: #e8e8e8 !important;
     --gm3-sys-color-on-surface-variant: #ffffff !important;
-    --gm3-sys-color-primary: #cc5200 !important;
+    --gm3-sys-color-primary: #ffffff !important;
     --gm3-sys-color-outline: #555555 !important;
   }
 
@@ -27,12 +27,12 @@
   .UUbT9,
   .MjjYud {
     background-color: color-mix(in srgb, #000000 80%, transparent) !important;
-    color: #e6f0ff !important;
+    color: #e8e8e8 !important;
   }
 
   a:link,
   a:visited {
-    color: #cc5200 !important;
+    color: #ffffff !important;
   }
 }
 
@@ -49,9 +49,9 @@
     --yt-spec-text-primary: #ffffff !important;
     --yt-spec-text-secondary: #ffffff !important;
     --yt-spec-text-disabled: #555555 !important;
-    --yt-spec-call-to-action: #cc5200 !important;
-    --yt-spec-brand-button-background: #cc5200 !important;
-    --yt-spec-themed-blue: #cc5200 !important;
+    --yt-spec-call-to-action: #e0e0e0 !important;
+    --yt-spec-brand-button-background: #e0e0e0 !important;
+    --yt-spec-themed-blue: #ffffff !important;
   }
 
   html,
@@ -78,13 +78,13 @@
     --bgColor-inset: color-mix(in srgb, #000000 80%, transparent) !important;
     --fgColor-default: #ffffff !important;
     --fgColor-muted: #ffffff !important;
-    --fgColor-accent: #cc5200 !important;
+    --fgColor-accent: #ffffff !important;
     --borderColor-default: #555555 !important;
     --color-canvas-default: transparent !important;
     --color-canvas-subtle: color-mix(in srgb, #000000 80%, transparent) !important;
     --color-fg-default: #ffffff !important;
     --color-fg-muted: #ffffff !important;
-    --color-accent-fg: #cc5200 !important;
+    --color-accent-fg: #ffffff !important;
     --color-border-default: #555555 !important;
   }
 
@@ -113,8 +113,8 @@
     --color-neutral-background-strong: color-mix(in srgb, #000000 80%, transparent) !important;
     --color-neutral-content: #ffffff !important;
     --color-neutral-content-weak: #ffffff !important;
-    --color-primary: #cc5200 !important;
-    --color-primary-background: #cc5200 !important;
+    --color-primary: #ffffff !important;
+    --color-primary-background: #e0e0e0 !important;
     --color-neutral-border: #555555 !important;
   }
 
