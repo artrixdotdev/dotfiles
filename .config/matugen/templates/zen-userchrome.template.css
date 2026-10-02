@@ -8,30 +8,30 @@
   --arrowpanel-color: {{colors.on_background.default.hex}} !important;
   --arrowpanel-background: {{colors.surface_container.default.hex}} !important;
   --sidebar-text-color: {{colors.on_background.default.hex}} !important;
-  --zen-main-browser-background: {{colors.background.default.hex}} !important;
-  --zen-main-browser-background-toolbar: {{colors.background.default.hex}} !important;
+  --zen-main-browser-background: color-mix(in srgb, {{colors.background.default.hex}} 80%, transparent) !important;
+  --zen-main-browser-background-toolbar: color-mix(in srgb, {{colors.background.default.hex}} 80%, transparent) !important;
 }
 
 #zen-browser-background {
-  --zen-main-browser-background: {{colors.background.default.hex}} !important;
-  --zen-background-opacity: 1 !important;
+  --zen-main-browser-background: color-mix(in srgb, {{colors.background.default.hex}} 80%, transparent) !important;
+  --zen-background-opacity: 0.80 !important;
 }
 
 #zen-toolbar-background {
-  --zen-main-browser-background-toolbar: {{colors.background.default.hex}} !important;
-  --zen-background-opacity: 1 !important;
+  --zen-main-browser-background-toolbar: color-mix(in srgb, {{colors.background.default.hex}} 80%, transparent) !important;
+  --zen-background-opacity: 0.80 !important;
 }
 
 .sidebar-placesTree {
-  background-color: {{colors.surface_container.default.hex}} !important;
+  background-color: color-mix(in srgb, {{colors.surface_container.default.hex}} 80%, transparent) !important;
 }
 
 #zen-workspaces-button {
-  background-color: {{colors.surface_container.default.hex}} !important;
+  background-color: color-mix(in srgb, {{colors.surface_container.default.hex}} 80%, transparent) !important;
 }
 
 #TabsToolbar {
-  background-color: {{colors.background.default.hex}} !important;
+  background-color: color-mix(in srgb, {{colors.background.default.hex}} 80%, transparent) !important;
 }
 
 .urlbar-background,

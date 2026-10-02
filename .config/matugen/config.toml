@@ -21,6 +21,10 @@ output_path = '/home/artrix/.config/starship/starship.toml'
 input_path = '/home/artrix/dotfiles/.config/matugen/templates/zen-userchrome.template.css'
 output_path = '/home/artrix/.config/DankMaterialShell/zen.css'
 
+[templates.zen-usercontent]
+input_path = '/home/artrix/dotfiles/.config/matugen/templates/zen-usercontent.template.css'
+output_path = '/home/artrix/.config/DankMaterialShell/zen-content.css'
+
 [templates.zellij]
 input_path = '/home/artrix/dotfiles/.config/matugen/templates/zellij.template.kdl'
 output_path = '/home/artrix/.config/zellij/themes/dank-material.kdl'
