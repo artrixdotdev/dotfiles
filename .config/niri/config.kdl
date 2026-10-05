@@ -310,10 +310,18 @@ window-rule {
    match app-id="cider"
    match app-id="Codex"
    match app-id="t3code"
+   match app-id="^org\\.gnome\\.Nautilus$"
+   match app-id="(?i)^(vesktop|dev\\.vencord\\.Vesktop|discord|com\\.discordapp\\.Discord)$"
+   match app-id="^zen$"
    background-effect {
       blur true
       xray true
    }
+}
+window-rule {
+   match app-id="^org\\.gnome\\.Nautilus$"
+   match app-id="(?i)^(vesktop|dev\\.vencord\\.Vesktop|discord|com\\.discordapp\\.Discord)$"
+   opacity 0.80
 }
 binds {
    // === System & Overview ===
