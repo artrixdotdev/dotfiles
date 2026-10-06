@@ -284,6 +284,12 @@
           "enabled": false
         },
         {
+          "id": "battery",
+          "enabled": true,
+          "showBatteryPercent": false,
+          "showBatteryPercentOnlyOnBattery": true
+        },
+        {
           "id": "systemTray",
           "enabled": true,
           "trayUseInlineExpansion": false,
@@ -340,13 +346,13 @@
       "iconScale": 1,
       "followInterfaceStyle": false,
       "widgetFollowInterfaceStyle": true,
-      "island": false,
       "dot": false,
       "attachToScreenEdge": false,
       "barLengthMode": "full",
       "widgetStyle": "pills",
       "maximizeWidgetText": true,
-      "widgetOutlineOpacity": 0
+      "widgetOutlineOpacity": 0,
+      "hoverPopouts": false
     },
     {
       "id": "dot1791569582589",
@@ -457,9 +463,188 @@
       "iconScale": 0.82,
       "followInterfaceStyle": false,
       "widgetFollowInterfaceStyle": true,
-      "island": false,
       "dot": true,
       "attachToScreenEdge": false
+    },
+    {
+      "id": "bar1791664274461",
+      "name": "Island",
+      "enabled": true,
+      "position": 0,
+      "screenPreferences": [
+        {
+          "model": "MND508ZB1-1",
+          "name": "eDP-1"
+        }
+      ],
+      "showOnLastDisplay": true,
+      "leftWidgets": [
+        {
+          "id": "launcherButton",
+          "enabled": false,
+          "launcherLogoMode": "os"
+        },
+        {
+          "id": "workspaceSwitcher",
+          "enabled": false,
+          "showWorkspacePadding": true,
+          "showWorkspaceApps": true,
+          "workspaceFollowFocus": true,
+          "workspaceUnfocusedColorMode": "sch"
+        },
+        {
+          "id": "privacyIndicator",
+          "enabled": false
+        },
+        {
+          "id": "ocrScanner",
+          "enabled": false
+        }
+      ],
+      "centerWidgets": [
+        {
+          "id": "music",
+          "enabled": true
+        },
+        {
+          "id": "clock",
+          "enabled": true,
+          "clockCompactMode": true
+        },
+        {
+          "id": "notificationButton",
+          "enabled": true
+        }
+      ],
+      "rightWidgets": [
+        {
+          "id": "volumeMixer",
+          "enabled": false
+        },
+        {
+          "id": "battery",
+          "enabled": false,
+          "showBatteryPercent": false,
+          "showBatteryPercentOnlyOnBattery": true
+        },
+        {
+          "id": "systemTray",
+          "enabled": false,
+          "trayUseInlineExpansion": false,
+          "trayPopupSingleLine": true,
+          "trayAutoOverflow": true,
+          "trayMaxVisibleItems": 0
+        },
+        {
+          "id": "vpn",
+          "enabled": false
+        },
+        {
+          "id": "screenRecorder",
+          "enabled": false
+        },
+        {
+          "id": "nextBootSelector",
+          "enabled": false
+        },
+        {
+          "id": "controlCenterButton",
+          "enabled": false,
+          "showNetworkIcon": false,
+          "showVpnIcon": false,
+          "showBluetoothIcon": false,
+          "showAudioIcon": false
+        }
+      ],
+      "spacing": 0,
+      "innerPadding": 24,
+      "bottomGap": 50,
+      "transparency": 0.88,
+      "widgetTransparency": 1,
+      "squareCorners": true,
+      "noBackground": false,
+      "gothCornersEnabled": false,
+      "gothCornerRadiusOverride": false,
+      "gothCornerRadiusValue": 12,
+      "borderEnabled": false,
+      "borderColor": "surfaceText",
+      "borderOpacity": 1,
+      "borderThickness": 1,
+      "fontScale": 1.27,
+      "autoHide": true,
+      "autoHideDelay": 250,
+      "openOnOverview": true,
+      "visible": true,
+      "popupGapsAuto": false,
+      "popupGapsManual": 4,
+      "widgetOutlineEnabled": true,
+      "maximizeWidgetIcons": false,
+      "clickThrough": false,
+      "shadowIntensity": 0,
+      "iconScale": 1,
+      "followInterfaceStyle": false,
+      "widgetFollowInterfaceStyle": true,
+      "attachToScreenEdge": false,
+      "barLengthMode": "full",
+      "widgetStyle": "pills",
+      "maximizeWidgetText": true,
+      "widgetOutlineOpacity": 0.15,
+      "dot": false,
+      "islandFloating": true,
+      "islandPlacement": "edge",
+      "islandNotch": true,
+      "islandRouteClipboard": "island",
+      "islandSystemOsd": true,
+      "islandHomeLayout": [
+        {
+          "id": "workspaces",
+          "enabled": false
+        },
+        {
+          "id": "media",
+          "enabled": true
+        },
+        {
+          "id": "clock",
+          "enabled": true
+        },
+        {
+          "id": "weather",
+          "enabled": false
+        },
+        {
+          "id": "status",
+          "enabled": false
+        },
+        {
+          "id": "volume",
+          "enabled": false
+        },
+        {
+          "id": "brightness",
+          "enabled": false
+        },
+        {
+          "id": "notifications",
+          "enabled": false
+        },
+        {
+          "id": "privacy",
+          "enabled": false
+        }
+      ],
+      "island": true,
+      "islandOuterGap": 4,
+      "islandAlongOffset": 0,
+      "islandRouteLauncher": "island",
+      "islandNotificationExpand": true,
+      "islandRouteControlCenter": "island",
+      "islandRouteNotificationCenter": "island",
+      "hoverPopouts": true,
+      "islandInteractionMode": "hybrid",
+      "islandRouteMedia": "island",
+      "islandSatellitePosition": "edges",
+      "widgetOutlineColor": "primary"
     }
   ],
   "desktopWidgetInstances": [
@@ -563,7 +748,7 @@
   "frameRounding": 22,
   "frameBarSize": 24,
   "frameBlurEnabled": false,
-  "configVersion": 39,
+  "configVersion": 40,
   "radiusStrength": 100,
   "animationDuration": 750,
   "blurBorderEnabled": true,
@@ -654,7 +839,7 @@
   "focusRingWidth": 1,
   "connectedFrameBarStyleBackups": {},
   "frameEnabled": false,
-  "lockPamExternallyManaged": true,
+  "lockPamExternallyManaged": false,
   "springBounce": 0,
   "scrollbarsEnabled": false,
   "controlCenterIconScale": 1,
@@ -861,5 +1046,33 @@
   ],
   "lockScreenWallpaperPath": "/home/artrix/Pictures/wallpapers/neowall-DP-2.png",
   "lockScreenShowPowerActions": true,
-  "osdWorkspaceEnabled": true
+  "osdWorkspaceEnabled": true,
+  "batteryChargeLimit": 85,
+  "lowerDisplayRefreshRateOnBattery": true,
+  "displayPreviousRefreshModes": {
+    "niri": {
+      "eDP-1": {
+        "mode": "2880x1920@120.000"
+      },
+      "China Star Optoelectronics Technology Co., Ltd MND508ZB1-1 Unknown": {
+        "mode": "2880x1920@120.000"
+      },
+      "China Star Optoelectronics Technology Co., Ltd MND508ZB1-1": {
+        "mode": "2880x1920@120.000"
+      },
+      "desc:China Star Optoelectronics Technology Co. Ltd MND508ZB1-1": {
+        "mode": "2880x1920@120.000"
+      }
+    }
+  },
+  "batteryAutoPowerSaver": true,
+  "acProfileName": "2",
+  "batteryProfileName": "",
+  "enableFprint": true,
+  "greeterEnableFprint": true,
+  "acLockTimeout": 30,
+  "acMonitorTimeout": 120,
+  "acPostLockMonitorTimeout": 15,
+  "bluetoothMprisEnabled": true,
+  "launcherStyle": "island"
 }
