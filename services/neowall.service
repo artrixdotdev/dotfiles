@@ -7,7 +7,7 @@ Requisite=graphical-session.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/neowall -f
+ExecStart=/usr/bin/nu %h/dotfiles/scripts/neowall-launch.nu
 Restart=on-failure
 RestartSec=3
 

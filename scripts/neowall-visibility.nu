@@ -1,5 +1,7 @@
 #!/usr/bin/env nu
 
+use neowall-hardware.nu system-batteries
+
 let power_preference = "/sys/devices/system/cpu/cpu0/cpufreq/energy_performance_preference"
 
 def niri-json [socket: string, subject: string] {
@@ -29,10 +31,25 @@ def has-visible-window [socket: string] {
 }
 
 def should-pause [] {
-  if ($power_preference | path exists) {
-    let preference = (open $power_preference | str trim)
-    if $preference in [power balance_power] {
+  let batteries = (system-batteries)
+  if ($batteries | is-not-empty) {
+    for battery in $batteries {
+      let capacity = ($battery | path join "capacity")
+      if ($capacity | path exists) and (open $capacity | str trim | into int) <= 50 {
+        return true
+      }
+    }
+
+    let profile = (do -i { ^powerprofilesctl get } | complete)
+    if $profile.exit_code == 0 and ($profile.stdout | str trim) == "power-saver" {
       return true
+    }
+
+    if $profile.exit_code != 0 and ($power_preference | path exists) {
+      let preference = (open $power_preference | str trim)
+      if $preference == "power" {
+        return true
+      }
     }
   }
 
