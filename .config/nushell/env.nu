@@ -159,3 +159,6 @@ if ($bitwarden_ssh_agent_socket | path exists) {
 $env.PNPM_HOME = "/home/artrix/.local/share/pnpm"
 $env.PATH = ($env.PATH | split row (char esep) | prepend $env.PNPM_HOME )
 # pnpm end
+# Active local Niri session for headless Wayland clients (grim/Codex computer use).
+$env.XDG_RUNTIME_DIR = $"/run/user/(id -u)"
+$env.WAYLAND_DISPLAY = "wayland-1"
