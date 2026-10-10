@@ -1,6 +1,6 @@
 #!/usr/bin/env nu
 
-use neowall-hardware.nu system-batteries
+use neowall-hardware.nu [system-batteries gpu-count]
 
 let power_preference = "/sys/devices/system/cpu/cpu0/cpufreq/energy_performance_preference"
 
@@ -58,7 +58,9 @@ def should-pause [] {
     error make { msg: "Niri socket unavailable" }
   }
   if (niri-json $socket "overview-state" | get is_open? | default false) {
-    return false
+    # Keep the full-quality frame visible, but leave the GPU to Niri on
+    # single-GPU laptops while overview is animating.
+    return (($batteries | is-not-empty) and ((gpu-count) == 1))
   }
   has-visible-window $socket
 }
