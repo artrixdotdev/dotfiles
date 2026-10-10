@@ -2,7 +2,7 @@
   "currentThemeName": "custom",
   "currentThemeCategory": "registry",
   "matugenScheme": "scheme-monochrome",
-  "popupTransparency": 0.79,
+  "popupTransparency": 0.88,
   "widgetColorMode": "colorful",
   "niriLayoutGapsOverride": 4,
   "niriLayoutRadiusOverride": 28,
@@ -321,7 +321,7 @@
       "spacing": 0,
       "innerPadding": 24,
       "bottomGap": 50,
-      "transparency": 0.88,
+      "transparency": 0.9,
       "widgetTransparency": 1,
       "squareCorners": true,
       "noBackground": false,
@@ -344,7 +344,7 @@
       "clickThrough": false,
       "shadowIntensity": 0,
       "iconScale": 1,
-      "followInterfaceStyle": false,
+      "followInterfaceStyle": true,
       "widgetFollowInterfaceStyle": true,
       "dot": false,
       "attachToScreenEdge": false,
@@ -560,7 +560,7 @@
       "spacing": 0,
       "innerPadding": 24,
       "bottomGap": 50,
-      "transparency": 0.88,
+      "transparency": 0.9,
       "widgetTransparency": 1,
       "squareCorners": true,
       "noBackground": false,
@@ -583,7 +583,7 @@
       "clickThrough": false,
       "shadowIntensity": 0,
       "iconScale": 1,
-      "followInterfaceStyle": false,
+      "followInterfaceStyle": true,
       "widgetFollowInterfaceStyle": true,
       "attachToScreenEdge": false,
       "barLengthMode": "full",
@@ -1078,5 +1078,10 @@
   "bluetoothMprisEnabled": true,
   "launcherStyle": "island",
   "batteryLockTimeout": 300,
-  "batteryMonitorTimeout": 60
+  "batteryMonitorTimeout": 60,
+  "dashOptions": {
+    "media": {
+      "animatedArt": true
+    }
+  }
 }
