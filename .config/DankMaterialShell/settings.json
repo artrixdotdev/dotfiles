@@ -1072,9 +1072,11 @@
   "batteryProfileName": "",
   "enableFprint": true,
   "greeterEnableFprint": true,
-  "acLockTimeout": 30,
+  "acLockTimeout": 300,
   "acMonitorTimeout": 120,
   "acPostLockMonitorTimeout": 15,
   "bluetoothMprisEnabled": true,
-  "launcherStyle": "island"
+  "launcherStyle": "island",
+  "batteryLockTimeout": 300,
+  "batteryMonitorTimeout": 60
 }
