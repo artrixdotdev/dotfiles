@@ -50,6 +50,7 @@ def css_theme_scheme [] {
 }
 
 def sync_zen_content_scheme [scheme: string] {
+  if not ($zen_dir | path exists) { return }
   let value = if $scheme == "prefer-dark" { 0 } else { 1 }
 
   ls $zen_dir

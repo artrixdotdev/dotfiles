@@ -274,6 +274,18 @@ def install-services [dotfiles_dir: path] {
   }
 
   mkdir $user_systemd_dir
+
+  # DMS starts its own Quickshell UI; retire the older standalone unit.
+  let old_quickshell = ($user_systemd_dir | path join "quickshell.service")
+  if ($old_quickshell | path type) == "symlink" and (^readlink $old_quickshell | str trim) == ($services_dir | path join "quickshell.service") {
+    do -i { ^systemctl --user stop quickshell.service } | complete | ignore
+    let disabled = (^systemctl --user disable quickshell.service | complete)
+    if ($old_quickshell | path type) == "symlink" { rm $old_quickshell }
+    if $disabled.exit_code != 0 { warn $"Could not disable quickshell.service: ($disabled.stderr | str trim)" }
+  }
+
+  safe-symlink ($services_dir | path join "dms-wayland.conf") ($user_systemd_dir | path join "dms.service.d" "wayland.conf")
+
   ls $services_dir | where name =~ '\.service$' | each { |service|
     let name = ($service.name | path basename)
     safe-symlink $service.name ($user_systemd_dir | path join $name)
