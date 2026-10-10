@@ -26,6 +26,7 @@ both machines. The generated `~/.config/niri/dms/outputs.kdl` stays local to eac
 machine; setup preserves an existing layout when migrating an older whole-directory
 Niri symlink. Run `nu setup.nu sync` on each machine after updating the repo.
 
-The NeoWall user service selects its shader frame policy from system battery and
-GPU detection at startup. Run `nu setup.nu post` to install and enable user
-services, then restart changed services after an update.
+NeoWall uses display-synced animation on both machines. Its visibility service
+pauses the shader at low battery or in power-saver mode on laptops. Run
+`nu setup.nu post` to install and enable user services, then restart changed
+services after an update.

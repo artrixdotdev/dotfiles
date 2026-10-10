@@ -1,4 +1,4 @@
-# Hardware facts shared by NeoWall startup and its visibility controller.
+# Battery detection for NeoWall's visibility controller.
 export def system-batteries [root: string = "/sys"] {
   glob ($root | path join "class/power_supply/*")
   | where {|supply|
@@ -12,26 +12,4 @@ export def system-batteries [root: string = "/sys"] {
       true
     }
   }
-}
-
-export def gpu-count [root: string = "/sys"] {
-  # PCI display-class devices include integrated, discrete, and 3D controllers,
-  # even when a GPU has no active DRM card. Virtual/simpledrm cards are excluded.
-  let pci_gpus = (glob ($root | path join "bus/pci/devices/*")
-    | where {|device|
-      let class_file = ($device | path join "class")
-      ($class_file | path exists) and ((open $class_file | str trim | str lowercase) =~ '^0x03')
-    }
-    | each { path expand })
-
-  # Include platform GPUs exposed through DRM, then deduplicate PCI devices.
-  let drm_gpus = (glob ($root | path join "class/drm/card[0-9]*")
-    | where {|card| ($card | path basename) =~ '^card[0-9]+$' }
-    | where {|card|
-      let driver = ($card | path join "device/driver")
-      ($driver | path exists) and (($driver | path expand | path basename) not-in ["simpledrm" "simple-framebuffer" "vgem"])
-    }
-    | each {|card| $card | path join "device" | path expand })
-
-  $pci_gpus | append $drm_gpus | uniq | length
 }
