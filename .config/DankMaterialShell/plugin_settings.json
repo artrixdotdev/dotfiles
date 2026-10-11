@@ -23,7 +23,8 @@
     "enabled": true
   },
   "screenRecorder": {
-    "enabled": true
+    "enabled": true,
+    "captureSource": "screen"
   },
   "emojiLauncher": {
     "enabled": true,

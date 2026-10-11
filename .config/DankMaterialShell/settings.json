@@ -274,6 +274,10 @@
           "clockCompactMode": true
         },
         {
+          "id": "screenRecorder",
+          "enabled": true
+        },
+        {
           "id": "notificationButton",
           "enabled": true
         }
@@ -300,10 +304,6 @@
         {
           "id": "vpn",
           "enabled": true
-        },
-        {
-          "id": "screenRecorder",
-          "enabled": false
         },
         {
           "id": "nextBootSelector",
@@ -657,46 +657,29 @@
       "config": {
         "displayPreferences": [
           {
-            "name": "DP-2",
+            "name": "DP-1",
             "model": "XV272U W2"
           }
         ],
         "showOnOverlay": false,
-        "vizMode": "curve-filled",
-        "barCount": 48,
-        "barSpacing": 10,
+        "vizMode": "bars",
+        "barCount": 128,
+        "barSpacing": 3,
         "channels": "mono",
         "showOnOverview": false,
         "barWidth": 0,
         "bgOpacity": 0,
-        "opacity": 19,
-        "clickThrough": true,
-        "sensitivity": 135,
-        "colorChoice": "secondary",
-        "syncPositionAcrossScreens": false
-      }
-    },
-    {
-      "id": "dw_1776982915282_bqdcd51oc",
-      "widgetType": "mediaPlayer",
-      "name": "Media Player",
-      "enabled": true,
-      "config": {
-        "displayPreferences": [
-          {
-            "name": "DP-2",
-            "model": "XV272U W2"
-          }
-        ],
-        "showOnOverlay": false,
-        "showOnOverview": true,
-        "showOnOverviewOnly": false,
+        "opacity": 100,
         "clickThrough": false,
-        "syncPositionAcrossScreens": true,
-        "backgroundOpacity": 81,
-        "borderOpacity": 0,
-        "rotateThumbnail": true
-      }
+        "sensitivity": 100,
+        "colorChoice": "surface",
+        "syncPositionAcrossScreens": false,
+        "silenceTimeout": 30,
+        "orientation": "horizontal",
+        "curveLineWidth": 1,
+        "curvePoints": 24
+      },
+      "group": "dwg_1777000189094_dqqfqtyzl"
     },
     {
       "id": "dw_1776983087576_hp1qv7xx6",
@@ -716,7 +699,31 @@
         ],
         "clickThrough": false,
         "syncPositionAcrossScreens": true
-      }
+      },
+      "group": "dwg_1777000189094_dqqfqtyzl"
+    },
+    {
+      "id": "dw_1776982915282_bqdcd51oc",
+      "widgetType": "mediaPlayer",
+      "name": "Media Player",
+      "enabled": false,
+      "config": {
+        "displayPreferences": [
+          {
+            "name": "DP-2",
+            "model": "XV272U W2"
+          }
+        ],
+        "showOnOverlay": false,
+        "showOnOverview": true,
+        "showOnOverviewOnly": false,
+        "clickThrough": false,
+        "syncPositionAcrossScreens": true,
+        "backgroundOpacity": 81,
+        "borderOpacity": 0,
+        "rotateThumbnail": true
+      },
+      "group": null
     }
   ],
   "desktopWidgetGroups": [
@@ -766,10 +773,10 @@
       "mode": "compact",
       "taskbarAlign": "center",
       "widgetExpansion": "inline",
-      "iconSize": 64,
+      "iconSize": 60,
       "spacing": 8,
-      "itemSpacing": 5.12,
-      "margin": 0,
+      "itemSpacing": 0,
+      "margin": 8,
       "bottomGap": 0,
       "transparency": 1,
       "followInterfaceStyle": false,
@@ -780,11 +787,11 @@
       "showOnFullscreen": false,
       "openOnOverview": true,
       "groupByApp": true,
-      "separatePinnedAndRunningApps": false,
+      "separatePinnedAndRunningApps": true,
       "restoreSpecialWorkspaceOnClick": false,
       "isolateDisplays": true,
       "indicatorStyle": "circle",
-      "borderEnabled": true,
+      "borderEnabled": false,
       "borderColor": "surfaceText",
       "borderOpacity": 0,
       "borderThickness": 1,
@@ -801,10 +808,10 @@
       "showTrash": false,
       "trashFileManager": "default",
       "trashCustomCommand": "",
-      "magnification": false,
-      "magnificationScale": 130,
-      "magnificationProfile": "parabolic",
-      "magnificationExpand": false,
+      "magnification": true,
+      "magnificationScale": 110,
+      "magnificationProfile": "gaussian",
+      "magnificationExpand": true,
       "order": [],
       "widgets": [
         {
@@ -816,9 +823,10 @@
           "id": "dock_apps",
           "widgetId": "appsDock",
           "enabled": true,
-          "runningAppsCurrentWorkspace": false,
+          "runningAppsCurrentWorkspace": true,
           "appsDockEnlargeOnHover": false,
-          "appsDockColorizeActive": false
+          "appsDockColorizeActive": false,
+          "appsDockIconSizePercentage": 70
         },
         {
           "id": "dock_trash",
@@ -1083,5 +1091,6 @@
     "media": {
       "animatedArt": true
     }
-  }
+  },
+  "desktopContextMenu": "auto"
 }
