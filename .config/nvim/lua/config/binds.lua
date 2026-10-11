@@ -162,10 +162,10 @@ wk.add {
    {
       "<C-\\>",
       function()
-         require("smart-splits").move_cursor_previous()
+         vim.cmd.wincmd "p"
       end,
       mode = "n",
-      desc = "Move to previous split",
+      desc = "Move to previous Neovim window",
    },
 
    -- Smart Splits: Swapping buffers

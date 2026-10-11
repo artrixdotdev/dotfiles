@@ -16,15 +16,9 @@ function M.get_theme_tb(name)
    return theme and theme[name] or {}
 end
 
-function M.install_integration(name, highlights)
-   local ok, integration = pcall(require, "base46.integrations." .. name)
-   if ok and type(integration) == "table" then
-      for group, value in pairs(highlights) do
-         integration[group] = value
-      end
-      return
-   end
-
+function M.install_integration(_name, highlights)
+   -- Base46 rebuilds integration modules when a colorscheme loads, so changing
+   -- those modules does not update the active highlights.
    for group, value in pairs(highlights) do
       vim.api.nvim_set_hl(0, group, value)
    end

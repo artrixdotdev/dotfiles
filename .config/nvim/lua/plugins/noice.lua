@@ -141,7 +141,9 @@ return {
       markdown = {
          hover = {
             ["|(%S-)|"] = vim.cmd.help, -- vim help links
-            ["%[.-%]%((%S-)%)"] = require("noice.util").open, -- markdown links
+            ["%[.-%]%((%S-)%)"] = function(url)
+               require("noice.util").open(url)
+            end, -- markdown links
          },
          highlights = {
             ["|%S-|"] = "@text.reference",
@@ -172,6 +174,13 @@ return {
       -- OPTIONAL:
       --   `nvim-notify` is only needed, if you want to use the notification view.
       --   If not available, we use `mini` as the fallback
-      "rcarriga/nvim-notify",
+      {
+         "rcarriga/nvim-notify",
+         opts = {
+            background_colour = function()
+               return require("config.base46").get_theme_tb("base_16").base00
+            end,
+         },
+      },
    },
 }

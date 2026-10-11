@@ -28,6 +28,17 @@
 -- end
 
 return {
+   transparency = true,
+   hl_override = {
+      NormalNC = { bg = "NONE" },
+      SignColumn = { bg = "NONE" },
+      FoldColumn = { bg = "NONE" },
+      StatusLine = { bg = "NONE" },
+      StatusLineNC = { bg = "NONE" },
+      NeoTreeNormal = { bg = "NONE" },
+      NeoTreeNormalNC = { bg = "NONE" },
+      NeoTreeEndOfBuffer = { bg = "NONE" },
+   },
    integrations = {
       defaults = true,
       syntax = true,

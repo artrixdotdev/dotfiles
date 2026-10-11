@@ -71,7 +71,7 @@ end
 return {
    "saghen/blink.cmp",
    build = function()
-      require("blink.cmp").build():wait(60000)
+      require("blink.cmp").build():pwait()
    end,
    -- optional: provides snippets for the snippet source
    dependencies = { "saghen/blink.lib", "rafamadriz/friendly-snippets", "onsails/lspkind.nvim", "AvengeMedia/base46" },
