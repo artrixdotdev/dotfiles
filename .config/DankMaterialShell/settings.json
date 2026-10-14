@@ -21,90 +21,118 @@
     {
       "id": "user",
       "enabled": true,
-      "w": 5,
-      "h": 1
+      "w": 4,
+      "h": 1,
+      "col": 0,
+      "row": 0
     },
     {
       "id": "settings",
       "enabled": true,
       "w": 1,
       "h": 1,
-      "small": true
+      "small": true,
+      "col": 5,
+      "row": 0
     },
     {
       "id": "lock",
       "enabled": true,
       "w": 1,
       "h": 1,
-      "small": true
+      "small": true,
+      "col": 6,
+      "row": 0
     },
     {
       "id": "power",
       "enabled": true,
       "w": 1,
       "h": 1,
-      "small": true
+      "small": true,
+      "col": 7,
+      "row": 0
     },
     {
       "id": "volumeSlider",
       "enabled": true,
       "w": 4,
-      "h": 1
+      "h": 1,
+      "col": 0,
+      "row": 1
     },
     {
       "id": "brightnessSlider",
       "enabled": true,
       "deviceName": "ddc:i2c-7",
       "w": 4,
-      "h": 1
+      "h": 1,
+      "col": 4,
+      "row": 1
     },
     {
       "id": "wifi",
       "enabled": true,
       "w": 4,
-      "h": 1
+      "h": 1,
+      "col": 0,
+      "row": 2
     },
     {
       "id": "bluetooth",
       "enabled": true,
       "w": 4,
-      "h": 1
+      "h": 1,
+      "col": 4,
+      "row": 2
     },
     {
       "id": "audioOutput",
       "enabled": true,
       "w": 4,
-      "h": 1
+      "h": 1,
+      "col": 0,
+      "row": 3
     },
     {
       "id": "audioInput",
       "enabled": true,
       "w": 4,
-      "h": 1
+      "h": 1,
+      "col": 4,
+      "row": 3
     },
     {
       "id": "darkMode",
       "enabled": true,
       "w": 4,
-      "h": 1
+      "h": 1,
+      "col": 0,
+      "row": 4
     },
     {
       "id": "colorPicker",
       "enabled": true,
       "w": 4,
-      "h": 1
+      "h": 1,
+      "col": 4,
+      "row": 4
     },
     {
       "id": "plugin_nextBootSelector",
       "enabled": true,
       "w": 4,
-      "h": 1
+      "h": 1,
+      "col": 0,
+      "row": 5
     },
     {
       "id": "builtin_tailscale",
       "enabled": true,
       "w": 4,
-      "h": 1
+      "h": 1,
+      "col": 4,
+      "row": 5
     },
     {
       "id": "runningApps",
@@ -121,6 +149,14 @@
       "small": true,
       "footer": true,
       "footerEnd": true
+    },
+    {
+      "id": "idleInhibitor",
+      "enabled": true,
+      "w": 1,
+      "h": 1,
+      "col": 4,
+      "row": 0
     }
   ],
   "workspaceNameIcons": {
@@ -504,17 +540,39 @@
       ],
       "centerWidgets": [
         {
-          "id": "music",
-          "enabled": true
+          "background": false,
+          "id": "workspaceSwitcher",
+          "enabled": true,
+          "showWorkspacePadding": true,
+          "showWorkspaceApps": true,
+          "workspaceFollowFocus": true,
+          "workspaceUnfocusedColorMode": "sch",
+          "outline": false
         },
         {
+          "mediaStyle": "activity",
+          "mediaTitleMode": "changes",
+          "mediaAlwaysVisible": true,
+          "background": false,
+          "id": "music",
+          "enabled": true,
+          "mediaArtworkCircular": true,
+          "mediaVisualizerIdle": false,
+          "mediaShowCoverArt": true,
+          "outline": false
+        },
+        {
+          "background": false,
           "id": "clock",
           "enabled": true,
-          "clockCompactMode": true
+          "clockCompactMode": true,
+          "outline": false
         },
         {
-          "id": "notificationButton",
-          "enabled": true
+          "background": false,
+          "id": "weather",
+          "enabled": true,
+          "outline": false
         }
       ],
       "rightWidgets": [
@@ -578,7 +636,7 @@
       "visible": true,
       "popupGapsAuto": false,
       "popupGapsManual": 4,
-      "widgetOutlineEnabled": true,
+      "widgetOutlineEnabled": false,
       "maximizeWidgetIcons": false,
       "clickThrough": false,
       "shadowIntensity": 0,
@@ -596,44 +654,6 @@
       "islandNotch": true,
       "islandRouteClipboard": "island",
       "islandSystemOsd": true,
-      "islandHomeLayout": [
-        {
-          "id": "workspaces",
-          "enabled": false
-        },
-        {
-          "id": "media",
-          "enabled": true
-        },
-        {
-          "id": "clock",
-          "enabled": true
-        },
-        {
-          "id": "weather",
-          "enabled": false
-        },
-        {
-          "id": "status",
-          "enabled": false
-        },
-        {
-          "id": "volume",
-          "enabled": false
-        },
-        {
-          "id": "brightness",
-          "enabled": false
-        },
-        {
-          "id": "notifications",
-          "enabled": false
-        },
-        {
-          "id": "privacy",
-          "enabled": false
-        }
-      ],
       "island": true,
       "islandOuterGap": 4,
       "islandAlongOffset": 0,
@@ -645,7 +665,11 @@
       "islandInteractionMode": "hybrid",
       "islandRouteMedia": "island",
       "islandSatellitePosition": "edges",
-      "widgetOutlineColor": "primary"
+      "widgetOutlineColor": "primary",
+      "islandCompactColor": "#000000",
+      "islandCompactOpacity": 1,
+      "islandExcludedSources": [],
+      "islandActivityColors": true
     }
   ],
   "desktopWidgetInstances": [
@@ -756,7 +780,7 @@
   "frameRounding": 22,
   "frameBarSize": 24,
   "frameBlurEnabled": false,
-  "configVersion": 40,
+  "configVersion": 43,
   "radiusStrength": 100,
   "animationDuration": 750,
   "blurBorderEnabled": true,
