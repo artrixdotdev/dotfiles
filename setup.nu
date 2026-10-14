@@ -245,10 +245,10 @@ def link-niri-config [source: path, target: path] {
   let gcr_socket = ($runtime_dir | path join "gcr" "ssh")
   let socket = if $current_socket != $ssh_agent_link and ($current_socket | path exists) {
     $current_socket
-  } else if ($bitwarden_socket | path exists) {
-    $bitwarden_socket
   } else if ($gcr_socket | path exists) {
     $gcr_socket
+  } else if ($bitwarden_socket | path exists) {
+    $bitwarden_socket
   } else {
     ""
   }
