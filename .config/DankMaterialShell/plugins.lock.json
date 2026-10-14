@@ -3,7 +3,7 @@
   "plugins": {
     "calculator": {
       "repo": "https://github.com/rochacbruno/DankCalculator",
-      "commit": "1db5865419a40a33171a475855a59e0b8bf7187f"
+      "commit": "c9fbbe921e9afeb92f4e92390e9fc05f006f0373"
     },
     "cavaVisualizer": {
       "repo": "https://github.com/ernestowgg/cava-visualizer",
@@ -12,7 +12,7 @@
     "dankActions": {
       "repo": "https://github.com/AvengeMedia/dms-plugins",
       "path": "DankActions",
-      "commit": "3ad0e7845b62a9aca56f7959dd086b2a85655079"
+      "commit": "a8a508bc371e7c3f2c7862d8840b88cf5c63978f"
     },
     "dankAudioVisualizer": {
       "repo": "https://github.com/odtgit/DankAudioVisualizer",
@@ -21,12 +21,12 @@
     "dankHooks": {
       "repo": "https://github.com/AvengeMedia/dms-plugins",
       "path": "DankHooks",
-      "commit": "3ad0e7845b62a9aca56f7959dd086b2a85655079"
+      "commit": "a8a508bc371e7c3f2c7862d8840b88cf5c63978f"
     },
     "dankKDEConnect": {
       "repo": "https://github.com/AvengeMedia/dms-plugins",
       "path": "DankKDEConnect",
-      "commit": "3ad0e7845b62a9aca56f7959dd086b2a85655079"
+      "commit": "a8a508bc371e7c3f2c7862d8840b88cf5c63978f"
     },
     "ddcBrightness": {
       "repo": "https://github.com/smithyyang/dms-brightness-plugin",
@@ -44,6 +44,10 @@
       "repo": "https://github.com/devnullvoid/dms-emoji-launcher",
       "commit": "8ff394e3ddfcb2fd755ed2e7b4c6f01f3e26e596"
     },
+    "githubHeatmapPlus": {
+      "repo": "https://github.com/maxlen727/DMS-GitHub_HeatMap_Plus",
+      "commit": "0ad3146b8f602be957078c3423e8ae8e4c63756a"
+    },
     "mediaPlayer": {
       "repo": "https://github.com/arrifat346afs/mediaPlayer",
       "commit": "56ec160ed3fe32ad55b920ff462727d918b6eb51"
@@ -54,7 +58,7 @@
     },
     "niriWindows": {
       "repo": "https://github.com/rochacbruno/DankNiriWindows",
-      "commit": "f2c0b0fc0325e3299257cc5d1895069a3d49247f"
+      "commit": "411d5ee9f7707029f4c12c824ec3b24ca6756a0d"
     },
     "ocrScanner": {
       "repo": "https://github.com/hthienloc/dms-ocr-scanner",
@@ -62,7 +66,7 @@
     },
     "quickCapture": {
       "repo": "https://github.com/hthienloc/dms-quick-capture",
-      "commit": "8db7eb6f38db637885db21891f91553f893c56e8"
+      "commit": "d9e4475404e29223fd68d60feadf2eab810d098e"
     },
     "screenRecorder": {
       "repo": "https://github.com/arqueon/dms-screen-recorder",
@@ -74,7 +78,7 @@
     },
     "worldClock": {
       "repo": "https://github.com/rochacbruno/WorldClock",
-      "commit": "f10e1f9c1ce14a819640fbea9e2787472cf3815f"
+      "commit": "92dafcd81244dc128c1efc26589c5db17b0c3c16"
     }
   }
 }

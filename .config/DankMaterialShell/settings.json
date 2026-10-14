@@ -19,127 +19,156 @@
   "systemTrayIconTintMode": "primary",
   "controlCenterWidgets": [
     {
+      "col": 0,
+      "enabled": true,
+      "h": 1,
       "id": "user",
-      "enabled": true,
-      "w": 4,
-      "h": 1,
-      "col": 0,
-      "row": 0
+      "row": 0,
+      "w": 4
     },
     {
-      "id": "settings",
-      "enabled": true,
-      "w": 1,
-      "h": 1,
-      "small": true,
       "col": 5,
-      "row": 0
+      "enabled": true,
+      "h": 1,
+      "id": "settings",
+      "row": 0,
+      "small": true,
+      "w": 1
     },
     {
-      "id": "lock",
-      "enabled": true,
-      "w": 1,
-      "h": 1,
-      "small": true,
       "col": 6,
-      "row": 0
-    },
-    {
-      "id": "power",
       "enabled": true,
-      "w": 1,
       "h": 1,
+      "id": "lock",
+      "row": 0,
       "small": true,
+      "w": 1
+    },
+    {
       "col": 7,
-      "row": 0
+      "enabled": true,
+      "h": 1,
+      "id": "power",
+      "row": 0,
+      "small": true,
+      "w": 1
     },
     {
+      "col": 0,
+      "enabled": true,
+      "h": 1,
       "id": "volumeSlider",
-      "enabled": true,
-      "w": 4,
-      "h": 1,
-      "col": 0,
-      "row": 1
+      "row": 1,
+      "w": 4
     },
     {
-      "id": "brightnessSlider",
-      "enabled": true,
+      "col": 4,
       "deviceName": "ddc:i2c-7",
-      "w": 4,
+      "enabled": true,
       "h": 1,
-      "col": 4,
-      "row": 1
+      "id": "brightnessSlider",
+      "row": 1,
+      "w": 4
     },
     {
+      "col": 0,
+      "enabled": true,
+      "h": 1,
       "id": "wifi",
-      "enabled": true,
-      "w": 4,
-      "h": 1,
-      "col": 0,
-      "row": 2
+      "row": 2,
+      "w": 4
     },
     {
+      "col": 4,
+      "enabled": true,
+      "h": 1,
       "id": "bluetooth",
-      "enabled": true,
-      "w": 4,
-      "h": 1,
-      "col": 4,
-      "row": 2
+      "row": 2,
+      "w": 4
     },
     {
+      "col": 0,
+      "enabled": true,
+      "h": 1,
       "id": "audioOutput",
-      "enabled": true,
-      "w": 4,
-      "h": 1,
-      "col": 0,
-      "row": 3
+      "row": 3,
+      "w": 4
     },
     {
+      "col": 4,
+      "enabled": true,
+      "h": 1,
       "id": "audioInput",
-      "enabled": true,
-      "w": 4,
-      "h": 1,
-      "col": 4,
-      "row": 3
+      "row": 3,
+      "w": 4
     },
     {
+      "col": 0,
+      "enabled": true,
+      "h": 1,
       "id": "darkMode",
-      "enabled": true,
-      "w": 4,
-      "h": 1,
-      "col": 0,
-      "row": 4
+      "row": 4,
+      "w": 4
     },
     {
+      "col": 4,
+      "enabled": true,
+      "h": 1,
       "id": "colorPicker",
-      "enabled": true,
-      "w": 4,
-      "h": 1,
-      "col": 4,
-      "row": 4
+      "row": 4,
+      "w": 4
     },
     {
-      "id": "plugin_nextBootSelector",
-      "enabled": true,
-      "w": 4,
-      "h": 1,
       "col": 0,
-      "row": 5
+      "enabled": true,
+      "h": 1,
+      "id": "plugin_nextBootSelector",
+      "row": 5,
+      "w": 4
     },
     {
-      "id": "builtin_tailscale",
-      "enabled": true,
-      "w": 4,
-      "h": 1,
       "col": 4,
-      "row": 5
+      "enabled": true,
+      "h": 1,
+      "id": "builtin_tailscale",
+      "row": 5,
+      "w": 4
+    },
+    {
+      "col": 0,
+      "enabled": true,
+      "h": 1,
+      "id": "plugin_screenRecorder",
+      "row": 6,
+      "w": 4
+    },
+    {
+      "col": 4,
+      "enabled": true,
+      "h": 1,
+      "id": "diskUsage",
+      "instanceId": "mv36lc9uiw08bdf9zpgdbgd9huda6",
+      "mountPath": "/",
+      "row": 6,
+      "showMountPath": true,
+      "w": 4
+    },
+    {
+      "col": 4,
+      "enabled": true,
+      "h": 1,
+      "id": "idleInhibitor",
+      "row": 0,
+      "w": 1
     },
     {
       "id": "runningApps",
       "enabled": true,
       "w": 4,
       "h": 1,
-      "footer": true
+      "small": true,
+      "col": 0,
+      "row": 7
     },
     {
       "id": "edit",
@@ -147,16 +176,8 @@
       "w": 1,
       "h": 1,
       "small": true,
-      "footer": true,
-      "footerEnd": true
-    },
-    {
-      "id": "idleInhibitor",
-      "enabled": true,
-      "w": 1,
-      "h": 1,
-      "col": 4,
-      "row": 0
+      "col": 7,
+      "row": 7
     }
   ],
   "workspaceNameIcons": {
@@ -297,6 +318,10 @@
         {
           "id": "ocrScanner",
           "enabled": false
+        },
+        {
+          "id": "dankKDEConnect",
+          "enabled": true
         }
       ],
       "centerWidgets": [
@@ -311,7 +336,7 @@
         },
         {
           "id": "screenRecorder",
-          "enabled": true
+          "enabled": false
         },
         {
           "id": "notificationButton",
@@ -649,8 +674,8 @@
       "maximizeWidgetText": true,
       "widgetOutlineOpacity": 0.15,
       "dot": false,
-      "islandFloating": false,
-      "islandPlacement": "free",
+      "islandFloating": true,
+      "islandPlacement": "edge",
       "islandNotch": true,
       "islandRouteClipboard": "island",
       "islandSystemOsd": true,
@@ -669,7 +694,11 @@
       "islandCompactColor": "#000000",
       "islandCompactOpacity": 1,
       "islandExcludedSources": [],
-      "islandActivityColors": true
+      "islandActivityColors": true,
+      "islandRoutePowerMenu": "island",
+      "islandRouteDash": "island",
+      "islandRouteWeather": "island",
+      "islandRouteWallpaper": "island"
     }
   ],
   "desktopWidgetInstances": [
@@ -1113,8 +1142,51 @@
   "batteryMonitorTimeout": 60,
   "dashOptions": {
     "media": {
-      "animatedArt": true
+      "animatedArt": true,
+      "titleFont": "Gochi Hand"
     }
   },
-  "desktopContextMenu": "auto"
+  "desktopContextMenu": "auto",
+  "dashCards": [
+    {
+      "id": "clock",
+      "w": 2,
+      "h": 1
+    },
+    {
+      "id": "weather",
+      "w": 1,
+      "h": 1
+    },
+    {
+      "id": "notifications",
+      "w": 3,
+      "h": 5
+    },
+    {
+      "id": "calendar",
+      "w": 3,
+      "h": 3
+    },
+    {
+      "id": "media",
+      "w": 3,
+      "h": 1
+    },
+    {
+      "id": "user",
+      "w": 3,
+      "h": 1
+    },
+    {
+      "id": "disk",
+      "w": 1,
+      "h": 1
+    },
+    {
+      "id": "wellbeing",
+      "w": 2,
+      "h": 1
+    }
+  ]
 }
