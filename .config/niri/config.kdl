@@ -135,6 +135,8 @@ overview {
 spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 spawn-at-startup "nu" "/home/artrix/.config/niri/workspace-orchestrator.nu"
+spawn-at-startup "systemctl" "--user" "import-environment" "SSH_AUTH_SOCK"
+spawn-at-startup "valent" "--gapplication-service"
 environment {
    XDG_CURRENT_DESKTOP "niri"
    QT_QPA_PLATFORM "wayland"
@@ -721,6 +723,7 @@ debug {
    honor-xdg-activation-with-invalid-serial
 }
 include "dms/outputs.kdl"
+include "dms/ssh-agent.kdl"
 include "dms/colors.kdl"
 include "dms/cursor.kdl"
 include "dms/wpblur.kdl"
