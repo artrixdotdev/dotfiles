@@ -2,6 +2,9 @@ approvals_reviewer = "user"
 model = "gpt-6-sol"
 model_reasoning_effort = "medium"
 
+[shell_environment_policy.set]
+SSH_AUTH_SOCK = "/home/artrix/.local/state/dotfiles/ssh-agent.sock"
+
 [projects]
 [projects."/home/artrix"]
 trust_level = "trusted"
@@ -34,6 +37,9 @@ trust_level = "trusted"
 trust_level = "trusted"
 
 [projects."/home/artrix/Documents/Code/sam-edit"]
+trust_level = "trusted"
+
+[projects."/home/artrix/Documents/Code/tether"]
 trust_level = "trusted"
 
 [tui]
