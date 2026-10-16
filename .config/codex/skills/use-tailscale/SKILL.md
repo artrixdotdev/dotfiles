@@ -7,6 +7,8 @@ description: Safely reach and operate a remote computer over Tailscale and SSH. 
 
 Read [references/connections.md](references/connections.md) for the generic connection workflow. Read the encrypted [references/machines.md](references/machines.md) when selecting a target or resolving any machine-specific value. Never copy details from the encrypted reference into unencrypted files, logs, commits, or responses.
 
+For a machine listed in the encrypted Tailscale hosts JSON, use [scripts/ssh_connect.py](scripts/ssh_connect.py) after selecting the target from the machine reference. Run `python3 ~/.codex/skills/use-tailscale/scripts/ssh_connect.py --check <target>` to inspect readiness or `python3 ~/.codex/skills/use-tailscale/scripts/ssh_connect.py <target> -- <command>` for a remote command; omit `-- <command>` for an interactive shell. The helper resolves the current Tailscale address, requires an existing trusted SSH host key, and uses SSH configuration plus an available agent. It refuses targets marked excluded in the machine reference unless `--allow-excluded` is explicitly passed for an authorized task. It never enrolls new host keys.
+
 ## Workflow
 
 1. Determine whether remote access is necessary.
