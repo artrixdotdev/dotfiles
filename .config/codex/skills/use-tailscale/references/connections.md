@@ -8,6 +8,8 @@ Resolve the target and connection parameters from the encrypted machine referenc
 
 For configured machines, the skill's `scripts/ssh_connect.py` reads the encrypted Tailscale hosts JSON, resolves the live Tailscale address, checks an existing known-host entry, and finds an agent with identities. SSH config still determines which private key file to use. The helper accepts `--hosts-file` or the `SSH_CONNECT_HOSTS_JSON` environment variable for another JSON mapping. Use it when available, especially if the plain alias fails to resolve or the default SSH agent is empty. The manual steps below remain useful for diagnosis or machines outside that helper's scope.
 
+For the same command on multiple machines, pass comma-separated aliases as one target argument followed by `-- <command>`. The helper checks every target before starting any SSH process, launches the commands concurrently, prefixes output with the target alias, and returns failure if any target fails. Multi-target interactive shells are not supported. Apply the same authorization and scope checks to the command on every target.
+
 For an interactive session:
 
 ```sh

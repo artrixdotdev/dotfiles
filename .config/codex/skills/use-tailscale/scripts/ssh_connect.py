@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Connect to an included Tailscale machine with existing SSH trust and keys."""
+"""Connect to configured Tailscale machines with existing SSH trust and keys."""
 
 import argparse
 import ipaddress
@@ -9,6 +9,7 @@ from pathlib import Path
 import stat
 import subprocess
 import sys
+import threading
 
 
 MACHINES = Path(__file__).resolve().parent.parent / "references" / "machines.md"
@@ -55,15 +56,17 @@ def excluded_targets() -> set[str]:
     return excluded
 
 
-def tailscale_peer(target: str, configured_host: str) -> tuple[str, str]:
+def tailscale_status() -> dict:
     try:
         result = subprocess.run(
             ["tailscale", "status", "--json"], capture_output=True, text=True, check=True
         )
-        status = json.loads(result.stdout)
+        return json.loads(result.stdout)
     except (OSError, subprocess.CalledProcessError, json.JSONDecodeError) as exc:
         raise ConnectionError("Tailscale status is unavailable") from exc
 
+
+def tailscale_peer(target: str, configured_host: str, status: dict) -> tuple[str, str]:
     self_name = status.get("Self", {}).get("DNSName", "").split(".")[0]
     if self_name == target:
         raise ConnectionError("The target is this machine; use a local shell")
@@ -146,39 +149,105 @@ def identity() -> tuple[dict[str, str], str]:
     return os.environ.copy(), "SSH configuration defaults"
 
 
-def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--check", action="store_true", help="inspect routing, trust, and identity without connecting")
-    parser.add_argument("--hosts-file", type=Path, help="JSON mapping aliases to Tailscale host names or addresses")
-    parser.add_argument("--allow-excluded", action="store_true", help="permit an excluded target when explicitly requested")
-    parser.add_argument("target", help="an alias in the hosts JSON")
-    parser.add_argument("command", nargs=argparse.REMAINDER, help="optional remote command after --")
-    args = parser.parse_args()
-
-    hosts = hosts_from_json(args.hosts_file or default_hosts_file())
-    if args.target not in hosts:
-        raise ConnectionError("Target is not present in hosts JSON")
-    if not args.allow_excluded and args.target in excluded_targets():
-        raise ConnectionError("Target is excluded in the private machine reference")
-    address, fqdn = tailscale_peer(args.target, hosts[args.target])
-    host_alias = trusted_host_alias(args.target, fqdn, address)
-    env, auth_source = identity()
-    if args.check:
-        print(f"{args.target}: online; host key trusted; authentication via {auth_source}")
-        return 0
-
-    command = args.command[1:] if args.command[:1] == ["--"] else args.command
-    ssh_args = [
+def ssh_command(target: str, address: str, host_alias: str, command: list[str]) -> list[str]:
+    return [
         "ssh",
         "-o", "BatchMode=yes",
         "-o", "StrictHostKeyChecking=yes",
         "-o", "ConnectTimeout=10",
         "-o", f"HostKeyAlias={host_alias}",
         "-o", f"HostName={address}",
-        args.target,
+        target,
         *command,
     ]
-    os.execvpe("ssh", ssh_args, env)
+
+
+def run_many(prepared: list[tuple[str, str, str]], command: list[str], env: dict[str, str]) -> int:
+    processes = {}
+    threads = []
+    output_lock = threading.Lock()
+
+    def relay(target: str, address: str, stream) -> None:
+        for line in stream:
+            with output_lock:
+                print(f"[{target}] {line.replace(address, '<tailscale-address>')}", end="", flush=True)
+
+    try:
+        for target, address, host_alias in prepared:
+            processes[target] = subprocess.Popen(
+                ssh_command(target, address, host_alias, command),
+                env=env,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
+                text=True,
+                errors="replace",
+                bufsize=1,
+            )
+        for target, address, _ in prepared:
+            stream = processes[target].stdout
+            assert stream is not None
+            thread = threading.Thread(target=relay, args=(target, address, stream), daemon=True)
+            thread.start()
+            threads.append(thread)
+        results = {target: process.wait() for target, process in processes.items()}
+        for thread in threads:
+            thread.join()
+    except (KeyboardInterrupt, OSError):
+        for process in processes.values():
+            if process.poll() is None:
+                process.terminate()
+        for process in processes.values():
+            process.wait()
+        raise
+
+    for target, code in results.items():
+        if code:
+            print(f"[{target}] SSH command exited with status {code}", file=sys.stderr)
+    return 0 if all(code == 0 for code in results.values()) else 1
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--check", action="store_true", help="inspect routing, trust, and identity without connecting")
+    parser.add_argument("--hosts-file", type=Path, help="JSON mapping aliases to Tailscale host names or addresses")
+    parser.add_argument("--allow-excluded", action="store_true", help="permit an excluded target when explicitly requested")
+    parser.add_argument("targets", help="one alias or comma-separated aliases in the hosts JSON")
+    parser.add_argument("command", nargs=argparse.REMAINDER, help="optional remote command after --")
+    args = parser.parse_args()
+
+    targets = [target.strip() for target in args.targets.split(",")]
+    if not all(targets) or len(set(targets)) != len(targets):
+        raise ConnectionError("Targets must be nonempty and unique")
+    command = args.command[1:] if args.command[:1] == ["--"] else args.command
+    if len(targets) > 1 and not args.check and not command:
+        raise ConnectionError("Multiple targets require a remote command")
+
+    hosts = hosts_from_json(args.hosts_file or default_hosts_file())
+    excluded = excluded_targets() if not args.allow_excluded else set()
+    status = tailscale_status()
+    prepared = []
+    for target in targets:
+        if target not in hosts:
+            raise ConnectionError(f"{target}: target is not present in hosts JSON")
+        if target in excluded:
+            raise ConnectionError(f"{target}: target is excluded in the private machine reference")
+        try:
+            address, fqdn = tailscale_peer(target, hosts[target], status)
+            host_alias = trusted_host_alias(target, fqdn, address)
+        except ConnectionError as exc:
+            raise ConnectionError(f"{target}: {exc}") from exc
+        prepared.append((target, address, host_alias))
+
+    env, auth_source = identity()
+    if args.check:
+        for target in targets:
+            print(f"{target}: online; host key trusted; authentication via {auth_source}")
+        return 0
+
+    if len(prepared) == 1:
+        target, address, host_alias = prepared[0]
+        os.execvpe("ssh", ssh_command(target, address, host_alias, command), env)
+    return run_many(prepared, command, env)
 
 
 if __name__ == "__main__":
