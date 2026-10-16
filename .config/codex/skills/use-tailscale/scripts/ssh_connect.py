@@ -6,6 +6,7 @@ import ipaddress
 import json
 import os
 from pathlib import Path
+import pwd
 import stat
 import subprocess
 import sys
@@ -66,18 +67,19 @@ def tailscale_status() -> dict:
         raise ConnectionError("Tailscale status is unavailable") from exc
 
 
-def tailscale_peer(target: str, configured_host: str, status: dict) -> tuple[str, str]:
-    self_name = status.get("Self", {}).get("DNSName", "").split(".")[0]
-    if self_name == target:
-        raise ConnectionError("The target is this machine; use a local shell")
+def tailscale_peer(configured_host: str, status: dict) -> tuple[str | None, str | None]:
+    def peer_matches(peer: dict) -> bool:
+        dns_name = peer.get("DNSName", "").rstrip(".")
+        addresses = peer.get("TailscaleIPs", [])
+        return configured_host in (dns_name.split(".")[0], dns_name) or configured_host in addresses
+
+    if peer_matches(status.get("Self", {})):
+        return None, None
 
     matches = []
     for peer in status.get("Peer", {}).values():
-        dns_name = peer.get("DNSName", "").rstrip(".")
-        addresses = peer.get("TailscaleIPs", [])
-        if configured_host not in (dns_name.split(".")[0], dns_name) and configured_host not in addresses:
-            continue
-        matches.append(peer)
+        if peer_matches(peer):
+            matches.append(peer)
     if len(matches) != 1:
         raise ConnectionError("Target is absent or ambiguous in Tailscale status")
     peer = matches[0]
@@ -162,20 +164,29 @@ def ssh_command(target: str, address: str, host_alias: str, command: list[str]) 
     ]
 
 
-def run_many(prepared: list[tuple[str, str, str]], command: list[str], env: dict[str, str]) -> int:
+def command_for_target(target: str, address: str | None, host_alias: str | None, command: list[str]) -> list[str]:
+    if address is None:
+        shell = pwd.getpwuid(os.getuid()).pw_shell or "/bin/sh"
+        return [shell, "-c", " ".join(command)] if command else [shell]
+    assert host_alias is not None
+    return ssh_command(target, address, host_alias, command)
+
+
+def run_many(prepared: list[tuple[str, str | None, str | None]], command: list[str], env: dict[str, str]) -> int:
     processes = {}
     threads = []
     output_lock = threading.Lock()
 
-    def relay(target: str, address: str, stream) -> None:
+    def relay(target: str, address: str | None, stream) -> None:
         for line in stream:
             with output_lock:
-                print(f"[{target}] {line.replace(address, '<tailscale-address>')}", end="", flush=True)
+                safe_line = line.replace(address, "<tailscale-address>") if address else line
+                print(f"[{target}] {safe_line}", end="", flush=True)
 
     try:
         for target, address, host_alias in prepared:
             processes[target] = subprocess.Popen(
-                ssh_command(target, address, host_alias, command),
+                command_for_target(target, address, host_alias, command),
                 env=env,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.STDOUT,
@@ -202,7 +213,7 @@ def run_many(prepared: list[tuple[str, str, str]], command: list[str], env: dict
 
     for target, code in results.items():
         if code:
-            print(f"[{target}] SSH command exited with status {code}", file=sys.stderr)
+            print(f"[{target}] command exited with status {code}", file=sys.stderr)
     return 0 if all(code == 0 for code in results.values()) else 1
 
 
@@ -232,21 +243,25 @@ def main() -> int:
         if target in excluded:
             raise ConnectionError(f"{target}: target is excluded in the private machine reference")
         try:
-            address, fqdn = tailscale_peer(target, hosts[target], status)
-            host_alias = trusted_host_alias(target, fqdn, address)
+            address, fqdn = tailscale_peer(hosts[target], status)
+            host_alias = trusted_host_alias(target, fqdn, address) if address is not None and fqdn is not None else None
         except ConnectionError as exc:
             raise ConnectionError(f"{target}: {exc}") from exc
         prepared.append((target, address, host_alias))
 
     env, auth_source = identity()
     if args.check:
-        for target in targets:
-            print(f"{target}: online; host key trusted; authentication via {auth_source}")
+        for target, address, _ in prepared:
+            if address is None:
+                print(f"{target}: local machine")
+            else:
+                print(f"{target}: online; host key trusted; authentication via {auth_source}")
         return 0
 
     if len(prepared) == 1:
         target, address, host_alias = prepared[0]
-        os.execvpe("ssh", ssh_command(target, address, host_alias, command), env)
+        argv = command_for_target(target, address, host_alias, command)
+        os.execvpe(argv[0], argv, env)
     return run_many(prepared, command, env)
 
 
