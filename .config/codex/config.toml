@@ -1,5 +1,5 @@
 approvals_reviewer = "user"
-model = "gpt-6-sol"
+model = "gpt-6-luna"
 model_reasoning_effort = "medium"
 
 [shell_environment_policy.set]
@@ -53,16 +53,39 @@ gpt-6-astra = 4
 [desktop]
 followUpQueueMode = "queue"
 conversationDetailMode = "STEPS_PROSE"
+sansFontSize = 14
+codeFontSize = 13
+ambient-suggestions-enabled = true
+appearanceDarkCodeThemeId = "vercel"
+
+[desktop.appearanceDarkChromeTheme]
+accent = "#006efe"
+accentSource = "custom"
+contrast = 50
+ink = "#ededed"
+opaqueWindows = true
+surface = "#000000"
+
+[desktop.appearanceDarkChromeTheme.fonts]
+code = '"Geist Mono", ui-monospace, "SFMono-Regular"'
+ui = "Geist, Inter"
+
+[desktop.appearanceDarkChromeTheme.semanticColors]
+diffAdded = "#00AD3A"
+diffRemoved = "#F13342"
+skill = "#9540D5"
 
 [mcp_servers]
 [mcp_servers.tauri]
 command = "npx"
 args = ["-y", "@hypothesi/tauri-mcp-server"]
 
-[marketplaces.openai-primary-runtime]
-last_updated = "2026-08-02T22:40:11Z"
-source_type = "local"
-source = "/home/artrix/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
+[mcp_servers.notion]
+url = "https://mcp.notion.com/mcp"
+
+[mcp_servers.canvas-api]
+command = "/home/artrix/canvas-mcp/.venv/bin/canvas-mcp-server"
+cwd = "/home/artrix/canvas-mcp"
 
 [plugins."documents@openai-primary-runtime"]
 enabled = true
@@ -79,6 +102,21 @@ enabled = true
 [plugins."template-creator@openai-primary-runtime"]
 enabled = true
 
+[plugins."codex-app-tools@openai-bundled"]
+enabled = true
+
+[plugins."browser@openai-bundled"]
+enabled = true
+
+[plugins."unified-computer-use@openai-bundled"]
+enabled = true
+
+[plugins."code-review@openai-bundled"]
+enabled = true
+
+[plugins."visualize@openai-bundled"]
+enabled = true
+
 [mcp_servers.calendar]
 command = "/usr/bin/python3"
 args = ["/home/artrix/dotfiles/.config/caldav-mcp/launch.py"]
@@ -86,3 +124,31 @@ args = ["/home/artrix/dotfiles/.config/caldav-mcp/launch.py"]
 enabled = true
 tool_timeout_sec = 60
 enabled_tools = ["get_calendar_context", "list_calendars", "list_events", "get_today_events", "search_events", "get_event", "find_free_slots", "create_event", "update_event", "create_events_batch", "import_ics"]
+
+[mcp_servers.node_repl]
+args = []
+command = "/usr/lib/chatgpt/resources/cua_node/bin/node_repl"
+startup_timeout_sec = 120
+
+[mcp_servers.node_repl.env]
+NODE_REPL_NATIVE_PIPE_CONNECT_TIMEOUT_MS = "1000"
+NODE_REPL_NODE_MODULE_DIRS = "/usr/lib/chatgpt/resources/cua_node/lib/node_modules"
+NODE_REPL_NODE_PATH = "/usr/lib/chatgpt/resources/cua_node/bin/node"
+NODE_REPL_TRUSTED_CODE_PATHS = "/home/artrix/.codex:/usr/lib/chatgpt/resources/cua_node/lib/node_modules"
+CODEX_HOME = "/home/artrix/.codex"
+BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab,mcpapps"
+BROWSER_USE_TINYSKY_ENABLED = "1"
+NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = ""
+NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = ""
+BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
+BROWSER_USE_CODEX_APP_VERSION = "26.1007.71326"
+NODE_REPL_TRUSTED_SERVICES = '{"browser":"/home/artrix/.codex/plugins/cache/openai-bundled/browser/26.1007.71326/scripts/browser-service.mjs"}'
+CODEX_CLI_PATH = "/usr/lib/chatgpt/resources/codex"
+
+[marketplaces.openai-bundled]
+source_type = "local"
+source = "/home/artrix/.codex/.tmp/bundled-marketplaces/openai-bundled"
+
+[marketplaces.openai-primary-runtime]
+source_type = "local"
+source = "/home/artrix/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
