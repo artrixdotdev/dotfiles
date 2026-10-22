@@ -321,7 +321,7 @@
         },
         {
           "id": "dankKDEConnect",
-          "enabled": true
+          "enabled": false
         }
       ],
       "centerWidgets": [
@@ -340,6 +340,10 @@
         },
         {
           "id": "notificationButton",
+          "enabled": true
+        },
+        {
+          "id": "quickCapture",
           "enabled": true
         }
       ],
@@ -809,7 +813,7 @@
   "frameRounding": 22,
   "frameBarSize": 24,
   "frameBlurEnabled": false,
-  "configVersion": 43,
+  "configVersion": 42,
   "radiusStrength": 100,
   "animationDuration": 750,
   "blurBorderEnabled": true,
@@ -1188,5 +1192,7 @@
       "w": 2,
       "h": 1
     }
-  ]
+  ],
+  "batteryCriticalThreshold": 15,
+  "batteryLowThreshold": 25
 }

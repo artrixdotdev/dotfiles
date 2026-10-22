@@ -51,7 +51,15 @@
     "enabled": false
   },
   "quickCapture": {
-    "enabled": true
+    "enabled": true,
+    "micDevice": "default_input",
+    "systemAudioDevice": "default_output",
+    "recordingBackend": "auto",
+    "recordingCodec": "auto",
+    "recordingQuality": "medium",
+    "recordingScreenTarget": "screen",
+    "color_palette_preset": "adaptive",
+    "modalDisplayTarget": "focused"
   },
   "nextBootSelector": {
     "enabled": true,
@@ -77,5 +85,8 @@
   "dankKDEConnect": {
     "enabled": true,
     "selectedDeviceId": ""
+  },
+  "airpodsAutoConnect": {
+    "enabled": true
   }
 }
