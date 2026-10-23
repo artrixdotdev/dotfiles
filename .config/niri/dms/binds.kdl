@@ -1,5 +1,6 @@
 binds {
     Ctrl+Alt+Delete hotkey-overlay-title="Task Manager" { spawn "dms" "ipc" "call" "processlist" "toggle"; }
+    Mod+Alt+F5 { spawn "sh" "-c" "dms restart"; }
     Mod+Alt+L hotkey-overlay-title="Lock Screen" { spawn "dms" "ipc" "call" "lock" "lock"; }
     Mod+Comma hotkey-overlay-title="Settings" { spawn "dms" "ipc" "call" "settings" "toggle"; }
     Mod+Escape hotkey-overlay-title="Spotlight" { spawn "dms" "ipc" "call" "spotlight-bar" "toggle"; }
@@ -8,8 +9,12 @@ binds {
     Mod+P hotkey-overlay-title="Power Profiles" { spawn "dms" "ipc" "call" "powerprofile" "toggle"; }
     Mod+Period hotkey-overlay-title="Emoji Menu" { spawn "dms" "ipc" "call" "launcher" "openQuery" ":e"; }
     Mod+Shift+N hotkey-overlay-title="Notepad" { spawn "dms" "ipc" "call" "notepad" "toggle"; }
+    Mod+Shift+S hotkey-overlay-title="Screenshot: Region" { spawn "dms" "screenshot"; }
     Mod+Shift+Slash hotkey-overlay-title="Keybinds Cheatsheet: Toggle" { spawn "dms" "ipc" "call" "keybinds" "toggle" "niri"; }
     Mod+Space hotkey-overlay-title="Application Launcher" { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
+    Mod hotkey-overlay-title="Application Launcher" {
+       release { spawn "dms" "ipc" "call" "spotlight" "toggle"; };
+    }
     Mod+V hotkey-overlay-title="Clipboard Manager" { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
     Mod+Y hotkey-overlay-title="Browse Wallpapers" { spawn "dms" "ipc" "call" "dankdash" "wallpaper"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "decrement" "3"; }
