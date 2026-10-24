@@ -1,0 +1,5 @@
+window-rule {
+   match app-id="^org\\.gnome\\.Nautilus$"
+   match app-id="(?i)^(vesktop|dev\\.vencord\\.Vesktop|discord|com\\.discordapp\\.Discord)$"
+   opacity 0.80
+}

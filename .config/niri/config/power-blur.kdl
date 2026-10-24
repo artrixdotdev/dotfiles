@@ -1,0 +1,15 @@
+// Copied to dms/power-blur.kdl on each machine; the laptop clears it in power-saver mode.
+window-rule {
+   match app-id="com.mitchellh.ghostty"
+   match app-id="dev.zed.Zed-Preview"
+   match app-id="cider"
+   match app-id="Codex"
+   match app-id="t3code"
+   match app-id="^org\\.gnome\\.Nautilus$"
+   match app-id="(?i)^(vesktop|dev\\.vencord\\.Vesktop|discord|com\\.discordapp\\.Discord)$"
+   match app-id="^zen$"
+   background-effect {
+      blur true
+      xray true
+   }
+}

@@ -95,7 +95,8 @@ if ("~/.bun/bin" | path expand | path exists) {
 # and are never written to a plaintext environment file.
 let keyring_env = "/home/artrix/.local/bin/keyring-env"
 if ($keyring_env | path exists) {
-   let keyring_result = (^$keyring_env export | complete)
+   # A locked or unresponsive keyring must not block the interactive prompt.
+   let keyring_result = (^timeout 2s $keyring_env export | complete)
    if $keyring_result.exit_code == 0 and ($keyring_result.stdout | is-not-empty) {
       try {
          $keyring_result.stdout | from nuon | load-env

@@ -1,5 +1,5 @@
 [Unit]
-Description=Pause NeoWall when windows are visible or power saving is active
+Description=Control NeoWall and visual effects for power saving
 PartOf=graphical-session.target neowall.service
 After=graphical-session.target neowall.service
 Requisite=graphical-session.target

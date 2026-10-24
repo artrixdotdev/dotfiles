@@ -3,6 +3,7 @@
 .config/DankMaterialShell/.firstlaunch
 .config/DankMaterialShell/.changelog-*
 .config/DankMaterialShell/plugins/
+.config/DankMaterialShell/config.d/
 .config/DankMaterialShell/zen.css
 .config/btop/*.log*
 .config/btop/.cfg

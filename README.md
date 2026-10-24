@@ -33,3 +33,9 @@ NeoWall uses display-synced animation on both machines. Its visibility service
 pauses the shader at low battery or in power-saver mode on laptops. Run
 `nu setup.nu post` to install and enable user services, then restart changed
 services after an update.
+
+On laptops, the same service removes Niri blur and sets window opacity to 1 in
+power-saver mode. It writes a machine-local DMS `config.d` override for opaque
+shell surfaces; the shared `settings.json` retains the normal appearance.
+The Niri blur and opacity rules live in `config/power-*.kdl` and are copied to
+machine-local `dms/power-*.kdl` files by `setup.nu sync`.

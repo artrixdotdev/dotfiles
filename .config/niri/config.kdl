@@ -133,7 +133,7 @@ overview {
 // See the binds section below for more spawn examples.
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
-spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+// DMS provides the session polkit authentication agent.
 spawn-at-startup "nu" "/home/artrix/.config/niri/workspace-orchestrator.nu"
 spawn-at-startup "systemctl" "--user" "import-environment" "SSH_AUTH_SOCK"
 spawn-at-startup "valent" "--gapplication-service"
@@ -304,26 +304,6 @@ window-rule {
 window-rule {
    match app-id="^(Cron|notion-calendar)$"
    open-on-workspace "work"
-}
-// Background Blur
-window-rule {
-   match app-id="com.mitchellh.ghostty"
-   match app-id="dev.zed.Zed-Preview"
-   match app-id="cider"
-   match app-id="Codex"
-   match app-id="t3code"
-   match app-id="^org\\.gnome\\.Nautilus$"
-   match app-id="(?i)^(vesktop|dev\\.vencord\\.Vesktop|discord|com\\.discordapp\\.Discord)$"
-   match app-id="^zen$"
-   background-effect {
-      blur true
-      xray true
-   }
-}
-window-rule {
-   match app-id="^org\\.gnome\\.Nautilus$"
-   match app-id="(?i)^(vesktop|dev\\.vencord\\.Vesktop|discord|com\\.discordapp\\.Discord)$"
-   opacity 0.80
 }
 binds {
    // === System & Overview ===
@@ -723,6 +703,8 @@ debug {
    honor-xdg-activation-with-invalid-serial
 }
 include "dms/outputs.kdl"
+include "dms/power-blur.kdl"
+include "dms/power-opacity.kdl"
 include "dms/ssh-agent.kdl"
 include "dms/colors.kdl"
 include "dms/cursor.kdl"
