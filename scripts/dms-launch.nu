@@ -12,14 +12,14 @@ def active-display [runtime: string] {
   $sockets | first | path basename
 }
 
-def main [--probe] {
+def main [--probe, --binary: string = "/usr/bin/dms"] {
   let runtime = ($env.XDG_RUNTIME_DIR? | default $"/run/user/(^id -u | str trim)")
 
   loop {
     let display = (active-display $runtime)
     if ($display | is-not-empty) {
       if $probe { print $display; return }
-      exec /usr/bin/env $"WAYLAND_DISPLAY=($display)" "QT_QPA_PLATFORM=wayland" /usr/bin/dms run --session
+      exec /usr/bin/env $"WAYLAND_DISPLAY=($display)" "QT_QPA_PLATFORM=wayland" $binary run --session
     }
     if $probe { error make { msg: "No active Wayland display" } }
     sleep 1sec
