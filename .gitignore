@@ -21,3 +21,5 @@
 *backup.json
 __pycache__/
 *.pyc
+
+.config/DankMaterialShell/icc.json
